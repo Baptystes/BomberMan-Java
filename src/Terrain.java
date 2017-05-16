@@ -47,7 +47,7 @@ public class Terrain {
                     g.setColor(Color.orange);
                 else
                     g.setColor(Color.green);
-                g.fillRect(a*(tileHeight + tileBorder), b*(tileHeight + tileBorder), 50, 50);
+                g.fillRect(a*(tileHeight + tileBorder), b*(tileHeight + tileBorder), tileWidth, tileHeight);
                 //System.out.print(tabMap[index] + ", ");
             }
             //System.out.print("\n");

@@ -6,9 +6,9 @@ public class Main
 
     public static void main( String[] args ) throws SlickException
     {
-        int tileWidth = 40;
-        int tileHeight = 40;
-        int tileBorder = 11;
+        int tileWidth = 35;
+        int tileHeight = tileWidth;
+        int tileBorder = 1;
 
         app = new AppGameContainer( new BBMan(tileWidth, tileHeight, tileBorder) );
         app.setDisplayMode(21*(tileWidth + tileBorder) , 17*(tileHeight + tileBorder), false );

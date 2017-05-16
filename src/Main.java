@@ -6,8 +6,12 @@ public class Main
 
     public static void main( String[] args ) throws SlickException
     {
-        app = new AppGameContainer( new BBMan() );
-        app.setDisplayMode( 640, 480, false );
+        int tileWidth = 40;
+        int tileHeight = 40;
+        int tileBorder = 11;
+
+        app = new AppGameContainer( new BBMan(tileWidth, tileHeight, tileBorder) );
+        app.setDisplayMode(21*(tileWidth + tileBorder) , 17*(tileHeight + tileBorder), false );
         app.setShowFPS(false);
         app.setTargetFrameRate(60);
         app.start();

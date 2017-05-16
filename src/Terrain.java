@@ -3,14 +3,14 @@ import org.newdawn.slick.*;
 public class Terrain {
 
 
-    private int tileWidth, tileHeight, tileBorder;
+    private int tileSize, tileBorder;
 
     private int tabMap [] = {
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
             1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 1,
             1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 0, 0, 0, 1,
-            1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 1,
-            1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1,
+            1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 1,
+            1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 0, 1, 2, 1,
             1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
             1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1,
             1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
@@ -26,12 +26,14 @@ public class Terrain {
 
 
 
-    Terrain (int tileWidth, int tileHeight, int tileBorder)
+    Terrain (int tileSize, int tileBorder)
     {
-        this.tileHeight = tileHeight;
-        this.tileWidth = tileWidth;
+        this.tileSize = tileSize;
         this.tileBorder = tileBorder;
     }
+
+    public int getTileSize(){ return tileSize; }
+    public int getTileBorder(){ return tileBorder; }
 
     public void dessinerMap (Graphics g)
     {
@@ -47,13 +49,18 @@ public class Terrain {
                     g.setColor(Color.orange);
                 else
                     g.setColor(Color.green);
-                g.fillRect(a*(tileHeight + tileBorder), b*(tileHeight + tileBorder), tileWidth, tileHeight);
+                g.fillRect(a*(tileSize + tileBorder), b*(tileSize + tileBorder), tileSize, tileSize);
                 //System.out.print(tabMap[index] + ", ");
             }
             //System.out.print("\n");
 
         }
 
+    }
+
+    public int getIdTile (int positX, int positY)
+    {
+        return tabMap[positY * 21 + positX];
     }
 
 

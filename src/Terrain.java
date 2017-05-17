@@ -1,9 +1,14 @@
+import org.lwjgl.Sys;
 import org.newdawn.slick.*;
+import java.util.Vector;
 
 public class Terrain {
 
 
-    private int tileSize, tileBorder;
+    private int tileSize, tileBorder, bombSize;
+
+    //private Vector bombes= new Vector();
+    public Vector<Bombe> bombes = new Vector<Bombe>(0);
 
     private int tabMap [] = {
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -30,10 +35,13 @@ public class Terrain {
     {
         this.tileSize = tileSize;
         this.tileBorder = tileBorder;
+        bombes.clear();
+        bombSize = 6;
     }
 
     public int getTileSize(){ return tileSize; }
     public int getTileBorder(){ return tileBorder; }
+    public int getIdTile (int positX, int positY) { return tabMap[positY * 21 + positX]; }
 
     public void dessinerMap (Graphics g)
     {
@@ -58,9 +66,25 @@ public class Terrain {
 
     }
 
-    public int getIdTile (int positX, int positY)
+
+    public void poserBombe (Personnage perso)
     {
-        return tabMap[positY * 21 + positX];
+        bombes.add(new Bombe(perso));
+        System.out.print("\nHeu");
+    }
+
+    public void afficherBombes (Graphics g)
+    {
+        for (int a=0 ; a<bombes.size() ; a++)
+        {
+            afficherBombe(g, bombes.get(a));
+        }
+    }
+
+    private void afficherBombe (Graphics g, Bombe bombe)
+    {
+        g.setColor(Color.black);
+        g.fillOval(bombe.getPositX() * (tileSize + tileBorder) + tileSize/2 - bombSize/2, bombe.getPositY() * (tileSize + tileBorder) + tileSize/2 - bombSize/2, bombSize, bombSize);
     }
 
 

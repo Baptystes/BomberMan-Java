@@ -9,7 +9,7 @@ public class Personnage {
     private int persoSize = 20;
     private Color couleur;
     private Terrain terrain;
-    private int toucheHaut, toucheBas, toucheGauche, toucheDroite;
+    private int toucheHaut, toucheBas, toucheGauche, toucheDroite, toucheBombe;
 
     Personnage (Terrain terrain, int idPerso, Color couleur)
     {
@@ -23,6 +23,7 @@ public class Personnage {
             toucheBas = Input.KEY_S;
             toucheGauche = Input.KEY_Q;
             toucheDroite = Input.KEY_D;
+            toucheBombe = Input.KEY_F;
         }
         else if (idPerso == 2)
         {
@@ -30,12 +31,17 @@ public class Personnage {
             toucheBas = Input.KEY_DOWN;
             toucheGauche = Input.KEY_LEFT;
             toucheDroite = Input.KEY_RIGHT;
+            toucheBombe = Input.KEY_NUMPAD0;
         }
 
         offsetX = 0;
         offsetY = 0;
         vitesse = 3;
     }
+
+    public int getPositX () { return positX; }
+    public int getPositY () { return positY; }
+    public int getIdPerso () { return idPerso; }
 
     public void spawn (int positX, int positY)
     {
@@ -63,7 +69,7 @@ public class Personnage {
         }
 
 
-        System.out.println(offsetY);
+        //System.out.println(offsetY);
         if (direction == 1 && (terrain.getIdTile(positX,positY-1) == 0 || offsetY>0))
         {
             if (Math.abs(offsetX) < vitesse)
@@ -154,10 +160,18 @@ public class Personnage {
 
 
     }
+
+    public int veutPoserBombe(GameContainer gc)
+    {
+        if (gc.getInput().isKeyPressed(toucheBombe))
+            return 1;
+        else
+            return 0;
+    }
+
     public void afficher (Graphics g)
     {
         g.setColor(couleur);
-
         g.fillOval(positX * (terrain.getTileSize() + terrain.getTileBorder()) + offsetX + terrain.getTileSize()/2 - persoSize/2, positY * (terrain.getTileSize() + terrain.getTileBorder()) + offsetY + terrain.getTileSize()/2 - persoSize/2, persoSize, persoSize);
     }
 

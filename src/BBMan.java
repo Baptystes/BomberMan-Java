@@ -1,5 +1,12 @@
 import org.newdawn.slick.*;
 
+import java.util.Date;
+
+import java.util.Timer;
+
+import java.util.TimerTask;
+
+
 public class BBMan extends BasicGame
 {
     private GameContainer gc;
@@ -32,8 +39,13 @@ public class BBMan extends BasicGame
     @Override
     public void render( GameContainer gc, Graphics g ) throws SlickException{
         terrain.dessinerMap(g);
+        terrain.afficherBombes(g);
         perso1.afficher(g);
         perso2.afficher(g);
+
+
+
+
 
 
     }
@@ -42,5 +54,15 @@ public class BBMan extends BasicGame
     public void update( GameContainer gc, int delta ) throws SlickException{
         perso1.deplacer(gc);
         perso2.deplacer(gc);
+        Timer timer = new Timer(true);System.out.println("TimerTask begins! :" + new Date());
+        timer.
+        if (perso1.veutPoserBombe(gc) == 1)
+        {
+            terrain.poserBombe(perso1);
+        }
+        if (perso2.veutPoserBombe(gc) == 1)
+        {
+            terrain.poserBombe(perso2);
+        }
     }
 }

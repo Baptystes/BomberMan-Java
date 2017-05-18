@@ -36,7 +36,6 @@ public class Terrain {
         this.tileSize = tileSize;
         this.tileBorder = tileBorder;
         bombes.clear();
-        bombSize = 6;
     }
 
     public int getTileSize(){ return tileSize; }
@@ -82,16 +81,12 @@ public class Terrain {
 
     public void afficherBombes (Graphics g)
     {
+        Bombe bombe;
         for (int a=0 ; a<bombes.size() ; a++)
         {
-            afficherBombe(g, bombes.get(a));
+            bombe = bombes.get(a);
+            bombe.afficher(g);
         }
-    }
-
-    private void afficherBombe (Graphics g, Bombe bombe)
-    {
-        g.setColor(Color.black);
-        g.fillOval(bombe.getPositX() * (tileSize + tileBorder) + tileSize/2 - bombSize/2, bombe.getPositY() * (tileSize + tileBorder) + tileSize/2 - bombSize/2, bombSize, bombSize);
     }
 
     public void gestionBombes ()

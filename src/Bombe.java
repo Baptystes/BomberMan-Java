@@ -1,7 +1,9 @@
-import java.awt.*;
+import org.newdawn.slick.*;
+
+
 
 public class Bombe {
-    private int positX, positY, tempsAvantExplosion, etat, flammePortee, flammeHaut, flammeBas, flammeGauche, flammeDroite;
+    private int positX, positY, tempsAvantExplosion, etat, flammePortee, flammeHaut, flammeBas, flammeGauche, flammeDroite, bombeSize;
     private Chronometre chronometre;
     private Personnage auteur;
     private Terrain terrain;
@@ -22,19 +24,30 @@ public class Bombe {
         chronometre.reDemarrer(3000);
         etat = 1;
 
+        bombeSize = 5;
+
     }
 
     public int getPositX() { return positX; }
     public int getPositY() { return positY; }
+    public int getEtat() { return etat; }
 
 
 
     public int mettreAJour ()
     {
         //System.out.println(chronometre.getTempsRestant());
-        if (chronometre.checkFinished() == 1)
+        if (chronometre.checkFinished() == 1 && etat == 1)
         {
             exploser();
+            etat = 2;
+            chronometre.reDemarrer(1000);
+            return 0;
+
+        }
+        else if (etat == 2 && chronometre.checkFinished() == 1)
+        {
+            etat = 0;
             return 1;
         }
         else
@@ -43,7 +56,7 @@ public class Bombe {
 
     public void exploser ()
     {
-        etat = 2;
+
         int stopAvance = 0;
         int idBloc;
         while (stopAvance == 0) // Haut
@@ -131,6 +144,31 @@ public class Bombe {
     public Personnage getAuteur ()
     {
         return auteur;
+    }
+
+
+    public void afficher(Graphics g)
+    {
+        int tileSize = terrain.getTileSize();
+        int tileBorder = terrain.getTileBorder();
+        if (etat == 1) {
+            g.setColor(Color.black);
+            g.fillOval(positX * (tileSize + tileBorder) + tileSize / 2 - bombeSize / 2, positY * (tileSize + tileBorder) + tileSize / 2 - bombeSize / 2, bombeSize, bombeSize);
+
+        }
+        else if (etat == 2)
+        {
+            g.setColor(Color.red);
+            for (int a=positX-flammeGauche ; a<=positX+flammeDroite ; a++)
+            {
+                g.fillRect(a*(tileSize+tileBorder), positY*(tileSize+tileBorder) + (tileSize+tileBorder)/2 - 4/2, tileSize, 4);
+            }
+
+            for (int a=positY-flammeBas ; a<=positY+flammeHaut ; a++)
+            {
+                g.fillRect(positX*(tileSize+tileBorder) + (tileSize+tileBorder)/2 - 4/2, a*(tileSize+tileBorder), 4, tileSize);
+            }
+        }
     }
 
 

@@ -10,6 +10,8 @@ public class Bombe {
     private Personnage auteur;
     private Terrain terrain;
 
+    Image imageBombe;
+
     Bombe (Personnage perso, Terrain terrain)
     {
         auteur = perso;
@@ -29,9 +31,13 @@ public class Bombe {
         chronometre.reDemarrer(tempsAvantExplosion);
         etat = 1;
 
-        bombeSize = 5;
+        bombeSize = 20;
 
-
+        try {
+            imageBombe = new Image ("images/bombe/bombe.png");
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -191,8 +197,8 @@ public class Bombe {
         int tileSize = terrain.getTileSize();
         int tileBorder = terrain.getTileBorder();
         if (etat == 1) {
-            g.setColor(Color.black);
-            g.fillOval(positX * (tileSize + tileBorder) + tileSize / 2 - bombeSize / 2, positY * (tileSize + tileBorder) + tileSize / 2 - bombeSize / 2, bombeSize, bombeSize);
+            //g.setColor(Color.black);
+            imageBombe.draw(positX * (tileSize + tileBorder) + tileSize / 2 - bombeSize / 2, positY * (tileSize + tileBorder) + tileSize / 2 - bombeSize / 2, bombeSize, bombeSize);
 
         }
         else if (etat == 2)

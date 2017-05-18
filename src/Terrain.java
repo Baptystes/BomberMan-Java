@@ -41,7 +41,8 @@ public class Terrain {
 
     public int getTileSize(){ return tileSize; }
     public int getTileBorder(){ return tileBorder; }
-    public int getIdTile (int positX, int positY) { return tabMap[positY * 21 + positX]; }
+    public int getIdBloc (int positX, int positY) { return tabMap[positY * 21 + positX]; }
+    public void setIdBloc (int positX, int positY, int idBloc) { tabMap[positY * 21 + positX] = idBloc;}
 
     public void dessinerMap (Graphics g)
     {
@@ -50,10 +51,9 @@ public class Terrain {
         {
             for (int b=0 ; b<17 ; b++)
             {
-                int index = b*21 + a;
-                if (tabMap[index] == 1)
+                if (getIdBloc(a, b) == 1)
                     g.setColor(Color.gray);
-                else if (tabMap[index] == 2)
+                else if (getIdBloc(a, b) == 2)
                     g.setColor(Color.orange);
                 else
                     g.setColor(Color.green);
@@ -72,7 +72,7 @@ public class Terrain {
 
         if (perso.peutPoserBombe() == 1)
         {
-            bombes.add(new Bombe(perso));
+            bombes.add(new Bombe(perso, this));
             perso.poseUneBombe();
             System.out.print("\nHeu");
         }
@@ -107,6 +107,10 @@ public class Terrain {
         }
     }
 
+    public void detruireBloc (int positX, int positY)
+    {
+        setIdBloc(positX, positY, 0);
+    }
 
 
 }

@@ -4,7 +4,7 @@ import org.newdawn.slick.*;
 public class Personnage {
 
 
-    private int positX, positY, offsetX, offsetY, idPerso, direction, vitesse, nombreBombeMax, nombreBombePosee;
+    private int positX, positY, offsetX, offsetY, idPerso, direction, vitesse, nombreBombeMax, nombreBombePosee, bombe_portee;
 
     private int persoSize = 20;
     private Color couleur;
@@ -40,6 +40,7 @@ public class Personnage {
 
         nombreBombeMax = 3;
         nombreBombePosee = 0;
+        bombe_portee = 1;
     }
 
     public int getPositX () { return positX; }
@@ -73,7 +74,7 @@ public class Personnage {
 
 
         //System.out.println(offsetY);
-        if (direction == 1 && (terrain.getIdTile(positX,positY-1) == 0 || offsetY>0))
+        if (direction == 1 && (terrain.getIdBloc(positX,positY-1) == 0 || offsetY>0))
         {
             if (Math.abs(offsetX) < vitesse)
             {
@@ -89,7 +90,7 @@ public class Personnage {
             }
 
         }
-        else if (direction == 2 && (terrain.getIdTile(positX+1,positY) == 0 || offsetX<0))
+        else if (direction == 2 && (terrain.getIdBloc(positX+1,positY) == 0 || offsetX<0))
         {
             if (Math.abs(offsetY) < vitesse)
             {
@@ -104,7 +105,7 @@ public class Personnage {
                     offsetY+=vitesse;
             }
         }
-        else if (direction == 3 && (terrain.getIdTile(positX,positY+1) == 0 || offsetY<0))
+        else if (direction == 3 && (terrain.getIdBloc(positX,positY+1) == 0 || offsetY<0))
         {
             if (Math.abs(offsetX) < vitesse)
             {
@@ -119,7 +120,7 @@ public class Personnage {
                     offsetX+=vitesse;
             }
         }
-        else if (direction == 4 && (terrain.getIdTile(positX-1,positY) == 0 || offsetX>0))
+        else if (direction == 4 && (terrain.getIdBloc(positX-1,positY) == 0 || offsetX>0))
         {
             if (Math.abs(offsetY) < vitesse)
             {
@@ -197,5 +198,8 @@ public class Personnage {
         nombreBombePosee --;
     }
 
-
+    public int getBombe_portee ()
+    {
+        return bombe_portee;
+    }
 }

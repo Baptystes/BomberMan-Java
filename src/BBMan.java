@@ -31,6 +31,8 @@ public class BBMan extends BasicGame
         perso2 = new Personnage(terrain, 2, Color.blue);
         perso2.spawn(19,1);
 
+
+
     }
 
     @Override

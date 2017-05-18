@@ -4,7 +4,7 @@ import org.newdawn.slick.*;
 public class Personnage {
 
 
-    private int positX, positY, offsetX, offsetY, idPerso, direction, vitesse, nombreBombeMax, nombreBombePosee, bombe_portee, bombe_tempsAvantExplosion;
+    private int positX, positY, offsetX, offsetY, idPerso, direction, vitesse, nombreBombeMax, nombreBombePosee, bombe_portee, bombe_tempsAvantExplosion, bombe_traverseBloc;
 
     private int persoSize = 20;
     private Color couleur;
@@ -214,5 +214,29 @@ public class Personnage {
             bombe_portee += offset;
         else if (offset<0 && bombe_portee>0)
             bombe_portee -= offset;
+    }
+
+    public void setTailleFlamme (int taille)
+    {
+        bombe_portee = taille;
+    }
+
+    public void setBombeRouge ()
+    {
+        bombe_traverseBloc = 1;
+    }
+
+    public boolean getBombeRouge ()
+    {
+        return (bombe_traverseBloc == 1);
+    }
+
+    public void ajouterNombreBombe (int offset)
+    {
+        nombreBombeMax+=offset;
+        if (nombreBombeMax>7)
+            nombreBombeMax = 7;
+        else if (nombreBombeMax<2)
+            nombreBombeMax = 2;
     }
 }

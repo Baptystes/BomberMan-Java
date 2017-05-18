@@ -12,6 +12,8 @@ public class Terrain {
     private Vector<Bonus> bonus = new Vector<Bonus>(0);
 
 
+
+
     private int tabMap [] = {
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
             1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 1,
@@ -139,7 +141,7 @@ public class Terrain {
 
     public void poserBonus (int positX, int positY)
     {
-        bonus.add(new FlammeBleu(positX, positY, this));
+        bonus.add(new BombeMoins(positX, positY, this));
         System.out.print("\nSpawnBonus");
     }
 

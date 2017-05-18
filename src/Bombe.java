@@ -5,6 +5,7 @@ import org.newdawn.slick.*;
 
 public class Bombe {
     private int positX, positY, tempsAvantExplosion, etat, flammePortee, flammeHaut, flammeBas, flammeGauche, flammeDroite, bombeSize;
+    private boolean traverseBloc;
     private Chronometre chronometre;
     private Personnage auteur;
     private Terrain terrain;
@@ -22,11 +23,14 @@ public class Bombe {
 
         tempsAvantExplosion = auteur.getBombe_tempsAvantExplosion();
 
+        traverseBloc = auteur.getBombeRouge();
+
         chronometre = new Chronometre();
         chronometre.reDemarrer(tempsAvantExplosion);
         etat = 1;
 
         bombeSize = 5;
+
 
 
 
@@ -80,7 +84,8 @@ public class Bombe {
                 else if (idBloc == 2)
                 {
                     flammeHaut++;
-                    stopAvance++;
+                    if (!traverseBloc)
+                        stopAvance++;
                     terrain.detruireBloc(positX, positY + flammeHaut);
                 }
                 else if (idBloc == 1)
@@ -107,7 +112,8 @@ public class Bombe {
                 else if (idBloc == 2)
                 {
                     flammeBas++;
-                    stopAvance++;
+                    if (!traverseBloc)
+                        stopAvance++;
                     terrain.detruireBloc(positX, positY - flammeBas);
                 }
                 else if (idBloc == 1)
@@ -131,7 +137,8 @@ public class Bombe {
                 else if (idBloc == 2)
                 {
                     flammeGauche++;
-                    stopAvance++;
+                    if (!traverseBloc)
+                        stopAvance++;
                     terrain.detruireBloc(positX - flammeGauche, positY);
                 }
                 else if (idBloc == 1)
@@ -159,7 +166,8 @@ public class Bombe {
                 else if (idBloc == 2)
                 {
                     flammeDroite++;
-                    stopAvance++;
+                    if (!traverseBloc)
+                        stopAvance++;
                     terrain.detruireBloc(positX + flammeDroite, positY);
                 }
                 else if (idBloc == 1)

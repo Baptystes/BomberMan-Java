@@ -1,13 +1,13 @@
 import org.newdawn.slick.*;
 
-public class FlammeBleu extends Bonus{
+public class FlammeJaune extends Bonus{
 
-    public FlammeBleu(int positX, int positY, Terrain terrain)
+    public FlammeJaune(int positX, int positY, Terrain terrain)
     {
         super (positX, positY, terrain);
 
         try {
-            image = new Image("images/bonus/flamme_bleue.png");
+            image = new Image("images/bonus/flamme_jaune.png");
         } catch (SlickException e) {
             e.printStackTrace();
         }
@@ -19,7 +19,7 @@ public class FlammeBleu extends Bonus{
     @Override
     public void prendEffet(Personnage joueur)
     {
-        joueur.ajouterTailleFlamme(-1);
-        System.out.print("Flamme bleue!");
+        joueur.ajouterTailleFlamme(1);
+        System.out.print("Flamme jaune!");
     }
 }

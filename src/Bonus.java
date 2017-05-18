@@ -4,6 +4,9 @@ public class Bonus {
 
     private int positX, positY;
     private Terrain terrain;
+    protected Image image;
+    protected int bonusSize;
+
 
     private boolean doitDisparaitre;
 
@@ -13,6 +16,10 @@ public class Bonus {
         this.positY = positY;
         this.terrain = terrain;
         doitDisparaitre = false;
+
+
+
+
     }
 
     public int getPositX() {return positX;}
@@ -28,8 +35,9 @@ public class Bonus {
         int tileSize = terrain.getTileSize();
         int tileBorder = terrain.getTileBorder();
 
-        g.setColor(Color.blue);
-        g.fillOval(positX * (tileSize + tileBorder) + tileSize / 2 - 7 / 2, positY * (tileSize + tileBorder) + tileSize / 2 - 7 / 2, 7, 7);
+
+
+        image.draw(positX * (tileSize + tileBorder) + tileSize / 2 - bonusSize / 2, positY * (tileSize + tileBorder) + tileSize / 2 - bonusSize / 2, bonusSize, bonusSize);
     }
 
     public void faireDisparaitre()

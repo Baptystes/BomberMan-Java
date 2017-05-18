@@ -175,6 +175,7 @@ public class Personnage {
 
     public void afficher (Graphics g)
     {
+        System.out.println(terrain.getIdBloc(positX, positY -1));
         g.setColor(couleur);
         g.fillOval(positX * (terrain.getTileSize() + terrain.getTileBorder()) + offsetX + terrain.getTileSize()/2 - persoSize/2, positY * (terrain.getTileSize() + terrain.getTileBorder()) + offsetY + terrain.getTileSize()/2 - persoSize/2, persoSize, persoSize);
     }

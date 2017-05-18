@@ -17,6 +17,7 @@ public class Bombe {
         positY = auteur.getPositY();
 
         flammePortee = auteur.getBombe_portee();
+        flammeHaut = 0; flammeBas = 0; flammeDroite = 0; flammeGauche = 0;
 
         tempsAvantExplosion = 0;
 
@@ -25,6 +26,8 @@ public class Bombe {
         etat = 1;
 
         bombeSize = 5;
+
+
 
     }
 
@@ -63,16 +66,18 @@ public class Bombe {
         {
             if (flammeHaut < flammePortee)
             {
-                if ((idBloc = terrain.getIdBloc(positX, positY - flammeHaut -1)) == 0)
+                if ((idBloc = terrain.getIdBloc(positX, positY + flammeHaut +1)) == 0)
                     flammeHaut++;
                 else if (idBloc == 2)
                 {
                     flammeHaut++;
                     stopAvance++;
-                    terrain.detruireBloc(positX, positY - flammeHaut);
+                    terrain.detruireBloc(positX, positY + flammeHaut);
                 }
                 else if (idBloc == 1)
+                {
                     stopAvance++;
+                }
             }
             else
                 stopAvance++;
@@ -83,13 +88,13 @@ public class Bombe {
         {
             if (flammeBas < flammePortee)
             {
-                if ((idBloc = terrain.getIdBloc(positX, positY + flammeBas +1)) == 0)
+                if ((idBloc = terrain.getIdBloc(positX, positY - flammeBas -1)) == 0)
                     flammeBas++;
                 else if (idBloc == 2)
                 {
                     flammeBas++;
                     stopAvance++;
-                    terrain.detruireBloc(positX, positY + flammeBas);
+                    terrain.detruireBloc(positX, positY - flammeBas);
                 }
                 else if (idBloc == 1)
                     stopAvance++;

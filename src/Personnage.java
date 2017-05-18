@@ -239,4 +239,11 @@ public class Personnage {
         else if (nombreBombeMax<2)
             nombreBombeMax = 2;
     }
+
+    public void ajoutTempsDetonation (int offset)
+    {
+        bombe_tempsAvantExplosion += offset;
+        if (bombe_tempsAvantExplosion < 3000)
+            bombe_tempsAvantExplosion = 3000;
+    }
 }

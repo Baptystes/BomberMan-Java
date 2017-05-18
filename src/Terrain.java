@@ -69,8 +69,15 @@ public class Terrain {
 
     public void poserBombe (Personnage perso)
     {
-        bombes.add(new Bombe(perso));
-        System.out.print("\nHeu");
+
+        if (perso.peutPoserBombe() == 1)
+        {
+            bombes.add(new Bombe(perso));
+            perso.poseUneBombe();
+            System.out.print("\nHeu");
+        }
+
+
     }
 
     public void afficherBombes (Graphics g)
@@ -85,6 +92,19 @@ public class Terrain {
     {
         g.setColor(Color.black);
         g.fillOval(bombe.getPositX() * (tileSize + tileBorder) + tileSize/2 - bombSize/2, bombe.getPositY() * (tileSize + tileBorder) + tileSize/2 - bombSize/2, bombSize, bombSize);
+    }
+
+    public void gestionBombes ()
+    {
+        for (int a=0 ; a< bombes.size() ; a++)
+        {
+            if (bombes.get(a).mettreAJour() == 1)
+            {
+                bombes.get(a).getAuteur().supprimeUneBombe();
+                bombes.removeElementAt(a);
+                System.out.print(" REMOVE");
+            }
+        }
     }
 
 

@@ -2,9 +2,6 @@ import org.newdawn.slick.*;
 
 import java.util.Date;
 
-import java.util.Timer;
-
-import java.util.TimerTask;
 
 
 public class BBMan extends BasicGame
@@ -54,8 +51,8 @@ public class BBMan extends BasicGame
     public void update( GameContainer gc, int delta ) throws SlickException{
         perso1.deplacer(gc);
         perso2.deplacer(gc);
-        Timer timer = new Timer(true);System.out.println("TimerTask begins! :" + new Date());
-        timer.
+        //Date date = new Date(); date.get
+        //System.out.println((date.getTimestamp());
         if (perso1.veutPoserBombe(gc) == 1)
         {
             terrain.poserBombe(perso1);
@@ -64,5 +61,6 @@ public class BBMan extends BasicGame
         {
             terrain.poserBombe(perso2);
         }
+        terrain.gestionBombes();
     }
 }

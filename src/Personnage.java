@@ -4,7 +4,7 @@ import org.newdawn.slick.*;
 public class Personnage {
 
 
-    private int positX, positY, offsetX, offsetY, idPerso, direction, vitesse;
+    private int positX, positY, offsetX, offsetY, idPerso, direction, vitesse, nombreBombeMax, nombreBombePosee;
 
     private int persoSize = 20;
     private Color couleur;
@@ -37,6 +37,9 @@ public class Personnage {
         offsetX = 0;
         offsetY = 0;
         vitesse = 3;
+
+        nombreBombeMax = 3;
+        nombreBombePosee = 0;
     }
 
     public int getPositX () { return positX; }
@@ -175,7 +178,24 @@ public class Personnage {
         g.fillOval(positX * (terrain.getTileSize() + terrain.getTileBorder()) + offsetX + terrain.getTileSize()/2 - persoSize/2, positY * (terrain.getTileSize() + terrain.getTileBorder()) + offsetY + terrain.getTileSize()/2 - persoSize/2, persoSize, persoSize);
     }
 
+    public int peutPoserBombe ()
+    {
+        if (nombreBombePosee < nombreBombeMax)
+            return 1;
+        else
+            return 0;
 
+    }
+
+    public void poseUneBombe ()
+    {
+        nombreBombePosee ++;
+    }
+
+    public void supprimeUneBombe ()
+    {
+        nombreBombePosee --;
+    }
 
 
 }

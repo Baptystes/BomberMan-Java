@@ -1,3 +1,4 @@
+import org.lwjgl.Sys;
 import org.newdawn.slick.*;
 
 
@@ -43,8 +44,6 @@ public class Bombe {
         if (chronometre.checkFinished() == 1 && etat == 1)
         {
             exploser();
-            etat = 2;
-            chronometre.reDemarrer(1000);
             return 0;
 
         }
@@ -60,14 +59,24 @@ public class Bombe {
     public void exploser ()
     {
 
+        if (etat == 1)
+        {
+            chronometre.reDemarrer(1000);
+            etat = 2;
+        }
         int stopAvance = 0;
         int idBloc;
+        Bombe bombe;
         while (stopAvance == 0) // Haut
         {
             if (flammeHaut < flammePortee)
             {
                 if ((idBloc = terrain.getIdBloc(positX, positY + flammeHaut +1)) == 0)
+                {
                     flammeHaut++;
+                    if ((bombe = terrain.detectBombe(positX, positY + flammeHaut)) != null)
+                        bombe.exploser();
+                }
                 else if (idBloc == 2)
                 {
                     flammeHaut++;
@@ -89,7 +98,12 @@ public class Bombe {
             if (flammeBas < flammePortee)
             {
                 if ((idBloc = terrain.getIdBloc(positX, positY - flammeBas -1)) == 0)
+                {
+
                     flammeBas++;
+                    if ((bombe = terrain.detectBombe(positX, positY - flammeBas)) != null)
+                        bombe.exploser();
+                }
                 else if (idBloc == 2)
                 {
                     flammeBas++;
@@ -109,7 +123,11 @@ public class Bombe {
             if (flammeGauche < flammePortee)
             {
                 if ((idBloc = terrain.getIdBloc(positX - flammeGauche -1, positY)) == 0)
+                {
                     flammeGauche++;
+                    if ((bombe = terrain.detectBombe(positX - flammeGauche, positY)) != null)
+                        bombe.exploser();
+                }
                 else if (idBloc == 2)
                 {
                     flammeGauche++;
@@ -129,7 +147,15 @@ public class Bombe {
             if (flammeDroite < flammePortee)
             {
                 if ((idBloc = terrain.getIdBloc(positX + flammeDroite +1, positY)) == 0)
+                {
                     flammeDroite++;
+                    if ((bombe = terrain.detectBombe(positX + flammeDroite, positY)) != null)
+                    {
+                        bombe.exploser();
+                        System.out.print("KSLKJFKSDFLKSJDLF");
+                    }
+
+                }
                 else if (idBloc == 2)
                 {
                     flammeDroite++;

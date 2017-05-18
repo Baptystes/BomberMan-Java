@@ -75,7 +75,7 @@ public class Personnage {
 
 
         //System.out.println(offsetY);
-        if (direction == 1 && (terrain.getIdBloc(positX,positY-1) == 0 || offsetY>0))
+        if (direction == 1 && (terrain.peutTraverser(positX, positY-1) || offsetY>0))
         {
             if (Math.abs(offsetX) < vitesse)
             {
@@ -91,7 +91,7 @@ public class Personnage {
             }
 
         }
-        else if (direction == 2 && (terrain.getIdBloc(positX+1,positY) == 0 || offsetX<0))
+        else if (direction == 2 && (terrain.peutTraverser(positX+1, positY) || offsetX<0))
         {
             if (Math.abs(offsetY) < vitesse)
             {
@@ -106,7 +106,7 @@ public class Personnage {
                     offsetY+=vitesse;
             }
         }
-        else if (direction == 3 && (terrain.getIdBloc(positX,positY+1) == 0 || offsetY<0))
+        else if (direction == 3 && (terrain.peutTraverser(positX, positY+1)|| offsetY<0))
         {
             if (Math.abs(offsetX) < vitesse)
             {
@@ -121,7 +121,7 @@ public class Personnage {
                     offsetX+=vitesse;
             }
         }
-        else if (direction == 4 && (terrain.getIdBloc(positX-1,positY) == 0 || offsetX>0))
+        else if (direction == 4 && (terrain.peutTraverser(positX-1, positY)|| offsetX>0))
         {
             if (Math.abs(offsetY) < vitesse)
             {
@@ -176,7 +176,6 @@ public class Personnage {
 
     public void afficher (Graphics g)
     {
-        System.out.println(terrain.getIdBloc(positX, positY - 1));
         g.setColor(couleur);
         g.fillOval(positX * (terrain.getTileSize() + terrain.getTileBorder()) + offsetX + terrain.getTileSize()/2 - persoSize/2, positY * (terrain.getTileSize() + terrain.getTileBorder()) + offsetY + terrain.getTileSize()/2 - persoSize/2, persoSize, persoSize);
     }

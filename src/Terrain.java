@@ -73,7 +73,7 @@ public class Terrain {
         {
             bombes.add(new Bombe(perso, this));
             perso.poseUneBombe();
-            System.out.print("\nHeu");
+            System.out.print("\nPose");
         }
 
 
@@ -107,6 +107,23 @@ public class Terrain {
         setIdBloc(positX, positY, 0);
     }
 
+    public Bombe detectBombe (int positX, int positY)
+    {
+
+        for (int a=0 ; a< bombes.size() ; a++)
+        {
+            if (bombes.get(a).getPositX() == positX && bombes.get(a).getPositY() == positY)
+                return bombes.get(a);
+        }
+        return null;
+    }
+    public boolean peutTraverser (int positX, int positY)
+    {
+        if (getIdBloc(positX,positY) == 0 && detectBombe(positX, positY) == null)
+            return true;
+        else
+            return false;
+    }
 
 }
 

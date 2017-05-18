@@ -19,10 +19,10 @@ public class Bombe {
         flammePortee = auteur.getBombe_portee();
         flammeHaut = 0; flammeBas = 0; flammeDroite = 0; flammeGauche = 0;
 
-        tempsAvantExplosion = 0;
+        tempsAvantExplosion = auteur.getBombe_tempsAvantExplosion();
 
         chronometre = new Chronometre();
-        chronometre.reDemarrer(3000);
+        chronometre.reDemarrer(tempsAvantExplosion);
         etat = 1;
 
         bombeSize = 5;

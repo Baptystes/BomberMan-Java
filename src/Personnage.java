@@ -4,7 +4,7 @@ import org.newdawn.slick.*;
 public class Personnage {
 
 
-    private int positX, positY, offsetX, offsetY, idPerso, direction, vitesse, nombreBombeMax, nombreBombePosee, bombe_portee;
+    private int positX, positY, offsetX, offsetY, idPerso, direction, vitesse, nombreBombeMax, nombreBombePosee, bombe_portee, bombe_tempsAvantExplosion;
 
     private int persoSize = 20;
     private Color couleur;
@@ -40,12 +40,13 @@ public class Personnage {
 
         nombreBombeMax = 3;
         nombreBombePosee = 0;
-        bombe_portee = 1;
+        bombe_portee = 3;
+        bombe_tempsAvantExplosion = 4000;
     }
 
     public int getPositX () { return positX; }
     public int getPositY () { return positY; }
-    public int getIdPerso () { return idPerso; }
+    public int getBombe_tempsAvantExplosion () {return bombe_tempsAvantExplosion;}
 
     public void spawn (int positX, int positY)
     {
@@ -175,7 +176,7 @@ public class Personnage {
 
     public void afficher (Graphics g)
     {
-        System.out.println(terrain.getIdBloc(positX, positY -1));
+        System.out.println(terrain.getIdBloc(positX, positY - 1));
         g.setColor(couleur);
         g.fillOval(positX * (terrain.getTileSize() + terrain.getTileBorder()) + offsetX + terrain.getTileSize()/2 - persoSize/2, positY * (terrain.getTileSize() + terrain.getTileBorder()) + offsetY + terrain.getTileSize()/2 - persoSize/2, persoSize, persoSize);
     }

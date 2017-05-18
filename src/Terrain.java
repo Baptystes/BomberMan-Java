@@ -8,7 +8,9 @@ public class Terrain {
     private int tileSize, tileBorder, bombSize;
 
     //private Vector bombes= new Vector();
-    public Vector<Bombe> bombes = new Vector<Bombe>(0);
+    private Vector<Bombe> bombes = new Vector<Bombe>(0);
+    private Vector<Bonus> bonus = new Vector<Bonus>(0);
+
 
     private int tabMap [] = {
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -36,6 +38,7 @@ public class Terrain {
         this.tileSize = tileSize;
         this.tileBorder = tileBorder;
         bombes.clear();
+        bonus.clear();
     }
 
     public int getTileSize(){ return tileSize; }
@@ -75,8 +78,6 @@ public class Terrain {
             perso.poseUneBombe();
             System.out.print("\nPose");
         }
-
-
     }
 
     public void afficherBombes (Graphics g)
@@ -105,6 +106,7 @@ public class Terrain {
     public void detruireBloc (int positX, int positY)
     {
         setIdBloc(positX, positY, 0);
+        poserBonus(positX, positY);
     }
 
     public Bombe detectBombe (int positX, int positY)
@@ -123,6 +125,45 @@ public class Terrain {
             return true;
         else
             return false;
+    }
+
+
+
+    public void afficherBonus(Graphics g)
+    {
+        for (int a=0 ; a<bonus.size() ; a++)
+        {
+                bonus.get(a).afficher(g);
+        }
+    }
+
+    public void poserBonus (int positX, int positY)
+    {
+        bonus.add(new FlammeBleu(positX, positY, this));
+        System.out.print("\nSpawnBonus");
+    }
+
+    public Bonus detectBonus (int positX, int positY)
+    {
+        for (int a=0 ; a< bonus.size() ; a++)
+        {
+            if (bonus.get(a).getPositX() == positX && bonus.get(a).getPositY() == positY)
+            {
+                bonus.get(a).faireDisparaitre();
+                return bonus.get(a);
+            }
+        }
+        return null;
+    }
+
+    public void gestionBonus ()
+    {
+        for (int a=0 ; a<bonus.size() ; a++)
+        {
+            if (bonus.get(a).doitDisparaitre())
+                bonus.removeElementAt(a);
+
+        }
     }
 
 }

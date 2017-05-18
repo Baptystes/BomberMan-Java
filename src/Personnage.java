@@ -160,7 +160,11 @@ public class Personnage {
             offsetX = (terrain.getTileSize() + terrain.getTileBorder())/2;
             positX--;
         }
-
+        Bonus bonus;
+        if ((bonus = terrain.detectBonus(positX, positY)) != null)
+        {
+            bonus.prendEffet(this);
+        }
         direction = 0;
 
 
@@ -202,5 +206,13 @@ public class Personnage {
     public int getBombe_portee ()
     {
         return bombe_portee;
+    }
+
+    public void ajouterTailleFlamme(int offset)
+    {
+        if (offset>0 && bombe_portee<10)
+            bombe_portee += offset;
+        else if (offset<0 && bombe_portee>0)
+            bombe_portee -= offset;
     }
 }

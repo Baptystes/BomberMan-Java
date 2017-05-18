@@ -37,6 +37,7 @@ public class BBMan extends BasicGame
     public void render( GameContainer gc, Graphics g ) throws SlickException{
         terrain.dessinerMap(g);
         terrain.afficherBombes(g);
+        terrain.afficherBonus(g);
         perso1.afficher(g);
         perso2.afficher(g);
 
@@ -62,5 +63,6 @@ public class BBMan extends BasicGame
             terrain.poserBombe(perso2);
         }
         terrain.gestionBombes();
+        terrain.gestionBonus();
     }
 }

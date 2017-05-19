@@ -2,9 +2,9 @@ import org.newdawn.slick.*;
 
 public class FlammeRouge extends Bonus{
 
-    public FlammeRouge(int positX, int positY, Terrain terrain)
+    public FlammeRouge(Interface interfaceBM, Terrain terrain, int positX, int positY)
     {
-        super (positX, positY, terrain);
+        super (interfaceBM, terrain, positX, positY);
 
         try {
             image = new Image("images/bonus/flamme_rouge.png");

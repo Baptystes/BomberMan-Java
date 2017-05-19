@@ -10,7 +10,7 @@ public class Terrain {
     //private Vector bombes= new Vector();
     private Vector<Bombe> bombes = new Vector<Bombe>(0);
     private Vector<Bonus> bonus = new Vector<Bonus>(0);
-
+    private Interface interfaceBM;
 
 
 
@@ -35,10 +35,13 @@ public class Terrain {
 
 
 
-    Terrain (int tileSize, int tileBorder)
+    Terrain (Interface interfaceBM, int tileSize, int tileBorder)
     {
         this.tileSize = tileSize;
         this.tileBorder = tileBorder;
+
+        this.interfaceBM = interfaceBM;
+
         bombes.clear();
         bonus.clear();
     }
@@ -71,12 +74,12 @@ public class Terrain {
     }
 
 
-    public void poserBombe (Personnage perso)
+    public void poserBombe (Personnage perso, Personnage deuxiemePerso)
     {
 
-        if (perso.peutPoserBombe() == 1)
+        if (perso.peutPoserBombe() == 1 && detectBombe(perso.getPositX(), perso.getPositY()) == null)
         {
-            bombes.add(new Bombe(perso, this));
+            bombes.add(new Bombe(interfaceBM, perso, deuxiemePerso, this));
             perso.poseUneBombe();
             System.out.print("\nPose");
         }
@@ -141,7 +144,7 @@ public class Terrain {
 
     public void poserBonus (int positX, int positY)
     {
-        bonus.add(new BombeMoins(positX, positY, this));
+        bonus.add(new BombeMoins(interfaceBM, this, positX, positY));
         System.out.print("\nSpawnBonus");
     }
 

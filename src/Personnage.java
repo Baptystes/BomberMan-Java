@@ -4,19 +4,24 @@ import org.newdawn.slick.*;
 public class Personnage {
 
 
-    private int positX, positY, offsetX, offsetY, idPerso, direction, vitesse, nombreBombeMax, nombreBombePosee, bombe_portee, bombe_tempsAvantExplosion, bombe_traverseBloc;
+    private int positX, positY, offsetX, offsetY, idPerso, direction, vitesse, nombreBombeMax, nombreBombePosee, bombe_portee, bombe_tempsAvantExplosion, bombe_traverseBloc, nbVies;
 
     private int persoSize = 20;
     private Color couleur;
     private Terrain terrain;
+    private Interface interfaceBM;
+    Chronometre tempsInvincible;
     private int toucheHaut, toucheBas, toucheGauche, toucheDroite, toucheBombe;
 
-    Personnage (Terrain terrain, int idPerso, Color couleur)
+    Personnage (Interface interfaceBM, Terrain terrain, int idPerso, Color couleur)
     {
         this.terrain = terrain;
         this.couleur =  couleur;
-
+        this.interfaceBM = interfaceBM;
         this.idPerso = idPerso;
+
+        nbVies = 3;
+
         if (idPerso == 1)
         {
             toucheHaut = Input.KEY_Z;
@@ -42,6 +47,8 @@ public class Personnage {
         nombreBombePosee = 0;
         bombe_portee = 3;
         bombe_tempsAvantExplosion = 4000;
+
+        tempsInvincible = new Chronometre();
     }
 
     public int getPositX () { return positX; }
@@ -182,6 +189,8 @@ public class Personnage {
     {
         g.setColor(couleur);
         g.fillOval(positX * (terrain.getTileSize() + terrain.getTileBorder()) + offsetX + terrain.getTileSize()/2 - persoSize/2, positY * (terrain.getTileSize() + terrain.getTileBorder()) + offsetY + terrain.getTileSize()/2 - persoSize/2, persoSize, persoSize);
+        if (estInvincible())
+            g.drawOval(positX * (terrain.getTileSize() + terrain.getTileBorder()) + offsetX + terrain.getTileSize()/2 - (persoSize + 6)/2, positY * (terrain.getTileSize() + terrain.getTileBorder()) + offsetY + terrain.getTileSize()/2 - (persoSize + 6)/2, (persoSize + 6), (persoSize + 6));
     }
 
     public int peutPoserBombe ()
@@ -245,5 +254,36 @@ public class Personnage {
         bombe_tempsAvantExplosion += offset;
         if (bombe_tempsAvantExplosion < 3000)
             bombe_tempsAvantExplosion = 3000;
+    }
+
+    public void modifierVie (int offset)
+    {
+
+    }
+
+    public void perdUneVie (Personnage autreJoueur)
+    {
+        offsetX = 0 ;
+        offsetY = 0;
+        if (Math.sqrt( Math.pow(1 - autreJoueur.getPositX(), 2) + Math.sqrt(Math.pow(15 - autreJoueur.getPositY(), 2))) > Math.sqrt( Math.pow(19 - autreJoueur.getPositX(), 2) + Math.sqrt(Math.pow(1 - autreJoueur.getPositY(), 2))))
+        {
+            positX = 1 ; positY = 15;
+        }
+        else
+        {
+            positX = 19 ; positY = 1;
+        }
+
+        tempsInvincible.reDemarrer(3000);
+    }
+
+    public boolean estInvincible ()
+    {
+        return possedeBouclierResurection();
+    }
+
+    public boolean possedeBouclierResurection()
+    {
+        return tempsInvincible.checkFinished() == 0;
     }
 }

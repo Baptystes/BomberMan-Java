@@ -6,17 +6,17 @@ public class Bonus {
     private Terrain terrain;
     protected Image image;
     protected int bonusSize;
-
+    private Interface interfaceBM;
 
     private boolean doitDisparaitre;
 
-    public Bonus (int positX, int positY, Terrain terrain)
+    public Bonus (Interface interfaceBM, Terrain terrain, int positX, int positY)
     {
         this.positX = positX;
         this.positY = positY;
         this.terrain = terrain;
         doitDisparaitre = false;
-
+        this.interfaceBM = interfaceBM;
 
 
 
@@ -34,8 +34,6 @@ public class Bonus {
     {
         int tileSize = terrain.getTileSize();
         int tileBorder = terrain.getTileBorder();
-
-
 
         image.draw(positX * (tileSize + tileBorder) + tileSize / 2 - bonusSize / 2, positY * (tileSize + tileBorder) + tileSize / 2 - bonusSize / 2, bonusSize, bonusSize);
     }

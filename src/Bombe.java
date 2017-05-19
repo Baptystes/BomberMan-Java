@@ -7,16 +7,17 @@ public class Bombe {
     private int positX, positY, tempsAvantExplosion, etat, flammePortee, flammeHaut, flammeBas, flammeGauche, flammeDroite, bombeSize;
     private boolean traverseBloc;
     private Chronometre chronometre;
-    private Personnage auteur;
+    private Personnage auteur, deuxiemePerso;
     private Terrain terrain;
-
+    private Interface interfaceBM;
     Image imageBombe;
 
-    Bombe (Personnage perso, Terrain terrain)
+    Bombe (Interface interfaceBM, Personnage perso, Personnage deuxiemePerso, Terrain terrain)
     {
         auteur = perso;
+        this.deuxiemePerso = deuxiemePerso;
         this.terrain = terrain;
-
+        this.interfaceBM = interfaceBM;
         positX = auteur.getPositX();
         positY = auteur.getPositY();
 
@@ -51,6 +52,19 @@ public class Bombe {
     public int mettreAJour ()
     {
         //System.out.println(chronometre.getTempsRestant());
+
+        if (etat == 2)
+        {
+            if (detectJoueur(auteur))
+            {
+                auteur.perdUneVie(deuxiemePerso);
+            }
+            if (detectJoueur(deuxiemePerso))
+            {
+               deuxiemePerso.perdUneVie(auteur);
+            }
+        }
+
         if (chronometre.checkFinished() == 1 && etat == 1)
         {
             exploser();
@@ -63,7 +77,10 @@ public class Bombe {
             return 1;
         }
         else
+        {
             return 0;
+        }
+
     }
 
     public void exploser ()
@@ -79,20 +96,21 @@ public class Bombe {
         Bombe bombe;
         while (stopAvance == 0) // Haut
         {
-            if (flammeHaut < flammePortee)
+            if (flammeBas < flammePortee)
             {
-                if ((idBloc = terrain.getIdBloc(positX, positY + flammeHaut +1)) == 0)
+                if ((idBloc = terrain.getIdBloc(positX, positY + flammeBas +1)) == 0)
                 {
-                    flammeHaut++;
-                    if ((bombe = terrain.detectBombe(positX, positY + flammeHaut)) != null)
+
+                    flammeBas++;
+                    if ((bombe = terrain.detectBombe(positX, positY + flammeBas)) != null)
                         bombe.exploser();
                 }
                 else if (idBloc == 2)
                 {
-                    flammeHaut++;
+                    flammeBas++;
                     if (!traverseBloc)
                         stopAvance++;
-                    terrain.detruireBloc(positX, positY + flammeHaut);
+                    terrain.detruireBloc(positX, positY + flammeBas);
                 }
                 else if (idBloc == 1)
                 {
@@ -106,21 +124,21 @@ public class Bombe {
         stopAvance = 0;
         while (stopAvance == 0) // Bas
         {
-            if (flammeBas < flammePortee)
+            if (flammeHaut < flammePortee)
             {
-                if ((idBloc = terrain.getIdBloc(positX, positY - flammeBas -1)) == 0)
+                if ((idBloc = terrain.getIdBloc(positX, positY - flammeHaut -1)) == 0)
                 {
 
-                    flammeBas++;
-                    if ((bombe = terrain.detectBombe(positX, positY - flammeBas)) != null)
+                    flammeHaut++;
+                    if ((bombe = terrain.detectBombe(positX, positY - flammeHaut)) != null)
                         bombe.exploser();
                 }
                 else if (idBloc == 2)
                 {
-                    flammeBas++;
+                    flammeHaut++;
                     if (!traverseBloc)
                         stopAvance++;
-                    terrain.detruireBloc(positX, positY - flammeBas);
+                    terrain.detruireBloc(positX, positY - flammeHaut);
                 }
                 else if (idBloc == 1)
                     stopAvance++;
@@ -184,6 +202,7 @@ public class Bombe {
         }
 
 
+
     }
 
     public Personnage getAuteur ()
@@ -209,11 +228,27 @@ public class Bombe {
                 g.fillRect(a*(tileSize+tileBorder), positY*(tileSize+tileBorder) + (tileSize+tileBorder)/2 - 4/2, tileSize, 4);
             }
 
-            for (int a=positY-flammeBas ; a<=positY+flammeHaut ; a++)
+            for (int a=positY-flammeHaut ; a<=positY+flammeBas ; a++)
             {
                 g.fillRect(positX*(tileSize+tileBorder) + (tileSize+tileBorder)/2 - 4/2, a*(tileSize+tileBorder), 4, tileSize);
             }
         }
+    }
+
+    public boolean detectJoueur (Personnage joueur)
+    {
+        int detectJoueur;
+        if (((positX + flammeDroite) >= joueur.getPositX() && (positX - flammeGauche) <=joueur.getPositX() && positY == joueur.getPositY()) ||  ((positY + flammeBas) >= joueur.getPositY() && (positY - flammeHaut) <= joueur.getPositY() && positX == joueur.getPositX()))
+        {
+            return true;
+            //System.out.print("\nGOOOooooooooooooooooD");
+        }
+        else
+        {
+            return false;
+            //System.out.println(" "+ (positX + flammeDroite) + " " + (positX - flammeGauche) + "   " + joueur.getPositX() + " " + joueur.getPositY() + "  ");
+        }
+
     }
 
 

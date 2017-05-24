@@ -13,10 +13,11 @@ public class BBMan extends BasicGame
 
     private int tileSize, tileBorder;
 
+    int etatDuJeu;
+
     public BBMan(int tileSize, int tileBorder){
         super( "BomberBat!" );
         this.tileSize = tileSize;
-
         this.tileBorder = tileBorder;
     }
 
@@ -31,21 +32,25 @@ public class BBMan extends BasicGame
         perso2 = new Personnage(interfaceBM, terrain, 2, Color.blue);
         perso2.spawn(19,1);
 
-
+        etatDuJeu = 0;
 
 
     }
 
     @Override
     public void render( GameContainer gc, Graphics g ) throws SlickException{
-        terrain.dessinerMap(g);
-        terrain.afficherBombes(g);
-        terrain.afficherBonus(g);
-        perso1.afficher(g);
-        perso2.afficher(g);
-
-
-
+        if (etatDuJeu == 0)
+        {
+            menu.afficher();
+        }
+        else if (etatDuJeu == 1)
+        {
+            terrain.dessinerMap(g);
+            terrain.afficherBombes(g);
+            terrain.afficherBonus(g);
+            perso1.afficher(g);
+            perso2.afficher(g);
+        }
 
 
 
@@ -53,19 +58,37 @@ public class BBMan extends BasicGame
 
     @Override
     public void update( GameContainer gc, int delta ) throws SlickException{
-        perso1.deplacer(gc);
-        perso2.deplacer(gc);
-        //Date date = new Date(); date.get
-        //System.out.println((date.getTimestamp());
-        if (perso1.veutPoserBombe(gc) == 1)
+        if (etatDuJeu == 0)
         {
-            terrain.poserBombe(perso1, perso2);
+            menu.controler();
+            if (menu.choixSelectionne == 1)
+                etatDuJeu = 1; // Pour Jouer
+            else if (menu.choixSelectionne == 2)
+                etatDuJeu = 2;
         }
-        if (perso2.veutPoserBombe(gc) == 1)
+
+        else if (etatDuJeu == 1)
         {
-            terrain.poserBombe(perso2, perso1);
+            perso1.deplacer(gc);
+            perso2.deplacer(gc);
+            //Date date = new Date(); date.get
+            //System.out.println((date.getTimestamp());
+            if (perso1.veutPoserBombe(gc) == 1)
+            {
+                terrain.poserBombe(perso1, perso2);
+            }
+            if (perso2.veutPoserBombe(gc) == 1)
+            {
+                terrain.poserBombe(perso2, perso1);
+            }
+            terrain.gestionBombes();
+            terrain.gestionBonus();
+
+            if (terrain.partieTerminee() == 1)
+            {
+                etatDuJeu = 0;
+            }
         }
-        terrain.gestionBombes();
-        terrain.gestionBonus();
+
     }
 }

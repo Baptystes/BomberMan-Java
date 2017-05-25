@@ -55,13 +55,7 @@ public class Terrain {
         {
             for (int b=0 ; b<17 ; b++)
             {
-                if (getIdBloc(a, b) == 1)
-                    g.setColor(Color.gray);
-                else if (getIdBloc(a, b) == 2)
-                    g.setColor(Color.orange);
-                else
-                    g.setColor(Color.green);
-                g.fillRect(a*(affichage.getTileSize()+ affichage.getTileBorder()), b*(affichage.getTileSize() + affichage.getTileBorder()), affichage.getTileSize(), affichage.getTileSize());
+                affichage.blocMap (g, a, b, getIdBloc(a, b));
                 //System.out.print(tabMap[index] + ", ");
             }
             //System.out.print("\n");

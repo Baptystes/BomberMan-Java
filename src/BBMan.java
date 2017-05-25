@@ -11,20 +11,21 @@ public class BBMan extends BasicGame
     private Personnage perso1, perso2;
     private Affichage affichage;
 
-    private int tileSize, tileBorder;
+    private int tileSize, tileBorder, colonneLatterale;
 
     int etatDuJeu;
 
-    public BBMan(int tileSize, int tileBorder){
+    public BBMan(int tileSize, int tileBorder, int colonneLatterale){
         super( "BomberBat!" );
         this.tileSize = tileSize;
         this.tileBorder = tileBorder;
+        this.colonneLatterale = colonneLatterale;
     }
 
     @Override
     public void init( GameContainer gc) throws SlickException{
         this.gc = gc;
-        affichage = new Affichage(tileSize, tileBorder);
+        affichage = new Affichage(tileSize, tileBorder, colonneLatterale);
         terrain = new Terrain(affichage);
 
         perso1 = new Personnage(affichage, terrain, 1);
@@ -45,6 +46,7 @@ public class BBMan extends BasicGame
             terrain.afficherBonus(g);
             perso1.afficher(g);
             perso2.afficher(g);
+            affichage.interfaceJeu(g, perso1, perso2);
 
 
 

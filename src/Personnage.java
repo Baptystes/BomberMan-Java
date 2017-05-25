@@ -6,18 +6,16 @@ public class Personnage {
 
     private int positX, positY, offsetX, offsetY, idPerso, direction, vitesse, nombreBombeMax, nombreBombePosee, bombe_portee, bombe_tempsAvantExplosion, bombe_traverseBloc, nbVies;
 
-    private int persoSize = 20;
-    private Color couleur;
     private Terrain terrain;
-    private Interface interfaceBM;
+    private Affichage affichage;
     Chronometre tempsInvincible;
+    Animation animation;
     private int toucheHaut, toucheBas, toucheGauche, toucheDroite, toucheBombe;
 
-    Personnage (Interface interfaceBM, Terrain terrain, int idPerso, Color couleur)
+    Personnage (Affichage affichage, Terrain terrain, int idPerso)
     {
         this.terrain = terrain;
-        this.couleur =  couleur;
-        this.interfaceBM = interfaceBM;
+        this.affichage = affichage;
         this.idPerso = idPerso;
 
         nbVies = 3;
@@ -53,6 +51,10 @@ public class Personnage {
 
     public int getPositX () { return positX; }
     public int getPositY () { return positY; }
+    public int getOffsetX () {return offsetX;}
+    public int getOffsetY () {return offsetY;}
+
+    public int getIdJoueur () {return idPerso;}
     public int getBombe_tempsAvantExplosion () {return bombe_tempsAvantExplosion;}
 
     public void spawn (int positX, int positY)
@@ -144,27 +146,27 @@ public class Personnage {
             }
         }
 
-        if (offsetX>(terrain.getTileSize() + terrain.getTileBorder())/2)
+        if (offsetX>(affichage.getTileSize() + affichage.getTileBorder())/2)
         {
-            offsetX = -(terrain.getTileSize() + terrain.getTileBorder())/2;
+            offsetX = -(affichage.getTileSize() + affichage.getTileBorder())/2;
             positX++;
         }
 
-        if (offsetY>(terrain.getTileSize() + terrain.getTileBorder())/2)
+        if (offsetY>(affichage.getTileSize() + affichage.getTileBorder())/2)
         {
-            offsetY = -(terrain.getTileSize() + terrain.getTileBorder())/2;
+            offsetY = -(affichage.getTileSize() + affichage.getTileBorder())/2;
             positY++;
         }
 
-        if (offsetY<-(terrain.getTileSize() + terrain.getTileBorder())/2)
+        if (offsetY<-(affichage.getTileSize() + affichage.getTileBorder())/2)
         {
-            offsetY = (terrain.getTileSize() + terrain.getTileBorder())/2;
+            offsetY = (affichage.getTileSize() + affichage.getTileBorder())/2;
             positY--;
         }
 
-        if (offsetX<-(terrain.getTileSize() + terrain.getTileBorder())/2)
+        if (offsetX<-(affichage.getTileSize() + affichage.getTileBorder())/2)
         {
-            offsetX = (terrain.getTileSize() + terrain.getTileBorder())/2;
+            offsetX = (affichage.getTileSize() + affichage.getTileBorder())/2;
             positX--;
         }
         Bonus bonus;
@@ -187,10 +189,10 @@ public class Personnage {
 
     public void afficher (Graphics g)
     {
-        g.setColor(couleur);
-        g.fillOval(positX * (terrain.getTileSize() + terrain.getTileBorder()) + offsetX + terrain.getTileSize()/2 - persoSize/2, positY * (terrain.getTileSize() + terrain.getTileBorder()) + offsetY + terrain.getTileSize()/2 - persoSize/2, persoSize, persoSize);
-        if (estInvincible())
-            g.drawOval(positX * (terrain.getTileSize() + terrain.getTileBorder()) + offsetX + terrain.getTileSize()/2 - (persoSize + 6)/2, positY * (terrain.getTileSize() + terrain.getTileBorder()) + offsetY + terrain.getTileSize()/2 - (persoSize + 6)/2, (persoSize + 6), (persoSize + 6));
+       affichage.joueur (g, this, animation);
+       /*if (estInvincible())
+            g.drawOval(positX * (affichage.getTileSize() + affichage.getTileBorder()) + offsetX + affichage.getTileSize()/2 - (persoSize + 6)/2, positY * (affichage.getTileSize() + affichage.getTileBorder()) + offsetY + affichage.getTileSize()/2 - (persoSize + 6)/2, (persoSize + 6), (persoSize + 6));
+    */
     }
 
     public int peutPoserBombe ()

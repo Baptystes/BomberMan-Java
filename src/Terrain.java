@@ -5,12 +5,12 @@ import java.util.Vector;
 public class Terrain {
 
 
-    private int tileSize, tileBorder, bombSize;
+    private int bombSize;
 
     //private Vector bombes= new Vector();
     private Vector<Bombe> bombes = new Vector<Bombe>(0);
     private Vector<Bonus> bonus = new Vector<Bonus>(0);
-    private Interface interfaceBM;
+    private Affichage affichage;
 
 
 
@@ -35,19 +35,16 @@ public class Terrain {
 
 
 
-    Terrain (Interface interfaceBM, int tileSize, int tileBorder)
+    Terrain (Affichage affichage)
     {
-        this.tileSize = tileSize;
-        this.tileBorder = tileBorder;
 
-        this.interfaceBM = interfaceBM;
+
+        this.affichage = affichage;
 
         bombes.clear();
         bonus.clear();
     }
 
-    public int getTileSize(){ return tileSize; }
-    public int getTileBorder(){ return tileBorder; }
     public int getIdBloc (int positX, int positY) { return tabMap[positY * 21 + positX]; }
     public void setIdBloc (int positX, int positY, int idBloc) { tabMap[positY * 21 + positX] = idBloc;}
 
@@ -64,7 +61,7 @@ public class Terrain {
                     g.setColor(Color.orange);
                 else
                     g.setColor(Color.green);
-                g.fillRect(a*(tileSize + tileBorder), b*(tileSize + tileBorder), tileSize, tileSize);
+                g.fillRect(a*(affichage.getTileSize()+ affichage.getTileBorder()), b*(affichage.getTileSize() + affichage.getTileBorder()), affichage.getTileSize(), affichage.getTileSize());
                 //System.out.print(tabMap[index] + ", ");
             }
             //System.out.print("\n");
@@ -79,7 +76,7 @@ public class Terrain {
 
         if (perso.peutPoserBombe() == 1 && detectBombe(perso.getPositX(), perso.getPositY()) == null)
         {
-            bombes.add(new Bombe(interfaceBM, perso, deuxiemePerso, this));
+            bombes.add(new Bombe(affichage, perso, deuxiemePerso, this));
             perso.poseUneBombe();
             System.out.print("\nPose");
         }
@@ -144,7 +141,7 @@ public class Terrain {
 
     public void poserBonus (int positX, int positY)
     {
-        bonus.add(new BombeMoins(interfaceBM, this, positX, positY));
+        bonus.add(new Bonus(affichage, this, 0, positX, positY));
         System.out.print("\nSpawnBonus");
     }
 

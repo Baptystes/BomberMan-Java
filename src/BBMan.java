@@ -9,7 +9,7 @@ public class BBMan extends BasicGame
     private GameContainer gc;
     private Terrain terrain;
     private Personnage perso1, perso2;
-    private Interface interfaceBM;
+    private Affichage affichage;
 
     private int tileSize, tileBorder;
 
@@ -22,14 +22,14 @@ public class BBMan extends BasicGame
     }
 
     @Override
-    public void init( GameContainer gc ) throws SlickException{
+    public void init( GameContainer gc) throws SlickException{
         this.gc = gc;
-        interfaceBM = new Interface();
-        terrain = new Terrain(interfaceBM, tileSize, tileBorder);
+        affichage = new Affichage(tileSize, tileBorder);
+        terrain = new Terrain(affichage);
 
-        perso1 = new Personnage(interfaceBM, terrain, 1, Color.red);
+        perso1 = new Personnage(affichage, terrain, 1);
         perso1.spawn(1,15);
-        perso2 = new Personnage(interfaceBM, terrain, 2, Color.blue);
+        perso2 = new Personnage(affichage, terrain, 2);
         perso2.spawn(19,1);
 
         etatDuJeu = 0;
@@ -39,18 +39,13 @@ public class BBMan extends BasicGame
 
     @Override
     public void render( GameContainer gc, Graphics g ) throws SlickException{
-        if (etatDuJeu == 0)
-        {
-            menu.afficher();
-        }
-        else if (etatDuJeu == 1)
-        {
+
             terrain.dessinerMap(g);
             terrain.afficherBombes(g);
             terrain.afficherBonus(g);
             perso1.afficher(g);
             perso2.afficher(g);
-        }
+
 
 
 
@@ -58,17 +53,7 @@ public class BBMan extends BasicGame
 
     @Override
     public void update( GameContainer gc, int delta ) throws SlickException{
-        if (etatDuJeu == 0)
-        {
-            menu.controler();
-            if (menu.choixSelectionne == 1)
-                etatDuJeu = 1; // Pour Jouer
-            else if (menu.choixSelectionne == 2)
-                etatDuJeu = 2;
-        }
 
-        else if (etatDuJeu == 1)
-        {
             perso1.deplacer(gc);
             perso2.deplacer(gc);
             //Date date = new Date(); date.get
@@ -84,11 +69,6 @@ public class BBMan extends BasicGame
             terrain.gestionBombes();
             terrain.gestionBonus();
 
-            if (terrain.partieTerminee() == 1)
-            {
-                etatDuJeu = 0;
-            }
-        }
 
     }
 }

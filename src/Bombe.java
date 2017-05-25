@@ -9,15 +9,15 @@ public class Bombe {
     private Chronometre chronometre;
     private Personnage auteur, deuxiemePerso;
     private Terrain terrain;
-    private Interface interfaceBM;
-    Image imageBombe;
+    private Affichage affichage;
+    Animation animation;
 
-    Bombe (Interface interfaceBM, Personnage perso, Personnage deuxiemePerso, Terrain terrain)
+    Bombe (Affichage affichage, Personnage perso, Personnage deuxiemePerso, Terrain terrain)
     {
         auteur = perso;
         this.deuxiemePerso = deuxiemePerso;
         this.terrain = terrain;
-        this.interfaceBM = interfaceBM;
+        this.affichage = affichage;
         positX = auteur.getPositX();
         positY = auteur.getPositY();
 
@@ -34,17 +34,17 @@ public class Bombe {
 
         bombeSize = 20;
 
-        try {
-            imageBombe = new Image ("images/bombe/bombe.png");
-        } catch (SlickException e) {
-            e.printStackTrace();
-        }
 
 
     }
 
     public int getPositX() { return positX; }
     public int getPositY() { return positY; }
+    public int getFlammeGauche () {return flammeGauche;}
+    public int getFlammeDroite () {return flammeDroite;}
+    public int getFlammeHaut () {return flammeHaut;}
+    public int getFlammeBas () {return flammeBas;}
+
     public int getEtat() { return etat; }
 
 
@@ -213,8 +213,9 @@ public class Bombe {
 
     public void afficher(Graphics g)
     {
-        int tileSize = terrain.getTileSize();
-        int tileBorder = terrain.getTileBorder();
+
+        affichage.bombe(g, this, animation);
+        /*
         if (etat == 1) {
             //g.setColor(Color.black);
             imageBombe.draw(positX * (tileSize + tileBorder) + tileSize / 2 - bombeSize / 2, positY * (tileSize + tileBorder) + tileSize / 2 - bombeSize / 2, bombeSize, bombeSize);
@@ -233,6 +234,7 @@ public class Bombe {
                 g.fillRect(positX*(tileSize+tileBorder) + (tileSize+tileBorder)/2 - 4/2, a*(tileSize+tileBorder), 4, tileSize);
             }
         }
+        */
     }
 
     public boolean detectJoueur (Personnage joueur)

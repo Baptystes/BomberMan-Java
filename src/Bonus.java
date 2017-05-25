@@ -6,18 +6,20 @@ public class Bonus {
     private Terrain terrain;
     protected Image image;
     protected int bonusSize;
-    private Interface interfaceBM;
+    protected int idBonus;
+    private Affichage affichage;
 
     private boolean doitDisparaitre;
 
-    public Bonus (Interface interfaceBM, Terrain terrain, int positX, int positY)
+    public Bonus (Affichage affichage, Terrain terrain, int idBonus, int positX, int positY)
     {
         this.positX = positX;
         this.positY = positY;
         this.terrain = terrain;
         doitDisparaitre = false;
-        this.interfaceBM = interfaceBM;
+        this.affichage = affichage;
 
+        this.idBonus = idBonus;
 
 
     }
@@ -27,15 +29,54 @@ public class Bonus {
 
     public void prendEffet(Personnage joueur)
     {
+        if (idBonus == 0)
+        {
+            joueur.ajouterNombreBombe(-2);
+            System.out.print("Bombe -!");
+        }
+        else if (idBonus == 1)
+        {
+            joueur.ajouterNombreBombe(2);
+            System.out.print("Bombe +!");
+        }
+        else if (idBonus == 2)
+        {
+            joueur.setBombeRouge();
+            System.out.print("Bombe rouge!");
+        }
+        else if (idBonus == 3)
+        {
+            joueur.ajouterTailleFlamme(-1);
+            System.out.print("Flamme bleue!");
+        }
+        else if (idBonus == 4)
+        {
+            joueur.ajouterTailleFlamme(1);
+            System.out.print("Flamme jaune!");
+        }
+        else if (idBonus == 5)
+        {
+            joueur.setTailleFlamme(10);
+            System.out.print("Flamme rouge!");
+        }
+        else if (idBonus == 6)
+        {
+            joueur.ajouterTailleFlamme(1);
+            joueur.ajoutTempsDetonation(-1000);
+            System.out.print("Flamme Verte!");
+        }
 
+    }
+    public int getId ()
+    {
+        return idBonus;
     }
 
     public void afficher (Graphics g)
     {
-        int tileSize = terrain.getTileSize();
-        int tileBorder = terrain.getTileBorder();
-
-        image.draw(positX * (tileSize + tileBorder) + tileSize / 2 - bonusSize / 2, positY * (tileSize + tileBorder) + tileSize / 2 - bonusSize / 2, bonusSize, bonusSize);
+            int tileSize = affichage.getTileSize();
+            int tileBorder = affichage.getTileBorder();
+            affichage.bonus (this);
     }
 
     public void faireDisparaitre()

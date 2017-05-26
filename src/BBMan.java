@@ -15,9 +15,9 @@ public class BBMan extends BasicGame {
 
     int etatDuJeu;
 
-    Image play;
-    Image exit;
-    Image bonberman;
+    Image menu;
+
+    Image bomberman;
 
     public BBMan(int tileSize, int tileBorder) {
         super("BomberBat!");
@@ -36,22 +36,17 @@ public class BBMan extends BasicGame {
         perso2 = new Personnage(interfaceBM, terrain, 2, Color.blue);
         perso2.spawn(19, 1);
 
-       /* try {
-            play = new Image("images/menu/bomberman.png");
+        /*try {
+            bomberman = new Image("images/menu/bomberman.png");
 
         } catch (SlickException e) {
             e.printStackTrace();
         }*/
-        try {
-            play = new Image("images/menu/play.png");
 
-        } catch (SlickException e) {
-            e.printStackTrace();
-        }
 
 
         try {
-            exit = new Image("images/menu/exit .png");
+            menu = new Image("images/menu/menu.png");
 
         } catch (SlickException e) {
             e.printStackTrace();
@@ -70,9 +65,9 @@ public class BBMan extends BasicGame {
         // Menu
         if (etatDuJeu == 0) {
             g.drawString("Welcome to Bomberman", 100, 50);
-            //bonberman.draw(0 , 720);
-            play.draw(250, 100);
-            exit.draw(250, 400);
+            //bomberman.draw(0 , 0);
+            menu.draw(250, 100);
+
             //menu.afficher();
         }
         // partie en cours
@@ -93,14 +88,14 @@ public class BBMan extends BasicGame {
         int posX = Mouse.getX();
         int posY = Mouse.getY();
 
-        if ((posX > 250 && posX < 565) && (posY > 130 && posY <213 )) // pour y c'est en tatonnant en gros c'est pos de de play + 30 + hauteur de exit
+        if ((posX > 260 && posX < 525) && (posY > 325 && posY < 400)) // pour y c'est en tatonnant en gros c'est pos de de play + 30 + hauteur de exit
         {
             if (Mouse.isButtonDown(0)) {
                 //etatDuJeu = 1;
                 System.exit(0);
             }
         }
-        if ((posX > 250 && posX < 513) && (posY > 320 && posY < 511)) // pour x c'est la différence de largeur de l'image. Pour y c'est la postion de de part d'exit -80 + la hauteur de l'image
+        if ((posX > 260 && posX < 525) && (posY > 425 && posY < 500)) // pour x c'est la différence de largeur de l'image. Pour y c'est la postion de de part d'exit -80 + la hauteur de l'image
         {
             if ((Mouse.isButtonDown(0))) {
                 //System.exit(0);

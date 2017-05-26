@@ -60,8 +60,7 @@ public class Menu
     {
         int posX = Mouse.getX();
         int posY = Mouse.getY();
-        
-        if ((posX > 260 && posX < 525) && (posY > 425 && posY < 500))
+        if ((posX > 260 && posX < 525) && (posY > 375 && posY < 455))
         {
             if (Mouse.isButtonDown(0))
             {
@@ -76,7 +75,7 @@ public class Menu
     {
         int posX = Mouse.getX();
         int posY = Mouse.getY();
-        if ((posX > 260 && posX < 525) && (posY > 325 && posY < 400))
+        if ((posX > 260 && posX < 525) && (posY > 275 && posY < 355))
         {
             if (Mouse.isButtonDown(0))
             {
@@ -91,7 +90,7 @@ public class Menu
 
         int posX = Mouse.getX();
         int posY = Mouse.getY();
-        if ((posX > 260 && posX < 525) && (posY > 225 && posY < 300))
+        if ((posX > 260 && posX < 525) && (posY > 165 && posY < 250))
         {
             if (Mouse.isButtonDown(0))
             {
@@ -101,8 +100,9 @@ public class Menu
 
     }
 
-    public void afficherImage(Graphics g)
+    public void afficherImage()
     {
+
         imageBg.draw(0,0);
 
         imageMenu.draw(250, 150);

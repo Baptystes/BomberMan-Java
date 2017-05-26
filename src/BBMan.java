@@ -41,7 +41,7 @@ public class BBMan extends BasicGame {
         // Menu
         if (menu.getEtatDuJeu()== 0)
         {
-            menu.afficherImage(g);
+            menu.afficherImage();
         }
         // partie en cours
         else if (menu.getEtatDuJeu()== 1)

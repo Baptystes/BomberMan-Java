@@ -71,6 +71,11 @@ public class BBMan extends BasicGame
             terrain.gestionBombes();
             terrain.gestionBonus();
 
+            if (gc.getInput().isKeyDown(Input.KEY_ESCAPE))
+            {
+
+            }
+
 
     }
 }

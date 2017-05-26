@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec2ffd71-9a31-4359-91ac-7c780162dfa6" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BBMan/BBMan.class" afterPath="$PROJECT_DIR$/out/production/BBMan/BBMan.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BBMan/Personnage.class" afterPath="$PROJECT_DIR$/out/production/BBMan/Personnage.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BBMan.java" afterPath="$PROJECT_DIR$/src/BBMan.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Menu.java" afterPath="$PROJECT_DIR$/src/Menu.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Personnage.java" afterPath="$PROJECT_DIR$/src/Personnage.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,8 +33,8 @@
       <file leaf-file-name="Terrain.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Terrain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1515">
-              <caret line="101" column="38" lean-forward="false" selection-start-line="101" selection-start-column="38" selection-end-line="101" selection-end-column="38" />
+            <state relative-caret-position="1650">
+              <caret line="110" column="38" lean-forward="false" selection-start-line="110" selection-start-column="38" selection-end-line="110" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -53,8 +55,8 @@
       <file leaf-file-name="Menu.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Menu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="102" column="30" lean-forward="false" selection-start-line="102" selection-start-column="30" selection-end-line="102" selection-end-column="30" />
+            <state relative-caret-position="1680">
+              <caret line="112" column="0" lean-forward="false" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -72,13 +74,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Personnage.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Personnage.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Personnage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1200">
-              <caret line="80" column="9" lean-forward="false" selection-start-line="80" selection-start-column="9" selection-end-line="80" selection-end-column="9" />
+            <state relative-caret-position="4020">
+              <caret line="286" column="74" lean-forward="false" selection-start-line="286" selection-start-column="74" selection-end-line="286" selection-end-column="74" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1633#1634#0" expanded="true" />
+                <element signature="e#1662#1663#0" expanded="true" />
+                <element signature="e#1703#1704#0" expanded="true" />
+                <element signature="e#1739#1740#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -87,18 +93,18 @@
       <file leaf-file-name="Bonus.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Bonus.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+            <state relative-caret-position="376">
+              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BBMan.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BBMan.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/BBMan.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="43" column="31" lean-forward="false" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
+            <state relative-caret-position="299">
+              <caret line="93" column="0" lean-forward="true" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -139,12 +145,12 @@
         <option value="$PROJECT_DIR$/src/FlammeRouge.java" />
         <option value="$PROJECT_DIR$/src/Interface.java" />
         <option value="$PROJECT_DIR$/src/Bonus.java" />
-        <option value="$PROJECT_DIR$/src/Personnage.java" />
         <option value="$PROJECT_DIR$/src/Bombe.java" />
         <option value="$PROJECT_DIR$/src/Terrain.java" />
         <option value="$PROJECT_DIR$/images/menu/exit.paint" />
         <option value="$PROJECT_DIR$/src/Menu.java" />
         <option value="$PROJECT_DIR$/src/BBMan.java" />
+        <option value="$PROJECT_DIR$/src/Personnage.java" />
       </list>
     </option>
   </component>
@@ -661,14 +667,15 @@
       <workItem from="1495802033554" duration="2557000" />
       <workItem from="1495806824762" duration="642000" />
       <workItem from="1495807480756" duration="46000" />
+      <workItem from="1495807997502" duration="127000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81182000" />
+    <option name="totallyTimeSpent" value="82470000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="835" extended-state="1" />
+    <frame x="0" y="23" width="1440" height="835" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -756,6 +763,10 @@
           <caret line="86" column="24" lean-forward="false" selection-start-line="86" selection-start-column="24" selection-end-line="86" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1633#1634#0" expanded="true" />
+            <element signature="e#1662#1663#0" expanded="true" />
+            <element signature="e#1703#1704#0" expanded="true" />
+            <element signature="e#1739#1740#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -804,6 +815,10 @@
           <caret line="86" column="24" lean-forward="false" selection-start-line="86" selection-start-column="24" selection-end-line="86" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1633#1634#0" expanded="true" />
+            <element signature="e#1662#1663#0" expanded="true" />
+            <element signature="e#1703#1704#0" expanded="true" />
+            <element signature="e#1739#1740#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -898,8 +913,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Terrain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1515">
-          <caret line="101" column="38" lean-forward="false" selection-start-line="101" selection-start-column="38" selection-end-line="101" selection-end-column="38" />
+        <state relative-caret-position="1650">
+          <caret line="110" column="38" lean-forward="false" selection-start-line="110" selection-start-column="38" selection-end-line="110" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -933,24 +948,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Bonus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Personnage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1200">
-          <caret line="80" column="9" lean-forward="false" selection-start-line="80" selection-start-column="9" selection-end-line="80" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Bombe.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1365">
@@ -963,18 +960,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Menu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="102" column="30" lean-forward="false" selection-start-line="102" selection-start-column="30" selection-end-line="102" selection-end-column="30" />
+        <state relative-caret-position="1680">
+          <caret line="112" column="0" lean-forward="false" selection-start-line="112" selection-start-column="0" selection-end-line="112" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Bonus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/BBMan.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="43" column="31" lean-forward="false" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
+        <state relative-caret-position="299">
+          <caret line="93" column="0" lean-forward="true" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Personnage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4020">
+          <caret line="286" column="74" lean-forward="false" selection-start-line="286" selection-start-column="74" selection-end-line="286" selection-end-column="74" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1633#1634#0" expanded="true" />
+            <element signature="e#1662#1663#0" expanded="true" />
+            <element signature="e#1703#1704#0" expanded="true" />
+            <element signature="e#1739#1740#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -33,27 +33,22 @@ public class BBMan extends BasicGame {
         menu = new Menu();
 
 
-
     }
 
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
         // Menu
-        if (menu.getEtatDuJeu()== 0)
-        {
+        if (menu.getEtatDuJeu() == 0) {
             menu.afficherImage();
         }
         // partie en cours
-        else if (menu.getEtatDuJeu()== 1)
-        {
+        else if (menu.getEtatDuJeu() == 1) {
             terrain.dessinerMap(g);
             terrain.afficherBombes(g);
             terrain.afficherBonus(g);
             perso1.afficher(g);
             perso2.afficher(g);
-        }
-        else if ( menu.getEtatDuJeu()==2)
-        {
+        } else if (menu.getEtatDuJeu() == 2) {
 
         }
 
@@ -61,18 +56,16 @@ public class BBMan extends BasicGame {
     }
 
     @Override
-    public void update(GameContainer gc, int delta) throws SlickException
-    {
-      menu.play();
-      menu.exit();
-      menu.option();
-        if (gc.getInput().isKeyDown(Input.KEY_ESCAPE))
-        {
+    public void update(GameContainer gc, int delta) throws SlickException {
+        menu.play();
+        menu.exit();
+        menu.option();
+        if (gc.getInput().isKeyDown(Input.KEY_ESCAPE)) {
             menu.setEtatDuJeu(0);
         }
 
 
-        if(menu.getEtatDuJeu()==1)
+        if (menu.getEtatDuJeu() == 1)
 
         {
             perso1.deplacer(gc);
@@ -89,11 +82,14 @@ public class BBMan extends BasicGame {
             terrain.gestionBombes();
             terrain.gestionBonus();
 
-            /*if (terrain.partieTerminee() == 1) {
-                etatDuJeu = 0;*/
+            if (perso1.getNbVies() == 0 || perso2.getNbVies() == 0) {
+                perso1.mourrir();
+                perso2.mourrir();
+                menu.setEtatDuJeu(0);
             }
         }
     }
+}
 
 
 

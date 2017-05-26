@@ -53,6 +53,15 @@ public class Personnage {
 
     public int getPositX () { return positX; }
     public int getPositY () { return positY; }
+
+    public int getNbVies() {
+        return nbVies;
+    }
+
+    public void setNbVies(int nbVies) {
+        this.nbVies = nbVies;
+    }
+
     public int getBombe_tempsAvantExplosion () {return bombe_tempsAvantExplosion;}
 
     public void spawn (int positX, int positY)
@@ -259,6 +268,7 @@ public class Personnage {
     public void modifierVie (int offset)
     {
 
+
     }
 
     public void perdUneVie (Personnage autreJoueur)
@@ -273,9 +283,19 @@ public class Personnage {
         {
             positX = 19 ; positY = 1;
         }
+        setNbVies(getNbVies() -1);
+        System.out.println (" Le joueur " + idPerso+ " a perdu une vie ");
 
         tempsInvincible.reDemarrer(3000);
     }
+    public void mourrir()
+    {
+        if (getNbVies() ==0)
+        {
+            System.out.println(" Le joueur " + idPerso+ " a perdu");
+        }
+    }
+
 
     public boolean estInvincible ()
     {

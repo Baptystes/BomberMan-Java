@@ -103,11 +103,9 @@ public class Menu
 
     public void afficherImage(Graphics g)
     {
-        g.drawString("Welcome to Bomberman", 100, 50);
-
         imageBg.draw(0,0);
 
-        imageMenu.draw(250, 100);
+        imageMenu.draw(250, 150);
         
 
     }

@@ -127,7 +127,7 @@ public class Affichage {
 
     public void interfaceJeu(Graphics g, Personnage perso1, Personnage perso2)
     {
-        font.drawString(0,0,"Test MAGGLE!");
+        font.drawString(0,0,"Bomberman");
         //g.setFont();
         //g.drawString("Test", 0, 0);
     }

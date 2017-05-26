@@ -16,7 +16,7 @@ public class BBMan extends BasicGame
     int etatDuJeu;
 
     public BBMan(int tileSize, int tileBorder, int colonneLatterale){
-        super( "BomberBat!" );
+        super( "Bomberman" );
         this.tileSize = tileSize;
         this.tileBorder = tileBorder;
         this.colonneLatterale = colonneLatterale;

@@ -34,7 +34,7 @@ public class BBMan extends BasicGame
         perso2.spawn(19,1);
 
         etatDuJeu = 0;
-
+        Son.playSoundmain();
 
     }
 

@@ -4,7 +4,7 @@ import org.newdawn.slick.*;
 public class Personnage {
 
 
-    private int positX, positY, offsetX, offsetY, idPerso, direction, vitesse, nombreBombeMax, nombreBombePosee, bombe_portee, bombe_tempsAvantExplosion, bombe_traverseBloc, nbVies;
+    private int positX, positY, offsetX, offsetY, idPerso, direction, vitesse, nombreBombeMax, nombreBombePosee, bombe_portee, bombe_tempsAvantExplosion, bombe_traverseBloc, nbVies, directionEnCours;
 
     private Terrain terrain;
     private Affichage affichage;
@@ -17,6 +17,8 @@ public class Personnage {
         this.terrain = terrain;
         this.affichage = affichage;
         this.idPerso = idPerso;
+
+        animation = new Animation(3, 100);
 
         nbVies = 3;
 
@@ -56,6 +58,11 @@ public class Personnage {
 
     public int getIdJoueur () {return idPerso;}
     public int getBombe_tempsAvantExplosion () {return bombe_tempsAvantExplosion;}
+    public int getDirection () {return direction;}
+    public int getDirectionEnCours() {return directionEnCours;}
+
+    public Animation getAnimation() { return animation; }
+
 
     public void spawn (int positX, int positY)
     {
@@ -68,19 +75,29 @@ public class Personnage {
         if (gc.getInput().isKeyDown(toucheHaut))
         {
             direction = 1;
+            directionEnCours = 1;
         }
-        if (gc.getInput().isKeyDown(toucheBas))
+        else if (gc.getInput().isKeyDown(toucheBas))
         {
             direction = 3;
+            directionEnCours = 3;
         }
-        if (gc.getInput().isKeyDown(toucheGauche))
+        else if (gc.getInput().isKeyDown(toucheGauche))
         {
             direction = 4;
+            directionEnCours = 4;
         }
-        if (gc.getInput().isKeyDown(toucheDroite))
+        else if (gc.getInput().isKeyDown(toucheDroite))
         {
             direction = 2;
+            directionEnCours = 2;
         }
+        else
+            direction = 0;
+        if (direction>0)
+           animation.update();
+        else
+           animation.reset();
 
 
         //System.out.println(offsetY);
@@ -174,7 +191,7 @@ public class Personnage {
         {
             bonus.prendEffet(this);
         }
-        direction = 0;
+
 
 
     }
@@ -189,7 +206,7 @@ public class Personnage {
 
     public void afficher (Graphics g)
     {
-       affichage.joueur (g, this, animation);
+        affichage.joueur (g, this);
        /*if (estInvincible())
             g.drawOval(positX * (affichage.getTileSize() + affichage.getTileBorder()) + offsetX + affichage.getTileSize()/2 - (persoSize + 6)/2, positY * (affichage.getTileSize() + affichage.getTileBorder()) + offsetY + affichage.getTileSize()/2 - (persoSize + 6)/2, (persoSize + 6), (persoSize + 6));
     */

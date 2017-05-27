@@ -22,6 +22,8 @@ public class Affichage {
     private Image [] imagesBonus;
     private TrueTypeFont font;
 
+    private Image imageJoueurs;
+
 
 
     Affichage (int tileSize, int tileBorder, int colonneLatterale)
@@ -43,6 +45,13 @@ public class Affichage {
         bonusSize = 20;
 
         try {
+            imageJoueurs = new Image("images/perso.png");
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
             imageBombe = new Image("images/bombe/bombe.png");
         } catch (SlickException e) {
             e.printStackTrace();
@@ -61,18 +70,25 @@ public class Affichage {
 
     }
 
-    public void joueur(Graphics g, Personnage perso, Animation animation)
+    public void joueur(Graphics g, Personnage perso)
     {
         if (perso.getIdJoueur() == 1)
         {
-            g.setColor(Color.blue);
+            int blop;
+            if (perso.getDirection()>0)
+                blop = 1;
+            else
+                blop = 0;
+            //imageJoueurs.draw(colonneLatterale + perso.getPositX() * (tileSize + tileBorder) + perso.getOffsetX() + tileSize/2 - persoSize/2, perso.getPositY() * (tileSize + tileBorder) + perso.getOffsetY() +tileSize/2 - persoSize/2, persoSize, persoSize, 0,0,17, 30 );
+            imageJoueurs.getSubImage(16 * perso.getAnimation().getImageEnCours()*blop + 16*(perso.getDirectionEnCours()-1) * perso.getAnimation().getNombreImages(),0, 16, 30).draw(colonneLatterale + perso.getPositX() * (tileSize + tileBorder) + perso.getOffsetX() + tileSize/2 - persoSize/2, perso.getPositY() * (tileSize + tileBorder) + perso.getOffsetY() +tileSize/2 - persoSize/2, persoSize, persoSize);
         }
         else if (perso.getIdJoueur() == 2)
         {
             g.setColor(Color.red);
         }
-        g.fillOval(colonneLatterale + perso.getPositX() * (tileSize + tileBorder) + perso.getOffsetX() + tileSize/2 - persoSize/2, perso.getPositY() * (tileSize + tileBorder) + perso.getOffsetY() +tileSize/2 - persoSize/2, persoSize, persoSize);
+        //g.fillOval(colonneLatterale + perso.getPositX() * (tileSize + tileBorder) + perso.getOffsetX() + tileSize/2 - persoSize/2, perso.getPositY() * (tileSize + tileBorder) + perso.getOffsetY() +tileSize/2 - persoSize/2, persoSize, persoSize);
     }
+
 
     public int getTileSize() { return tileSize;}
     public int getTileBorder() { return tileBorder;}
@@ -128,6 +144,7 @@ public class Affichage {
     public void interfaceJeu(Graphics g, Personnage perso1, Personnage perso2)
     {
         font.drawString(0,0,"Test MAGGLE!");
+        //joueur();
         //g.setFont();
         //g.drawString("Test", 0, 0);
     }

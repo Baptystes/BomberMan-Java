@@ -16,7 +16,7 @@ public class BBMan extends BasicGame
     int etatDuJeu;
 
     public BBMan(int tileSize, int tileBorder, int colonneLatterale){
-        super( "BomberBat!" );
+        super( "Bomberman" );
         this.tileSize = tileSize;
         this.tileBorder = tileBorder;
         this.colonneLatterale = colonneLatterale;
@@ -34,7 +34,7 @@ public class BBMan extends BasicGame
         perso2.spawn(19,1);
 
         etatDuJeu = 0;
-
+        Son.playSoundmain();
 
     }
 
@@ -70,6 +70,11 @@ public class BBMan extends BasicGame
             }
             terrain.gestionBombes();
             terrain.gestionBonus();
+
+            if (gc.getInput().isKeyDown(Input.KEY_ESCAPE))
+            {
+
+            }
 
 
     }

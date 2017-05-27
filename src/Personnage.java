@@ -1,7 +1,7 @@
 import net.java.games.input.Component;
 import org.newdawn.slick.*;
 
-public class Personnage {
+public class Personnage extends Option {
 
 
     private int positX, positY, offsetX, offsetY, idPerso, direction, vitesse, nombreBombeMax, nombreBombePosee, bombe_portee, bombe_tempsAvantExplosion, bombe_traverseBloc, nbVies;
@@ -265,11 +265,7 @@ public class Personnage {
             bombe_tempsAvantExplosion = 3000;
     }
 
-    public void modifierVie (int offset)
-    {
 
-
-    }
 
     public void perdUneVie (Personnage autreJoueur)
     {
@@ -278,23 +274,29 @@ public class Personnage {
         if (Math.sqrt( Math.pow(1 - autreJoueur.getPositX(), 2) + Math.sqrt(Math.pow(15 - autreJoueur.getPositY(), 2))) > Math.sqrt( Math.pow(19 - autreJoueur.getPositX(), 2) + Math.sqrt(Math.pow(1 - autreJoueur.getPositY(), 2))))
         {
             positX = 1 ; positY = 15;
+
         }
         else
         {
             positX = 19 ; positY = 1;
+
         }
+        if (estInvincible() == false)
+        {
         setNbVies(getNbVies() -1);
-        System.out.println (" Le joueur " + idPerso+ " a perdu une vie ");
+        System.out.println (" Le joueur " + idPerso+ " a perdu une vie. Son nombre de vie est " +getNbVies());
+        }
 
         tempsInvincible.reDemarrer(3000);
     }
-    public void mourrir()
+    public void finMourrir(Graphics g)
     {
         if (getNbVies() ==0)
         {
-            System.out.println(" Le joueur " + idPerso+ " a perdu");
+            g.drawString("La partie est terminée. Le joueur" + idPerso + " a perdu", 200,0);
         }
     }
+
 
 
     public boolean estInvincible ()

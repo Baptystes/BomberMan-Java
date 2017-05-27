@@ -1,6 +1,7 @@
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
+import javax.swing.JOptionPane;
 
 /**
  * Created by Baptiste on 24/05/2017.
@@ -12,6 +13,7 @@ public class Menu
     private int choix  ;
     private Image imageMenu;
     private Image imageBg;
+    private Image imageWon;
 
     public Menu ( )
 
@@ -27,6 +29,12 @@ public class Menu
         }
         try {
             imageBg = new Image("images/menu/bomberman.png");
+
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
+        try {
+            imageWon = new Image("images/menu/winBomberman.jpg");
 
         } catch (SlickException e) {
             e.printStackTrace();
@@ -99,6 +107,21 @@ public class Menu
         }
 
     }
+    public void escape(GameContainer gc)
+    {
+        if (gc.getInput().isKeyDown(Input.KEY_ESCAPE))
+        {
+            setEtatDuJeu(0);
+        }
+    }
+    public void end(Personnage perso1, Personnage perso2)
+    {
+        if (perso1.getNbVies() ==0 || perso2.getNbVies() ==0)
+        {
+
+            setEtatDuJeu(3);
+        }
+    }
 
     public void afficherImage()
     {
@@ -109,4 +132,14 @@ public class Menu
         
 
     }
+    public void iWon()
+    {
+
+
+        imageWon.draw(0,50);
+    }
+
+
 }
+
+

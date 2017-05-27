@@ -12,6 +12,7 @@ public class BBMan extends BasicGame {
     private Interface interfaceBM;
     private int tileSize, tileBorder;
     private Menu menu;
+    private Option option;
 
 
     public BBMan(int tileSize, int tileBorder) {
@@ -31,6 +32,7 @@ public class BBMan extends BasicGame {
         perso2 = new Personnage(interfaceBM, terrain, 2, Color.blue);
         perso2.spawn(19, 1);
         menu = new Menu();
+        option =new Option();
 
 
     }
@@ -38,18 +40,28 @@ public class BBMan extends BasicGame {
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
         // Menu
-        if (menu.getEtatDuJeu() == 0) {
+        if (menu.getEtatDuJeu() == 0)
+        {
             menu.afficherImage();
         }
         // partie en cours
-        else if (menu.getEtatDuJeu() == 1) {
+        else if (menu.getEtatDuJeu() == 1)
+        {
             terrain.dessinerMap(g);
             terrain.afficherBombes(g);
             terrain.afficherBonus(g);
             perso1.afficher(g);
             perso2.afficher(g);
-        } else if (menu.getEtatDuJeu() == 2) {
-
+        }
+        else if (menu.getEtatDuJeu() == 2)
+        {
+            option.saisieVie();
+        }
+        else if (menu.getEtatDuJeu()==3)
+        {
+            perso1.finMourrir(g);
+            perso2.finMourrir (g);
+            menu.iWon();
         }
 
 
@@ -60,9 +72,8 @@ public class BBMan extends BasicGame {
         menu.play();
         menu.exit();
         menu.option();
-        if (gc.getInput().isKeyDown(Input.KEY_ESCAPE)) {
-            menu.setEtatDuJeu(0);
-        }
+        menu.escape(gc);
+        menu.end(perso1, perso2); // passer à l'écran de fin de partie
 
 
         if (menu.getEtatDuJeu() == 1)
@@ -82,14 +93,14 @@ public class BBMan extends BasicGame {
             terrain.gestionBombes();
             terrain.gestionBonus();
 
-            if (perso1.getNbVies() == 0 || perso2.getNbVies() == 0) {
-                perso1.mourrir();
-                perso2.mourrir();
-                menu.setEtatDuJeu(0);
-            }
+
         }
+
+        
+
     }
 }
+
 
 
 

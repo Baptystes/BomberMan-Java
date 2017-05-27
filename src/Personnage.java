@@ -18,7 +18,7 @@ public class Personnage {
         this.affichage = affichage;
         this.idPerso = idPerso;
 
-        animation = new Animation(3, 100);
+        animation = new Animation(3, 50, true);
 
         nbVies = 3;
 
@@ -47,6 +47,7 @@ public class Personnage {
         nombreBombePosee = 0;
         bombe_portee = 3;
         bombe_tempsAvantExplosion = 4000;
+        directionEnCours = 3;
 
         tempsInvincible = new Chronometre();
     }

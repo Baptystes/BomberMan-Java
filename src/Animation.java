@@ -5,15 +5,17 @@ public class Animation {
 
     private int nombreImages, imageEnCours;
     private long tempsImage;
-
+    boolean doubleSens;
+    int sensLecture;
     Chronometre chronometre;
 
-    public Animation (int nombreImages, long tempsImage)
+    public Animation (int nombreImages, long tempsImage, boolean doubleSens)
     {
         this.nombreImages = nombreImages;
         this.tempsImage = tempsImage;
         imageEnCours = 0;
-
+        this.doubleSens = doubleSens;
+        sensLecture = 1; // 0 gauche, 1 droite
         chronometre = new Chronometre();
         chronometre.reDemarrer(tempsImage);
     }
@@ -22,7 +24,24 @@ public class Animation {
     {
        if (chronometre.checkFinished() == 1)
        {
-           imageEnCours = (imageEnCours+1)%nombreImages;
+           imageEnCours += (2*sensLecture-1);
+           if (imageEnCours >= nombreImages)
+           {
+               if (doubleSens)
+               {
+                   sensLecture = 0;
+                   imageEnCours = nombreImages-2;
+               }
+               else
+                   imageEnCours = 0;
+
+           }
+           else if (imageEnCours<0)
+           {
+               imageEnCours = 1;
+               sensLecture = 1;
+           }
+
            chronometre.reDemarrer(tempsImage);
            System.out.println(imageEnCours + " " + nombreImages);
        }

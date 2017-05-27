@@ -34,6 +34,8 @@ public class Bombe {
 
         bombeSize = 20;
 
+        animation = new Animation(4, 80, true);
+
 
 
     }
@@ -47,12 +49,15 @@ public class Bombe {
 
     public int getEtat() { return etat; }
 
+    public Animation getAnimation() { return animation;}
+
 
 
     public int mettreAJour ()
     {
         //System.out.println(chronometre.getTempsRestant());
 
+        animation.update();
         if (etat == 2)
         {
             if (detectJoueur(auteur))
@@ -214,7 +219,7 @@ public class Bombe {
     public void afficher(Graphics g)
     {
 
-        affichage.bombe(g, this, animation);
+        affichage.bombe(g, this, animation, terrain);
         /*
         if (etat == 1) {
             //g.setColor(Color.black);

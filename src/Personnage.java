@@ -73,6 +73,7 @@ public class Personnage extends Option {
     public int getBombe_tempsAvantExplosion () {return bombe_tempsAvantExplosion;}
     public int getDirection () {return direction;}
     public int getDirectionEnCours() {return directionEnCours;}
+    public int getNombreBombeMax() {return nombreBombeMax;}
 
     public Animation getAnimation() { return animation; }
 
@@ -251,10 +252,8 @@ public class Personnage extends Option {
 
     public void ajouterTailleFlamme(int offset)
     {
-        if (offset>0 && bombe_portee<10)
+        if (offset>0 && bombe_portee<10 || offset<0 && bombe_portee>0)
             bombe_portee += offset;
-        else if (offset<0 && bombe_portee>0)
-            bombe_portee -= offset;
     }
 
     public void setTailleFlamme (int taille)
@@ -274,7 +273,7 @@ public class Personnage extends Option {
 
     public void ajouterNombreBombe (int offset)
     {
-        nombreBombeMax+=offset;
+        nombreBombeMax+= offset;
         if (nombreBombeMax>7)
             nombreBombeMax = 7;
         else if (nombreBombeMax<2)

@@ -22,7 +22,7 @@ public class Affichage {
     private Image [] imagesBonus;
     private TrueTypeFont font;
 
-    private Image imageJoueurs, imageFlammes, imageBlocs;
+    private Image imageJoueurs, imageFlammes, imageBlocs, imageInterface, imageBonus;
 
 
 
@@ -40,9 +40,8 @@ public class Affichage {
 
 
 
-        persoSize = 20;
         bombeSize = 20;
-        bonusSize = 20;
+
 
         try {
             imageJoueurs = new Image("images/perso.png");
@@ -52,7 +51,7 @@ public class Affichage {
 
 
         try {
-            imageBombe = new Image("images/bombeGood.png");
+            imageBombe = new Image("images/bombe.png");
         } catch (SlickException e) {
             e.printStackTrace();
         }
@@ -69,16 +68,25 @@ public class Affichage {
             e.printStackTrace();
         }
 
-        //imageBombe.setCenterOfRotation(57,57);
-        imagesBonus = new Image [6];
+        try {
+            imageInterface = new Image("images/interface.png");
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
 
-        for (int a=0 ; a<6 ; a++)
+        //imageBombe.setCenterOfRotation(57,57);
+        imagesBonus = new Image [7];
+
+        try {
+            imageBonus = new Image("images/bonus.png");
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
+
+
+        for (int a=0 ; a<7 ; a++)
         {
-            try {
-                imagesBonus[a] = new Image ("images/bonus/bonus_"+a+".png");
-            } catch (SlickException e) {
-                e.printStackTrace();
-            }
+           imagesBonus[a] = imageBonus.getSubImage(a*24, 0, 24, 24);
         }
 
     }
@@ -119,7 +127,7 @@ public class Affichage {
 
         if (bombe.getEtat() == 1) {
             //g.setColor(Color.black);
-            imageBombe.getSubImage(24*bombe.getAnimation().getImageEnCours(), 0, 23,31).draw(colonneLatterale + indexToPixel(bombe.getPositX(), bombeSize), indexToPixel(bombe.getPositY(), bombeSize)-5);
+            imageBombe.getSubImage(24*bombe.getAnimation().getImageEnCours(), bombe.isBombeRouge()*32, 23,31).draw(colonneLatterale + indexToPixelCentred(bombe.getPositX(), bombeSize), indexToPixelCentred(bombe.getPositY(), bombeSize)-5);
 
         }
         else if (bombe.getEtat() == 2)
@@ -146,17 +154,50 @@ public class Affichage {
 
     public void bonus (Bonus bonus)
     {
-        imagesBonus[bonus.getId()].draw(colonneLatterale + indexToPixel(bonus.getPositX(), bonusSize), indexToPixel(bonus.getPositY(), bonusSize), bonusSize, bonusSize);
+        imagesBonus[bonus.getId()].draw(colonneLatterale + indexToPixel(bonus.getPositX()), indexToPixel(bonus.getPositY()), tileSize, tileSize);
     }
 
-    private int indexToPixel (int index, int sizeBloc)
+    private int indexToPixelCentred (int index, int sizeBloc)
     {
         return index * (tileSize + tileBorder) + tileSize / 2 - sizeBloc / 2;
     }
 
+    private int indexToPixel (int index)
+    {
+        return index * (tileSize + tileBorder);
+    }
+
     public void interfaceJeu(Graphics g, Personnage perso1, Personnage perso2)
     {
-        font.drawString(0,0,"Test MAGGLE!");
+        Personnage [] persos = new Personnage[2];
+        persos[0] = perso1 ; persos[1] = perso2;
+        for (int a=0 ; a<4 ; a++)
+        {
+            for (int b=0 ; b < 17 ; b++)
+            {
+                blocMap(g, -a-1, b, 0);
+                blocMap(g, a+21, b, 0);
+            }
+        }
+
+        imageJoueurs.getSubImage(32*8,0, 32, 32).draw(colonneLatterale + indexToPixel(-3), indexToPixel(1) , 2*tileSize, 2*tileSize);
+        imageJoueurs.getSubImage(32*6,32, 32, 32).draw(colonneLatterale + indexToPixel(20+2), indexToPixel(1) , 2*tileSize, 2*tileSize);
+        for (int a=0 ; a<2 ; a++)
+        {
+            imageInterface.getSubImage(64,32, 16, 16).draw(colonneLatterale + indexToPixel(-3 + a*25), indexToPixel(4) , 1*tileSize, 1*tileSize);
+            font.drawString(colonneLatterale + indexToPixel(-2 + a*25)+15, indexToPixel(4),Integer.toString(persos[a].getNbVies()));
+
+            imageInterface.getSubImage(0,32, 16, 16).draw(colonneLatterale + indexToPixel(-3 + a*25), indexToPixel(5) , 1*tileSize, 1*tileSize); // nbBomebes
+            font.drawString(colonneLatterale + indexToPixel(-2 + a*25)+15, indexToPixel(5),Integer.toString(persos[a].getNombreBombeMax()));
+
+            imageInterface.getSubImage(32,48, 16, 16).draw(colonneLatterale + indexToPixel(-3 + a*25), indexToPixel(6) , 1*tileSize, 1*tileSize); // nbBomebes
+            font.drawString(colonneLatterale + indexToPixel(-2 + a*25)+15, indexToPixel(6),Integer.toString(persos[a].getBombe_portee()));
+
+            imageInterface.getSubImage(16,48, 16, 16).draw(colonneLatterale + indexToPixel(-3 + a*25), indexToPixel(7) , 1*tileSize, 1*tileSize); // nbBomebes
+            font.drawString(colonneLatterale + indexToPixel(-2 + a*25)+15, indexToPixel(7),Integer.toString(persos[a].getBombe_tempsAvantExplosion()/1000) + "s");
+        }
+        //font.drawString(0,0,"Test MAGGLE!");
+
         //joueur();
         //g.setFont();
         //g.drawString("Test", 0, 0);

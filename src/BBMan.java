@@ -40,7 +40,6 @@ public class BBMan extends BasicGame {
         perso2 = new Personnage(affichage, terrain, 2);
         perso2.spawn(19,1);
 
-        etatDuJeu = 0;
         Son.playSoundmain();
 
         menu = new Menu();
@@ -74,7 +73,7 @@ public class BBMan extends BasicGame {
         else if (menu.getEtatDuJeu()==3)
         {
             perso1.finMourrir(g);
-            perso2.finMourrir (g);
+            perso2.finMourrir(g);
             menu.iWon();
         }
 

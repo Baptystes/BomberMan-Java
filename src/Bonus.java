@@ -29,37 +29,37 @@ public class Bonus {
 
     public void prendEffet(Personnage joueur)
     {
-        if (idBonus == 0)
+        if (idBonus == 4)
         {
             joueur.ajouterNombreBombe(-2);
             System.out.print("Bombe -!");
         }
-        else if (idBonus == 1)
+        else if (idBonus == 5)
         {
             joueur.ajouterNombreBombe(2);
             System.out.print("Bombe +!");
         }
-        else if (idBonus == 2)
+        else if (idBonus == 6)
         {
             joueur.setBombeRouge();
-            System.out.print("Bombe rouge!");
+            System.out.print("Bombe rouge!");    ///////////////////
         }
-        else if (idBonus == 3)
+        else if (idBonus == 0)
         {
             joueur.ajouterTailleFlamme(-1);
             System.out.print("Flamme bleue!");
         }
-        else if (idBonus == 4)
+        else if (idBonus == 1)
         {
             joueur.ajouterTailleFlamme(1);
             System.out.print("Flamme jaune!");
         }
-        else if (idBonus == 5)
+        else if (idBonus == 2)
         {
             joueur.setTailleFlamme(10);
             System.out.print("Flamme rouge!");
         }
-        else if (idBonus == 6)
+        else if (idBonus == 3)
         {
             joueur.ajouterTailleFlamme(1);
             joueur.ajoutTempsDetonation(-1000);

@@ -7,7 +7,7 @@ import java.io.File;
 public class Son {
     public static void playSoundmain() {
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Musique/test.wav").getAbsoluteFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("j/Musique/test.wav").getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();

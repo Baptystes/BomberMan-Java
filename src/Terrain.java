@@ -1,6 +1,7 @@
 import org.lwjgl.Sys;
 import org.newdawn.slick.*;
-import java.util.Vector;
+
+import java.util.*;
 
 public class Terrain {
 
@@ -12,6 +13,7 @@ public class Terrain {
     private Vector<Bonus> bonus = new Vector<Bonus>(0);
     private Affichage affichage;
 
+    private Random r = new Random();
 
 
 
@@ -74,7 +76,7 @@ public class Terrain {
         {
             bombes.add(new Bombe(affichage, perso, deuxiemePerso, this));
             perso.poseUneBombe();
-            System.out.print("\nPose");
+            //System.out.print("\nPose");
         }
     }
 
@@ -96,7 +98,7 @@ public class Terrain {
             {
                 bombes.get(a).getAuteur().supprimeUneBombe();
                 bombes.removeElementAt(a);
-                System.out.print(" REMOVE");
+                //System.out.print(" REMOVE");
             }
         }
     }
@@ -104,7 +106,9 @@ public class Terrain {
     public void detruireBloc (int positX, int positY)
     {
         setIdBloc(positX, positY, 0);
-        poserBonus(positX, positY);
+        if (r.nextInt(100+1)<=20)
+            poserBonus(positX, positY, r.nextInt(7));
+
     }
 
     public Bombe detectBombe (int positX, int positY)
@@ -135,10 +139,10 @@ public class Terrain {
         }
     }
 
-    public void poserBonus (int positX, int positY)
+    public void poserBonus (int positX, int positY, int idBonus)
     {
-        bonus.add(new Bonus(affichage, this, 0, positX, positY));
-        System.out.print("\nSpawnBonus");
+        bonus.add(new Bonus(affichage, this, idBonus, positX, positY));
+        System.out.println("\nSpawnBonus:"+idBonus);
     }
 
     public Bonus detectBonus (int positX, int positY)

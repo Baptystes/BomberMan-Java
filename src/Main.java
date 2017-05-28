@@ -8,7 +8,7 @@ public class Main
     {
         int tileSize = 35;
         int tileBorder = 0;
-        int colonneLateralle = 200;
+        int colonneLateralle = 4*(tileSize+tileBorder);
 
         app = new AppGameContainer( new BBMan(tileSize, tileBorder, colonneLateralle));
         app.setDisplayMode(21*(tileSize + tileBorder) + 2*colonneLateralle, 17*(tileSize + tileBorder), false );

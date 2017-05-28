@@ -43,7 +43,7 @@ public class Animation {
            }
 
            chronometre.reDemarrer(tempsImage);
-           System.out.println(imageEnCours + " " + nombreImages);
+           //System.out.println(imageEnCours + " " + nombreImages);
        }
     }
 

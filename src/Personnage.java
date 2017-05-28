@@ -1,7 +1,7 @@
 import net.java.games.input.Component;
 import org.newdawn.slick.*;
 
-public class Personnage {
+public class Personnage extends Option {
 
 
     private int positX, positY, offsetX, offsetY, idPerso, direction, vitesse, nombreBombeMax, nombreBombePosee, bombe_portee, bombe_tempsAvantExplosion, bombe_traverseBloc, nbVies, directionEnCours;
@@ -54,10 +54,22 @@ public class Personnage {
 
     public int getPositX () { return positX; }
     public int getPositY () { return positY; }
+
     public int getOffsetX () {return offsetX;}
     public int getOffsetY () {return offsetY;}
 
     public int getIdJoueur () {return idPerso;}
+
+
+    public int getNbVies() {
+        return nbVies;
+    }
+
+    public void setNbVies(int nbVies) {
+        this.nbVies = nbVies;
+    }
+
+
     public int getBombe_tempsAvantExplosion () {return bombe_tempsAvantExplosion;}
     public int getDirection () {return direction;}
     public int getDirectionEnCours() {return directionEnCours;}
@@ -276,10 +288,7 @@ public class Personnage {
             bombe_tempsAvantExplosion = 3000;
     }
 
-    public void modifierVie (int offset)
-    {
 
-    }
 
     public void perdUneVie (Personnage autreJoueur)
     {
@@ -288,14 +297,30 @@ public class Personnage {
         if (Math.sqrt( Math.pow(1 - autreJoueur.getPositX(), 2) + Math.sqrt(Math.pow(15 - autreJoueur.getPositY(), 2))) > Math.sqrt( Math.pow(19 - autreJoueur.getPositX(), 2) + Math.sqrt(Math.pow(1 - autreJoueur.getPositY(), 2))))
         {
             positX = 1 ; positY = 15;
+
         }
         else
         {
             positX = 19 ; positY = 1;
+
+        }
+        if (estInvincible() == false)
+        {
+        setNbVies(getNbVies() -1);
+        System.out.println (" Le joueur " + idPerso+ " a perdu une vie. Son nombre de vie est " +getNbVies());
         }
 
         tempsInvincible.reDemarrer(3000);
     }
+    public void finMourrir(Graphics g)
+    {
+        if (getNbVies() ==0)
+        {
+            g.drawString("La partie est terminée. Le joueur" + idPerso + " a perdu", 200,0);
+        }
+    }
+
+
 
     public boolean estInvincible ()
     {

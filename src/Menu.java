@@ -11,7 +11,6 @@ public class Menu
 
 {
     private GameContainer gc;
-    private int etatDuJeu  ;
     private int choixEnCours;
     private Image imageBoutons;
     private Image imageBg;
@@ -21,7 +20,6 @@ public class Menu
 
     {
         choixEnCours = 0;
-        etatDuJeu=0;
         this.gc = gc;
 
         try {
@@ -44,18 +42,8 @@ public class Menu
         }
     }
 
-    public int getEtatDuJeu() {
-        return etatDuJeu;
-    }
+    
 
-    public void setEtatDuJeu(int etatDuJeu) {
-        this.etatDuJeu = etatDuJeu;
-    }
-
-    public int getChoix()
-    {
-        return choixEnCours;
-    }
 
     public void setChoix(int choix) {
         this.choixEnCours = choix;
@@ -80,14 +68,6 @@ public class Menu
             }
         }
 
-        if ((posX > 260 && posX < 525) && (posY > 375 && posY < 455))
-        {
-            if (Mouse.isButtonDown(0))
-            {
-                setEtatDuJeu(1);
-
-            }
-        }
         if (gc.getInput().isKeyPressed(Input.KEY_DOWN))
         {
             choixEnCours = (choixEnCours+1)%3;
@@ -130,23 +110,12 @@ public class Menu
         {
             if (Mouse.isButtonDown(0))
             {
-                setEtatDuJeu(2);
+                //setEtatDuJeu(2);
             }
         }
 
     }
-    public void escape(GameContainer gc)
-    {
-        if (gc.getInput().isKeyDown(Input.KEY_ESCAPE))
-        {
-            setEtatDuJeu(0);
-        }
-    }
-    public boolean checkFin(Personnage perso1, Personnage perso2)
-    {
-        return (perso1.getNbVies() ==0 || perso2.getNbVies() ==0);
 
-    }
 
     public void afficher()
     {
@@ -166,8 +135,6 @@ public class Menu
     }
     public void iWon()
     {
-
-
         imageWon.draw(0,50);
     }
 

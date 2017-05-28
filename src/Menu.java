@@ -10,20 +10,22 @@ import javax.swing.JOptionPane;
 public class Menu
 
 {
+    private GameContainer gc;
     private int etatDuJeu  ;
-    private int choix  ;
-    private Image imageMenu;
+    private int choixEnCours;
+    private Image imageBoutons;
     private Image imageBg;
     private Image imageWon;
 
-    public Menu ( )
+    public Menu (GameContainer gc)
 
     {
+        choixEnCours = 0;
         etatDuJeu=0;
-
+        this.gc = gc;
 
         try {
-            imageMenu = new Image("images/menu/menu.png");
+            imageBoutons = new Image("images/menu/boutons.png");
 
         } catch (SlickException e) {
             e.printStackTrace();
@@ -52,23 +54,32 @@ public class Menu
 
     public int getChoix()
     {
-        return choix;
+        return choixEnCours;
     }
 
     public void setChoix(int choix) {
-        this.choix = choix;
+        this.choixEnCours = choix;
     }
-    public void choisir (GameContainer gc)
+
+
+    public int gestion()
     {
-        if (Mouse.isButtonDown(0) || gc.getInput().isKeyDown(Input.KEY_ENTER))
+
+        int posX = gc.getInput().getMouseX();
+        int posY = gc.getInput().getMouseY();
+
+        boolean sourisDansCadre = false;
+        for (int a=0 ; a<3 ; a++)
         {
-            setChoix(1);
+            //System.out.println(posY);
+            //imageBoutons.getSubImage(0, a*84, 259, 84).draw(gc.getWidth()/2-259/2, gc.getHeight()/5*a + 100);
+            if (posX>gc.getWidth()/2-259/2 && posX < (gc.getWidth()/2-259/2)+259 && posY>(gc.getHeight()/5*a + 100) && posY < (gc.getHeight()/5*a + 100+84))
+            {
+                choixEnCours = a;
+                sourisDansCadre = true;
+            }
         }
-    }
-    public void play( )
-    {
-        int posX = Mouse.getX();
-        int posY = Mouse.getY();
+
         if ((posX > 260 && posX < 525) && (posY > 375 && posY < 455))
         {
             if (Mouse.isButtonDown(0))
@@ -77,6 +88,22 @@ public class Menu
 
             }
         }
+        if (gc.getInput().isKeyPressed(Input.KEY_DOWN))
+        {
+            choixEnCours = (choixEnCours+1)%3;
+        }
+        else if (gc.getInput().isKeyPressed(Input.KEY_UP))
+        {
+            choixEnCours--;
+            if (choixEnCours<0)
+                choixEnCours=2;
+        }
+
+        if ((gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && sourisDansCadre) || gc.getInput().isKeyPressed(Input.KEY_ENTER))
+            return choixEnCours+1;
+        else
+            return 0;
+
 
 
     }
@@ -124,12 +151,19 @@ public class Menu
         }
     }
 
-    public void afficherImage()
+    public void afficher()
     {
 
         imageBg.draw(0,0);
+        for (int a=0 ; a<3 ; a++)
+        {
+            imageBoutons.getSubImage(0, a*84, 259, 84).draw(gc.getWidth()/2-259/2, gc.getHeight()/5*a + 100);
+        }
 
-        imageMenu.draw(250, 150);
+        for (int a=0 ; a<2 ; a++)
+            imageBoutons.getSubImage(259, 0, 69, 11).draw(gc.getWidth()/2-259/2 - 90 + 360*a, gc.getHeight()/5*choixEnCours +84/2 - 11/2 + 100);
+
+
         
 
     }

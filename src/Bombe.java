@@ -96,6 +96,7 @@ public class Bombe {
             chronometre.reDemarrer(1000);
             etat = 2;
         }
+        animation.reset();
         int stopAvance = 0;
         int idBloc;
         Bombe bombe;

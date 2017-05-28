@@ -7,7 +7,7 @@ public class Main
     public static void main( String[] args ) throws SlickException
     {
         int tileSize = 35;
-        int tileBorder = 1;
+        int tileBorder = 0;
         int colonneLateralle = 200;
 
         app = new AppGameContainer( new BBMan(tileSize, tileBorder, colonneLateralle));

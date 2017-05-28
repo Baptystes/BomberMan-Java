@@ -142,13 +142,10 @@ public class Menu
             setEtatDuJeu(0);
         }
     }
-    public void end(Personnage perso1, Personnage perso2)
+    public boolean checkFin(Personnage perso1, Personnage perso2)
     {
-        if (perso1.getNbVies() ==0 || perso2.getNbVies() ==0)
-        {
+        return (perso1.getNbVies() ==0 || perso2.getNbVies() ==0);
 
-            setEtatDuJeu(3);
-        }
     }
 
     public void afficher()

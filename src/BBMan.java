@@ -17,7 +17,7 @@ public class BBMan extends BasicGame {
 
     private Menu menu;
     private Option option;
-
+    private Chronometre chronometre;
 
 
 
@@ -71,16 +71,27 @@ public class BBMan extends BasicGame {
                 menu.setChoix(0);
                 etatDuJeu = 0;
             }
+
         }
         else if (etatDuJeu == 2)
         {
+            gc.exit();
+        }
+
+        else if (etatDuJeu == 3)
+        {
             option.saisieVie();
         }
-        else if (etatDuJeu==3)
+        else if (etatDuJeu==4)
         {
             perso1.finMourrir(g);
             perso2.finMourrir(g);
             menu.iWon();
+            if (gc.getInput().isKeyPressed(Input.KEY_ENTER))
+            {
+                etatDuJeu = 0;
+                menu.setChoix(0);
+            }
         }
 
 
@@ -123,6 +134,11 @@ public class BBMan extends BasicGame {
             }
             terrain.gestionBombes();
             terrain.gestionBonus();
+
+            if (perso1.estMort() || perso2.estMort())
+            {
+                etatDuJeu=4;
+            }
         }
 
 

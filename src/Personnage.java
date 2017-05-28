@@ -326,6 +326,8 @@ public class Personnage extends Option {
         return possedeBouclierResurection();
     }
 
+    public boolean estMort () { return nbVies<=0;}
+
     public boolean possedeBouclierResurection()
     {
         return tempsInvincible.checkFinished() == 0;

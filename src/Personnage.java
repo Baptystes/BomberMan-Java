@@ -326,7 +326,7 @@ public class Personnage extends Option {
         return possedeBouclierResurection();
     }
 
-    public boolean estMort () { return nbVies<=0;}
+    public boolean estMort () { return (nbVies<=0);}
 
     public boolean possedeBouclierResurection()
     {

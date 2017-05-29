@@ -11,9 +11,35 @@ public class Son {
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             System.out.println("Error with playing sound.");
             ex.printStackTrace();
+        }
+    }
+
+    public static void playsonbombe() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("j/Musique/explosion_bome.mp3").getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+
+        }
+    }
+
+    public static void playsonbonus(){
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("j/Musique/son_bonus.mp3").getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+
         }
     }
 }

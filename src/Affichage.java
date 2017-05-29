@@ -16,11 +16,11 @@ import org.newdawn.slick.util.ResourceLoader;
 public class Affichage {
     private int tileSize, tileBorder, colonneLatterale, bombeSize, bonusSize, persoSize;
 
-
+    Texte texte;
 
     private Image imageBombe;
     private Image [] imagesBonus;
-    private TrueTypeFont font;
+
 
     private Image imageJoueurs, imageFlammes, imageBlocs, imageInterface, imageBonus;
 
@@ -29,9 +29,8 @@ public class Affichage {
     Affichage (int tileSize, int tileBorder, int colonneLatterale)
     {
 
+    texte = new Texte();
 
-        Font awtFont = new Font("Times New Roman", Font.BOLD, 24);
-        font = new TrueTypeFont(awtFont, true);
     //http://ninjacave.com/slickutil3
         this.tileSize = tileSize;
         this.tileBorder = tileBorder;
@@ -185,21 +184,26 @@ public class Affichage {
         for (int a=0 ; a<2 ; a++)
         {
             imageInterface.getSubImage(64,32, 16, 16).draw(colonneLatterale + indexToPixel(-3 + a*25), indexToPixel(4) , 1*tileSize, 1*tileSize);
-            font.drawString(colonneLatterale + indexToPixel(-2 + a*25)+15, indexToPixel(4),Integer.toString(persos[a].getNbVies()));
+            texte.afficher(colonneLatterale + indexToPixel(-2 + a*25)+15, indexToPixel(4),Integer.toString(persos[a].getNbVies()));
 
             imageInterface.getSubImage(0,32, 16, 16).draw(colonneLatterale + indexToPixel(-3 + a*25), indexToPixel(5) , 1*tileSize, 1*tileSize); // nbBomebes
-            font.drawString(colonneLatterale + indexToPixel(-2 + a*25)+15, indexToPixel(5),Integer.toString(persos[a].getNombreBombeMax()));
+            texte.afficher(colonneLatterale + indexToPixel(-2 + a*25)+15, indexToPixel(5),Integer.toString(persos[a].getNombreBombeMax()));
 
             imageInterface.getSubImage(32,48, 16, 16).draw(colonneLatterale + indexToPixel(-3 + a*25), indexToPixel(6) , 1*tileSize, 1*tileSize); // nbBomebes
-            font.drawString(colonneLatterale + indexToPixel(-2 + a*25)+15, indexToPixel(6),Integer.toString(persos[a].getBombe_portee()));
+            texte.afficher(colonneLatterale + indexToPixel(-2 + a*25)+15, indexToPixel(6),Integer.toString(persos[a].getBombe_portee()));;
 
             imageInterface.getSubImage(16,48, 16, 16).draw(colonneLatterale + indexToPixel(-3 + a*25), indexToPixel(7) , 1*tileSize, 1*tileSize); // nbBomebes
-            font.drawString(colonneLatterale + indexToPixel(-2 + a*25)+15, indexToPixel(7),Integer.toString(persos[a].getBombe_tempsAvantExplosion()/1000) + "s");
+            texte.afficher(colonneLatterale + indexToPixel(-2 + a*25)+15, indexToPixel(7),Integer.toString(persos[a].getBombe_tempsAvantExplosion()/1000) + "s");
         }
         //font.drawString(0,0,"Test MAGGLE!");
 
         //joueur();
         //g.setFont();
         //g.drawString("Test", 0, 0);
+    }
+
+    public Image getImageBonus (int a)
+    {
+        return imagesBonus[a];
     }
 }

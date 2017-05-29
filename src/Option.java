@@ -14,6 +14,7 @@ public class Option
         this.nombreBombePosee = 0;
         this.bombe_portee = 3;
         this.bombe_tempsAvantExplosion = 4000;
+        nbVies = 3;
     }
 
     public int getVitesse() {

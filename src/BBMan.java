@@ -34,15 +34,13 @@ public class BBMan extends BasicGame {
         this.gc = gc;
         affichage = new Affichage(tileSize, tileBorder, colonneLatterale);
         terrain = new Terrain(affichage);
-        /*
+
         perso1 = new Personnage(affichage, terrain, 1);
-        perso1.spawn(1,15);
         perso2 = new Personnage(affichage, terrain, 2);
-        perso2.spawn(19,1);*/
 
         Son.playSoundmain();
 
-        menu = new Menu(gc);
+        menu = new Menu(gc, affichage);
         option =new Option();
 
     }
@@ -53,7 +51,7 @@ public class BBMan extends BasicGame {
         // Menu
         if (etatDuJeu == 0)
         {
-            menu.afficher();
+            menu.afficherPrincipal();
         }
         // partie en cours
         else if (etatDuJeu == 1)
@@ -80,7 +78,7 @@ public class BBMan extends BasicGame {
 
         else if (etatDuJeu == 3)
         {
-            option.saisieVie();
+            menu.afficherOptions();
         }
         else if (etatDuJeu==4)
         {
@@ -111,12 +109,9 @@ public class BBMan extends BasicGame {
             etatDuJeu = menu.gestion();
             if (etatDuJeu == 1)
             {
-                perso1 = null;
-                perso2 = null;
-                perso1 = new Personnage(affichage, terrain, 1);
-                perso1.spawn(1,15);
-                perso2 = new Personnage(affichage, terrain, 2);
-                perso2.spawn(19,1);
+                perso1.reset(1,15);
+                perso2.reset(19,1);
+                terrain.reset();
             }
         }
         else if (etatDuJeu == 1)

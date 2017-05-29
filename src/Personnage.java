@@ -20,7 +20,6 @@ public class Personnage extends Option {
 
         animation = new Animation(3, 50, true);
 
-        nbVies = 3;
 
         if (idPerso == 1)
         {
@@ -41,12 +40,7 @@ public class Personnage extends Option {
 
         offsetX = 0;
         offsetY = 0;
-        vitesse = 3;
 
-        nombreBombeMax = 3;
-        nombreBombePosee = 0;
-        bombe_portee = 3;
-        bombe_tempsAvantExplosion = 4000;
         directionEnCours = 3;
 
         tempsInvincible = new Chronometre();
@@ -78,11 +72,7 @@ public class Personnage extends Option {
     public Animation getAnimation() { return animation; }
 
 
-    public void spawn (int positX, int positY)
-    {
-        this.positX = positX;
-        this.positY = positY;
-    }
+
 
     public void deplacer (GameContainer gc)
     {
@@ -291,16 +281,14 @@ public class Personnage extends Option {
 
     public void perdUneVie (Personnage autreJoueur)
     {
-        offsetX = 0 ;
-        offsetY = 0;
         if (Math.sqrt( Math.pow(1 - autreJoueur.getPositX(), 2) + Math.sqrt(Math.pow(15 - autreJoueur.getPositY(), 2))) > Math.sqrt( Math.pow(19 - autreJoueur.getPositX(), 2) + Math.sqrt(Math.pow(1 - autreJoueur.getPositY(), 2))))
         {
-            positX = 1 ; positY = 15;
+            respawn(1, 15);
 
         }
         else
         {
-            positX = 19 ; positY = 1;
+            respawn(19,1);
 
         }
         if (estInvincible() == false)
@@ -331,5 +319,34 @@ public class Personnage extends Option {
     public boolean possedeBouclierResurection()
     {
         return tempsInvincible.checkFinished() == 0;
+    }
+
+    public void reset(int positX, int positY)
+    {
+        Option option = new Option();
+        respawn(positX, positY);
+        nbVies = option.getNbVies();
+    }
+
+    public void respawn(int positX, int positY)
+    {
+        this.positX = positX;
+        this.positY = positY;
+        offsetX = 0;
+        offsetY = 0;
+        resetBonus();
+    }
+
+    public void resetBonus()
+    {
+
+        Option option = new Option();
+        vitesse = option.getVitesse();
+
+        nombreBombeMax = option.getNombreBombeMax();
+        nombreBombePosee = 0;
+        bombe_portee = option.getBombe_portee();
+        bombe_tempsAvantExplosion = option.getBombe_tempsAvantExplosion();
+        bombe_traverseBloc = 0;
     }
 }

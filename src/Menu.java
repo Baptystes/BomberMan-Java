@@ -15,10 +15,15 @@ public class Menu
     private Image imageBoutons;
     private Image imageBg;
     private Image imageWon;
+    private Affichage affichage;
 
-    public Menu (GameContainer gc)
+    Texte texte;
+
+    public Menu (GameContainer gc, Affichage affichage)
 
     {
+        this.affichage = affichage;
+
         choixEnCours = 0;
         this.gc = gc;
 
@@ -40,6 +45,8 @@ public class Menu
         } catch (SlickException e) {
             e.printStackTrace();
         }
+
+        texte = new Texte();
     }
 
     
@@ -117,7 +124,7 @@ public class Menu
     }
 
 
-    public void afficher()
+    public void afficherPrincipal()
     {
 
         imageBg.draw(0,0);
@@ -129,8 +136,16 @@ public class Menu
         for (int a=0 ; a<2 ; a++)
             imageBoutons.getSubImage(259, 0, 69, 11).draw(gc.getWidth()/2-259/2 - 90 + 360*a, gc.getHeight()/5*choixEnCours +84/2 - 11/2 + 100);
 
+    }
 
-        
+    public void afficherOptions()
+    {
+        imageBg.draw(0,0);
+        texte.afficher(gc.getWidth()/2-30, 50, "Options");
+        for (int a=0 ; a<7 ; a++)
+        {
+            affichage.getImageBonus(a).draw(gc.getWidth()/2-150 + a*50, 100, affichage.getTileSize(), affichage.getTileSize());
+        }
 
     }
     public void iWon()

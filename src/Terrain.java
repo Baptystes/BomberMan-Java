@@ -18,7 +18,7 @@ public class Terrain {
 
 
 
-    private int tabMap [] = {
+    private int tabMapInit [] =  {
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
             1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 1,
             1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 0, 1, 0, 1,
@@ -36,6 +36,7 @@ public class Terrain {
             1, 0, 1, 0, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1,
             1, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1,
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    private int [] tabMap = new int[tabMapInit.length];
 
 
 
@@ -45,6 +46,14 @@ public class Terrain {
 
         this.affichage = affichage;
 
+        bombes.clear();
+        bonus.clear();
+    }
+
+    public void reset()
+    {
+        for (int a=0 ; a<tabMapInit.length ; a++)
+            tabMap[a] = tabMapInit[a];
         bombes.clear();
         bonus.clear();
     }

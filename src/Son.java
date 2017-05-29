@@ -7,7 +7,7 @@ import java.io.File;
 public class Son {
     public static void playSoundmain() {
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("j/Musique/test.wav").getAbsoluteFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Musique/test.wav").getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
@@ -19,7 +19,7 @@ public class Son {
 
     public static void playsonbombe() {
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("j/Musique/explosion_bome.mp3").getAbsoluteFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Musique/explosion_bome.mp3").getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
@@ -32,7 +32,7 @@ public class Son {
 
     public static void playsonbonus(){
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("j/Musique/son_bonus.mp3").getAbsoluteFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Musique/son_bonus.mp3").getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();

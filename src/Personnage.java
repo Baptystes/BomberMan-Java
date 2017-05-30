@@ -25,7 +25,7 @@ public class Personnage extends Option {
 
         animation = new Animation(3, 50, true);
 
-        animationBouclier = new Animation(10, 50, false);
+        animationBouclier = new Animation(10, 50, true);
 
         if (idPerso == 1)
         {
@@ -68,7 +68,7 @@ public class Personnage extends Option {
     public void setNbVies(int nbVies) {
         this.nbVies = nbVies;
     }
-
+    public void gagneUneVie() {nbVies++;}
 
     public int getBombe_tempsAvantExplosion () {return bombe_tempsAvantExplosion;}
     public int getDirection () {return direction;}

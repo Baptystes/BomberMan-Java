@@ -77,6 +77,10 @@ public class Bonus {
             joueur.donnerBouclier();
             System.out.print("Bouclier");
         }
+        else if (idBonus==8)
+        {
+            joueur.gagneUneVie();
+        }
 
     }
     public int getId ()

@@ -113,12 +113,8 @@ public class Terrain {
             }
         }
 
-        System.out.println(perso1.getRecoitDegats());
         if (perso1.getRecoitDegats()==false && perso1.doitPerdreBouclier())
-        {
             perso1.retirerBouclier();
-            //System.out.println("LOST");
-        }
         if (perso2.getRecoitDegats()==false && perso2.doitPerdreBouclier())
             perso2.retirerBouclier();
 
@@ -129,7 +125,7 @@ public class Terrain {
     {
         setIdBloc(positX, positY, 0);
         //if (r.nextInt(100+1)<=20)
-            poserBonus(positX, positY, 7);//r.nextInt(8));
+            poserBonus(positX, positY, 8);//r.nextInt(8));
     }
 
     public Bombe detectBombe (int positX, int positY)

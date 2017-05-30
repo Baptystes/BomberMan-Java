@@ -133,6 +133,7 @@ public class BBMan extends BasicGame {
             if (perso1.estMort() || perso2.estMort())
             {
                 etatDuJeu=4;
+                Son.playsonperdu();
             }
         }
 

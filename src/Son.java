@@ -19,7 +19,7 @@ public class Son {
 
     public static void playsonbombe() {
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Musique/explosion_bome.mp3").getAbsoluteFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Musique/explosion_bombe.wav").getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
@@ -32,7 +32,33 @@ public class Son {
 
     public static void playsonbonus(){
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Musique/son_bonus.mp3").getAbsoluteFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Musique/bonus.wav").getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+
+        }
+    }
+
+    public static void playsonfeu(){
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Musique/feu.wav").getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+
+        }
+    }
+
+    public static void playsonperdu(){
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Musique/feu.wav").getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();

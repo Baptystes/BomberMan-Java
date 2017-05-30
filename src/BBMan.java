@@ -127,7 +127,7 @@ public class BBMan extends BasicGame {
             if (perso2.veutPoserBombe(gc) == 1) {
                 terrain.poserBombe(perso2, perso1);
             }
-            terrain.gestionBombes();
+            terrain.gestionBombes(perso1, perso2);
             terrain.gestionBonus();
 
             if (perso1.estMort() || perso2.estMort())

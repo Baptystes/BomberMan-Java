@@ -99,8 +99,11 @@ public class Terrain {
         }
     }
 
-    public void gestionBombes ()
+    public void gestionBombes (Personnage perso1, Personnage perso2)
     {
+        perso1.resetRecoitDegat();
+        perso2.resetRecoitDegat();
+
         for (int a=0 ; a< bombes.size() ; a++)
         {
             if (bombes.get(a).mettreAJour() == 1)
@@ -110,13 +113,24 @@ public class Terrain {
                 //System.out.print(" REMOVE");
             }
         }
+
+
+
+        if (perso1.getRecoitDegats()==false && perso1.doitPerdreBouclier())
+        {
+            perso1.fairePerdreBouclier();
+            System.out.println("LOST");
+        }
+        if (perso2.getRecoitDegats()==false && perso2.doitPerdreBouclier())
+            perso2.fairePerdreBouclier();
+
     }
 
     public void detruireBloc (int positX, int positY)
     {
         setIdBloc(positX, positY, 0);
-        if (r.nextInt(100+1)<=20)
-            poserBonus(positX, positY, r.nextInt(7));
+        //if (r.nextInt(100+1)<=20)
+            poserBonus(positX, positY, 7);//r.nextInt(8));
     }
 
     public Bombe detectBombe (int positX, int positY)

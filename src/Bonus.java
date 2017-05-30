@@ -65,6 +65,11 @@ public class Bonus {
             joueur.ajoutTempsDetonation(-1000);
             System.out.print("Flamme Verte!");
         }
+        else if (idBonus == 7)
+        {
+            joueur.donnerBouclier();
+            System.out.print("Bouclier");
+        }
 
     }
     public int getId ()

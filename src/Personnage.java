@@ -5,12 +5,16 @@ public class Personnage extends Option {
 
 
     private int positX, positY, offsetX, offsetY, idPerso, direction, vitesse, nombreBombeMax, nombreBombePosee, bombe_portee, bombe_tempsAvantExplosion, bombe_traverseBloc, nbVies, directionEnCours;
-
+    private boolean possedeBouclier;
     private Terrain terrain;
     private Affichage affichage;
     Chronometre tempsInvincible;
     Animation animation;
     private int toucheHaut, toucheBas, toucheGauche, toucheDroite, toucheBombe;
+
+    private boolean recoitDegats;
+
+    private boolean doitPerdreBlouclier;
 
     Personnage (Affichage affichage, Terrain terrain, int idPerso)
     {
@@ -225,6 +229,26 @@ public class Personnage extends Option {
 
     }
 
+    public void donnerBouclier()
+    {
+        possedeBouclier = true;
+        doitPerdreBlouclier = false;
+    }
+    public void retirerBouclier()
+    {
+        possedeBouclier = false;
+        doitPerdreBlouclier = false;
+    }
+    public boolean doitPerdreBouclier()
+    {
+        return doitPerdreBlouclier;
+    }
+
+    public boolean possedeBouclier ()
+    {
+        return possedeBouclier;
+    }
+
     public void poseUneBombe ()
     {
         nombreBombePosee ++;
@@ -328,6 +352,21 @@ public class Personnage extends Option {
         nbVies = option.getNbVies();
     }
 
+    public boolean getRecoitDegats()
+    {
+        return recoitDegats;
+    }
+
+    public void recoitDegats()
+    {
+        recoitDegats = true;
+    }
+
+    public void resetRecoitDegat()
+    {
+        recoitDegats = false;
+    }
+
     public void respawn(int positX, int positY)
     {
         this.positX = positX;
@@ -335,6 +374,12 @@ public class Personnage extends Option {
         offsetX = 0;
         offsetY = 0;
         resetBonus();
+        recoitDegats = false;
+    }
+
+    public void fairePerdreBouclier ()
+    {
+        doitPerdreBlouclier = true;
     }
 
     public void resetBonus()
@@ -348,5 +393,7 @@ public class Personnage extends Option {
         bombe_portee = option.getBombe_portee();
         bombe_tempsAvantExplosion = option.getBombe_tempsAvantExplosion();
         bombe_traverseBloc = 0;
+        possedeBouclier = false;
+        doitPerdreBlouclier = false;
     }
 }

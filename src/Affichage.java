@@ -21,6 +21,7 @@ public class Affichage {
     private Image imageBombe;
     private Image [] imagesBonus;
 
+    private Image imageBouclier;
 
     private Image imageJoueurs, imageFlammes, imageBlocs, imageInterface, imageBonus;
 
@@ -74,7 +75,7 @@ public class Affichage {
         }
 
         //imageBombe.setCenterOfRotation(57,57);
-        imagesBonus = new Image [7];
+        imagesBonus = new Image [8];
 
         try {
             imageBonus = new Image("images/bonus.png");
@@ -82,8 +83,15 @@ public class Affichage {
             e.printStackTrace();
         }
 
+        try {
+            imageBouclier = new Image("images/bouclier.png");
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
 
-        for (int a=0 ; a<7 ; a++)
+
+
+        for (int a=0 ; a<imagesBonus.length ; a++)
         {
            imagesBonus[a] = imageBonus.getSubImage(a*24, 0, 24, 24);
         }
@@ -99,7 +107,10 @@ public class Affichage {
             blop = 0;
         //imageJoueurs.draw(colonneLatterale + perso.getPositX() * (tileSize + tileBorder) + perso.getOffsetX() + tileSize/2 - persoSize/2, perso.getPositY() * (tileSize + tileBorder) + perso.getOffsetY() +tileSize/2 - persoSize/2, persoSize, persoSize, 0,0,17, 30 );
         imageJoueurs.getSubImage(32 * (1-blop)+32 * perso.getAnimation().getImageEnCours()*blop + 32*(perso.getDirectionEnCours()-1) * perso.getAnimation().getNombreImages(),32*(perso.getIdJoueur()-1), 32, 32).draw(colonneLatterale + perso.getPositX() * (tileSize + tileBorder) + perso.getOffsetX(), perso.getPositY() * (tileSize + tileBorder) + perso.getOffsetY() , tileSize, tileSize);
-
+        if (perso.possedeBouclier())
+        {
+            imageBouclier.getSubImage(0,0, 64, 64).draw(colonneLatterale + perso.getPositX() * (tileSize + tileBorder) + perso.getOffsetX(), perso.getPositY() * (tileSize + tileBorder) + perso.getOffsetY() , tileSize, tileSize);
+        }
 
     }
 

@@ -81,11 +81,25 @@ public class Bombe {
 
         animation.update();
         if (etat == 2) {
-            if (detectJoueur(auteur)) {
-                auteur.perdUneVie(deuxiemePerso);
+            if (detectJoueur(auteur))
+            {
+                if (auteur.possedeBouclier())
+                {
+                    auteur.recoitDegats();
+                    auteur.fairePerdreBouclier();
+                }
+                else
+                    auteur.perdUneVie(deuxiemePerso);
             }
-            if (detectJoueur(deuxiemePerso)) {
-                deuxiemePerso.perdUneVie(auteur);
+            if (detectJoueur(deuxiemePerso))
+            {
+                if (deuxiemePerso.possedeBouclier())
+                {
+                    deuxiemePerso.fairePerdreBouclier();
+                    deuxiemePerso.recoitDegats();
+                }
+                else
+                    deuxiemePerso.perdUneVie(auteur);
             }
         }
 
@@ -93,10 +107,13 @@ public class Bombe {
             exploser();
             return 0;
 
-        } else if (etat == 2 && chronometre.checkFinished() == 1) {
+        } else if (etat == 2 && chronometre.checkFinished() == 1)
+        {
             etat = 0;
             return 1;
-        } else {
+        }
+        else
+        {
             return 0;
         }
 

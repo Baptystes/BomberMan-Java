@@ -1,0 +1,12 @@
+Adobe After Effects v14.1 Windows 64 - Compte rendu du projet Projet sans titre.aep
+
+Début du rendu le 30/05/2017 à 09:49:52
+
+  30/05/2017 09:49:52 : début de la composition Composition 1.
+
+  Destin. : D:\Programmes\Programmation\JAVA\BBMan\images\Bouclier\bouclier_[#####].png      Rendu interrompu par l'utilisateur.    30/05/2017 09:49:55 : fin de la composition Composition 1.
+
+
+  Temps total écoulé : 3 Secondes
+Compte-rendu terminé le 30/05/2017 à 09:49:55
+

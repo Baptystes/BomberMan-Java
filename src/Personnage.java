@@ -1,7 +1,7 @@
 import net.java.games.input.Component;
 import org.newdawn.slick.*;
 
-public class Personnage extends Option {
+public class Personnage {
 
 
     private int positX, positY, offsetX, offsetY, idPerso, direction, vitesse, nombreBombeMax, nombreBombePosee, bombe_portee, bombe_tempsAvantExplosion, bombe_traverseBloc, nbVies, directionEnCours;
@@ -64,6 +64,8 @@ public class Personnage extends Option {
     public int getNbVies() {
         return nbVies;
     }
+
+    public int getVitesse() {return vitesse;}
 
     public void setNbVies(int nbVies) {
         this.nbVies = nbVies;
@@ -335,6 +337,16 @@ public class Personnage extends Option {
 
         tempsInvincible.reDemarrer(3000);
     }
+
+    public void modifierVitesse(double offset)
+    {
+        vitesse += offset;
+        if (vitesse>5)
+            vitesse = 5;
+        else if (vitesse<1)
+            vitesse = 1;
+    }
+
     public void finMourrir(Graphics g)
     {
         if (getNbVies() ==0)
@@ -362,6 +374,7 @@ public class Personnage extends Option {
         Option option = new Option();
         respawn(positX, positY);
         nbVies = option.getNbVies();
+        nombreBombePosee = 0;
     }
 
     public boolean getRecoitDegats()
@@ -398,7 +411,6 @@ public class Personnage extends Option {
         vitesse = option.getVitesse();
 
         nombreBombeMax = option.getNombreBombeMax();
-        nombreBombePosee = 0;
         bombe_portee = option.getBombe_portee();
         bombe_tempsAvantExplosion = option.getBombe_tempsAvantExplosion();
         bombe_traverseBloc = 0;

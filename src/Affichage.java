@@ -74,7 +74,7 @@ public class Affichage {
         }
 
         //imageBombe.setCenterOfRotation(57,57);
-        imagesBonus = new Image [9];
+        imagesBonus = new Image [10];
 
         try {
             imageBonus = new Image("images/bonus.png");
@@ -205,6 +205,9 @@ public class Affichage {
 
             imageInterface.getSubImage(16,48, 16, 16).draw(colonneLatterale + indexToPixel(-3 + a*25), indexToPixel(7) , 1*tileSize, 1*tileSize); // nbBomebes
             texte.afficher(colonneLatterale + indexToPixel(-2 + a*25)+15, indexToPixel(7),Integer.toString(persos[a].getBombe_tempsAvantExplosion()/1000) + "s");
+
+            imagesBonus[9].draw(colonneLatterale + indexToPixel(-3 + a*25), indexToPixel(8) , 1*tileSize, 1*tileSize); // nbBomebes
+            texte.afficher(colonneLatterale + indexToPixel(-2 + a*25)+15, indexToPixel(8),Integer.toString(persos[a].getVitesse()) + "/5");
         }
         //font.drawString(0,0,"Test MAGGLE!");
 

@@ -125,7 +125,7 @@ public class Terrain {
     {
         setIdBloc(positX, positY, 0);
         //if (r.nextInt(100+1)<=20)
-            poserBonus(positX, positY, 8);//r.nextInt(8));
+            poserBonus(positX, positY, 9);//r.nextInt(8));
     }
 
     public Bombe detectBombe (int positX, int positY)

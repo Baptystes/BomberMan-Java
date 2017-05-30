@@ -1,3 +1,4 @@
+import org.lwjgl.Sys;
 import org.newdawn.slick.*;
 
 public class Bonus {
@@ -80,6 +81,16 @@ public class Bonus {
         else if (idBonus==8)
         {
             joueur.gagneUneVie();
+        }
+        else if (idBonus == 9)
+        {
+            joueur.modifierVitesse(1);
+            System.out.print(joueur.getVitesse());
+        }
+        else if (idBonus == 10)
+        {
+            joueur.modifierVitesse(-1);
+            System.out.print(joueur.getVitesse());
         }
 
     }

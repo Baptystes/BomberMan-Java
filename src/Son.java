@@ -58,7 +58,7 @@ public class Son {
 
     public static void playsonperdu(){
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Musique/feu.wav").getAbsoluteFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Musique/gameover.wav").getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();

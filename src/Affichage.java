@@ -26,7 +26,6 @@ public class Affichage {
     private Image imageJoueurs, imageFlammes, imageBlocs, imageInterface, imageBonus;
 
 
-
     Affichage (int tileSize, int tileBorder, int colonneLatterale)
     {
 
@@ -109,7 +108,8 @@ public class Affichage {
         imageJoueurs.getSubImage(32 * (1-blop)+32 * perso.getAnimation().getImageEnCours()*blop + 32*(perso.getDirectionEnCours()-1) * perso.getAnimation().getNombreImages(),32*(perso.getIdJoueur()-1), 32, 32).draw(colonneLatterale + perso.getPositX() * (tileSize + tileBorder) + perso.getOffsetX(), perso.getPositY() * (tileSize + tileBorder) + perso.getOffsetY() , tileSize, tileSize);
         if (perso.possedeBouclier())
         {
-            imageBouclier.getSubImage(0,0, 64, 64).draw(colonneLatterale + perso.getPositX() * (tileSize + tileBorder) + perso.getOffsetX(), perso.getPositY() * (tileSize + tileBorder) + perso.getOffsetY() , tileSize, tileSize);
+            perso.getAnimationBouclier().update();
+            imageBouclier.getSubImage(64*perso.getAnimationBouclier().getImageEnCours(),0, 64, 64).draw(colonneLatterale + perso.getPositX() * (tileSize + tileBorder) + perso.getOffsetX(), perso.getPositY() * (tileSize + tileBorder) + perso.getOffsetY() , tileSize, tileSize);
         }
 
     }

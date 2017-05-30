@@ -110,19 +110,18 @@ public class Terrain {
             {
                 bombes.get(a).getAuteur().supprimeUneBombe();
                 bombes.removeElementAt(a);
-                //System.out.print(" REMOVE");
             }
         }
 
-
-
+        System.out.println(perso1.getRecoitDegats());
         if (perso1.getRecoitDegats()==false && perso1.doitPerdreBouclier())
         {
-            perso1.fairePerdreBouclier();
-            System.out.println("LOST");
+            perso1.retirerBouclier();
+            //System.out.println("LOST");
         }
         if (perso2.getRecoitDegats()==false && perso2.doitPerdreBouclier())
-            perso2.fairePerdreBouclier();
+            perso2.retirerBouclier();
+
 
     }
 
@@ -145,7 +144,8 @@ public class Terrain {
     }
     public boolean peutTraverser (int positX, int positY)
     {
-        if (getIdBloc(positX,positY) == 0 && detectBombe(positX, positY) == null)
+        Bombe bombe = detectBombe(positX, positY);
+        if (getIdBloc(positX,positY) == 0 && (bombe == null || bombe.getEtat()==2))
             return true;
         else
             return false;

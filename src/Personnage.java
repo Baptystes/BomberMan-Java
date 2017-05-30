@@ -10,6 +10,7 @@ public class Personnage extends Option {
     private Affichage affichage;
     Chronometre tempsInvincible;
     Animation animation;
+    Animation animationBouclier;
     private int toucheHaut, toucheBas, toucheGauche, toucheDroite, toucheBombe;
 
     private boolean recoitDegats;
@@ -24,6 +25,7 @@ public class Personnage extends Option {
 
         animation = new Animation(3, 50, true);
 
+        animationBouclier = new Animation(10, 50, false);
 
         if (idPerso == 1)
         {
@@ -75,7 +77,7 @@ public class Personnage extends Option {
 
     public Animation getAnimation() { return animation; }
 
-
+    public Animation getAnimationBouclier() {return animationBouclier;}
 
 
     public void deplacer (GameContainer gc)
@@ -229,6 +231,7 @@ public class Personnage extends Option {
 
     }
 
+
     public void donnerBouclier()
     {
         possedeBouclier = true;
@@ -243,11 +246,17 @@ public class Personnage extends Option {
     {
         return doitPerdreBlouclier;
     }
-
     public boolean possedeBouclier ()
     {
         return possedeBouclier;
     }
+
+    public void fairePerdreBouclier ()
+    {
+        doitPerdreBlouclier = true;
+    }
+
+
 
     public void poseUneBombe ()
     {
@@ -315,11 +324,14 @@ public class Personnage extends Option {
             respawn(19,1);
 
         }
-        if (estInvincible() == false)
-        {
+        donnerBouclier();
+        recoitDegats();
         setNbVies(getNbVies() -1);
-        System.out.println (" Le joueur " + idPerso+ " a perdu une vie. Son nombre de vie est " +getNbVies());
-        }
+        /*if (estInvincible() == false)
+        {
+
+            System.out.println (" Le joueur " + idPerso+ " a perdu une vie. Son nombre de vie est " +getNbVies());
+        }*/
 
         tempsInvincible.reDemarrer(3000);
     }
@@ -374,13 +386,10 @@ public class Personnage extends Option {
         offsetX = 0;
         offsetY = 0;
         resetBonus();
-        recoitDegats = false;
+        retirerBouclier();
     }
 
-    public void fairePerdreBouclier ()
-    {
-        doitPerdreBlouclier = true;
-    }
+
 
     public void resetBonus()
     {

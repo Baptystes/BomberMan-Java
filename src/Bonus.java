@@ -33,37 +33,44 @@ public class Bonus {
         {
             joueur.ajouterNombreBombe(-2);
             System.out.print("Bombe -!");
+            Son.playsonbonus();
         }
         else if (idBonus == 5)
         {
             joueur.ajouterNombreBombe(2);
             System.out.print("Bombe +!");
+            Son.playsonbonus();
         }
         else if (idBonus == 6)
         {
             joueur.setBombeRouge();
             System.out.print("Bombe rouge!");    ///////////////////
+            Son.playsonbonus();
         }
         else if (idBonus == 0)
         {
             joueur.ajouterTailleFlamme(-1);
             System.out.print("Flamme bleue!");
+            Son.playsonbonus();
         }
         else if (idBonus == 1)
         {
             joueur.ajouterTailleFlamme(1);
             System.out.print("Flamme jaune!");
+            Son.playsonbonus();
         }
         else if (idBonus == 2)
         {
             joueur.setTailleFlamme(10);
             System.out.print("Flamme rouge!");
+            Son.playsonbonus();
         }
         else if (idBonus == 3)
         {
             joueur.ajouterTailleFlamme(1);
             joueur.ajoutTempsDetonation(-1000);
             System.out.print("Flamme Verte!");
+            Son.playsonbonus();
         }
         else if (idBonus == 7)
         {

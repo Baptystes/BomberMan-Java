@@ -122,6 +122,8 @@ public class Bombe {
     public void exploser() {
 
         if (etat == 1) {
+            Son.playsonbombe();
+            Son.playsonfeu();
             chronometre.reDemarrer(1000);
             etat = 2;
         }

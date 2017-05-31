@@ -74,7 +74,7 @@ public class Affichage {
         }
 
         //imageBombe.setCenterOfRotation(57,57);
-        imagesBonus = new Image [10];
+        imagesBonus = new Image [12];
 
         try {
             imageBonus = new Image("images/bonus.png");
@@ -83,7 +83,7 @@ public class Affichage {
         }
 
         try {
-            imageBouclier = new Image("images/bouclier.png");
+            imageBouclier = new Image("images/bonus_extra.png");
         } catch (SlickException e) {
             e.printStackTrace();
         }
@@ -105,7 +105,14 @@ public class Affichage {
         else
             blop = 0;
         //imageJoueurs.draw(colonneLatterale + perso.getPositX() * (tileSize + tileBorder) + perso.getOffsetX() + tileSize/2 - persoSize/2, perso.getPositY() * (tileSize + tileBorder) + perso.getOffsetY() +tileSize/2 - persoSize/2, persoSize, persoSize, 0,0,17, 30 );
-        imageJoueurs.getSubImage(32 * (1-blop)+32 * perso.getAnimation().getImageEnCours()*blop + 32*(perso.getDirectionEnCours()-1) * perso.getAnimation().getNombreImages(),32*(perso.getIdJoueur()-1), 32, 32).draw(colonneLatterale + perso.getPositX() * (tileSize + tileBorder) + perso.getOffsetX(), perso.getPositY() * (tileSize + tileBorder) + perso.getOffsetY() , tileSize, tileSize);
+        if (perso.possedePasseMurail())
+        {
+            perso.getAnimationPasseMurail().update();
+            imageBouclier.getSubImage(64*perso.getAnimationPasseMurail().getImageEnCours(),64, 64, 64).draw(colonneLatterale + perso.getPositX() * (tileSize + tileBorder) + perso.getOffsetX(), perso.getPositY() * (tileSize + tileBorder) + perso.getOffsetY() , tileSize, tileSize);
+            imageJoueurs.getSubImage(32 + 32*(perso.getDirectionEnCours()-1) * perso.getAnimation().getNombreImages(),32*(perso.getIdJoueur()-1), 32, 32).draw(colonneLatterale + perso.getPositX() * (tileSize + tileBorder) + perso.getOffsetX(), -2 + perso.getPositY() * (tileSize + tileBorder) + perso.getOffsetY() , tileSize, tileSize);
+        }
+        else
+            imageJoueurs.getSubImage(32 * (1-blop)+32 * perso.getAnimation().getImageEnCours()*blop + 32*(perso.getDirectionEnCours()-1) * perso.getAnimation().getNombreImages(),32*(perso.getIdJoueur()-1), 32, 32).draw(colonneLatterale + perso.getPositX() * (tileSize + tileBorder) + perso.getOffsetX(), perso.getPositY() * (tileSize + tileBorder) + perso.getOffsetY() , tileSize, tileSize);
         if (perso.possedeBouclier())
         {
             perso.getAnimationBouclier().update();
@@ -137,7 +144,7 @@ public class Affichage {
 
         if (bombe.getEtat() == 1) {
             //g.setColor(Color.black);
-            imageBombe.getSubImage(24*bombe.getAnimation().getImageEnCours(), bombe.isBombeRouge()*32, 23,31).draw(colonneLatterale + indexToPixelCentred(bombe.getPositX(), bombeSize), indexToPixelCentred(bombe.getPositY(), bombeSize)-5);
+            imageBombe.getSubImage(24*bombe.getAnimation().getImageEnCours(), bombe.isBombeRouge()*32, 23,31).draw(colonneLatterale + indexToPixelCentred(bombe.getPositX(), bombeSize) + bombe.getOffsetX(), indexToPixelCentred(bombe.getPositY(), bombeSize)-5 +  + bombe.getOffsetY());
 
         }
         else if (bombe.getEtat() == 2)

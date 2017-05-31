@@ -10,6 +10,10 @@ public class Bombe {
     private Personnage auteur, deuxiemePerso;
     private Terrain terrain;
     private Affichage affichage;
+
+    private boolean kick;
+    private int direction, offsetX, offsetY;
+
     Animation animation;
 
     Bombe(Affichage affichage, Personnage perso, Personnage deuxiemePerso, Terrain terrain) {
@@ -38,7 +42,16 @@ public class Bombe {
 
         animation = new Animation(4, 80, true);
 
+        kick = false;
+        offsetX=0; offsetY = 0;
+        direction = 0;
 
+    }
+
+    public void kick(Personnage joueur)
+    {
+        kick = true;
+        direction = joueur.getDirection();
     }
 
     public int getPositX() {
@@ -48,6 +61,9 @@ public class Bombe {
     public int getPositY() {
         return positY;
     }
+
+    public int getOffsetX() {return offsetX;}
+    public int getOffsetY() {return offsetY;}
 
     public int getFlammeGauche() {
         return flammeGauche;
@@ -114,6 +130,80 @@ public class Bombe {
         }
         else
         {
+            if (kick)
+            {
+                if (direction == 1)
+                    offsetY-=2;
+                else if (direction == 2)
+                    offsetX+=2;
+                else if (direction == 3)
+                    offsetY+=2;
+                else if (direction == 4)
+                    offsetX-=2;
+
+
+                if (offsetX>(affichage.getTileSize() + affichage.getTileBorder())/2)
+                {
+                    offsetX = -(affichage.getTileSize() + affichage.getTileBorder())/2;
+                    positX++;
+                }
+
+                if (offsetY>(affichage.getTileSize() + affichage.getTileBorder())/2)
+                {
+                    offsetY = -(affichage.getTileSize() + affichage.getTileBorder())/2;
+                    positY++;
+                }
+
+                if (offsetY<-(affichage.getTileSize() + affichage.getTileBorder())/2)
+                {
+                    offsetY = (affichage.getTileSize() + affichage.getTileBorder())/2;
+                    positY--;
+                }
+
+                if (offsetX<-(affichage.getTileSize() + affichage.getTileBorder())/2)
+                {
+                    offsetX = (affichage.getTileSize() + affichage.getTileBorder())/2;
+                    positX--;
+                }
+
+                if ((Math.abs(offsetX) < 2 && Math.abs(offsetY) < 2) || true)
+                {
+                    if (direction == 1)
+                    {
+                        if (terrain.detectBombe(positX, positY-1) != null || terrain.getIdBloc(positX, positY-1) != 0)
+                        {
+                            offsetY = 0;
+                            kick = false;
+                        }
+                    }
+                    else if (direction == 2)
+                    {
+                        if (terrain.detectBombe(positX+1, positY) != null || terrain.getIdBloc(positX+1, positY) != 0)
+                        {
+                            offsetX = 0;
+                            kick = false;
+                        }
+                    }
+                    else if (direction == 3)
+                    {
+                        if (terrain.detectBombe(positX, positY+1) != null || terrain.getIdBloc(positX, positY+1) != 0)
+                        {
+                            offsetY = 0;
+                            kick = false;
+                        }
+                    }
+                    else if (direction == 4)
+                    {
+                        if (terrain.detectBombe(positX-1, positY) != null || terrain.getIdBloc(positX-1, positY) != 0)
+                        {
+                            offsetX = 0;
+                            kick = false;
+                        }
+                    }
+                }
+
+
+            }
             return 0;
         }
 
@@ -126,6 +216,7 @@ public class Bombe {
             Son.playsonfeu();
             chronometre.reDemarrer(1000);
             etat = 2;
+            kick =false;
         }
         animation.reset();
         int stopAvance = 0;

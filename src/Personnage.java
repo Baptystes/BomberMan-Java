@@ -5,12 +5,12 @@ public class Personnage {
 
 
     private int positX, positY, offsetX, offsetY, idPerso, direction, vitesse, nombreBombeMax, nombreBombePosee, bombe_portee, bombe_tempsAvantExplosion, bombe_traverseBloc, nbVies, directionEnCours;
-    private boolean possedeBouclier;
+    private boolean possedeBouclier, passeMurail, possedeKick;
     private Terrain terrain;
     private Affichage affichage;
     Chronometre tempsInvincible;
     Animation animation;
-    Animation animationBouclier;
+    Animation animationBouclier, animationPasseMurail;
     private int toucheHaut, toucheBas, toucheGauche, toucheDroite, toucheBombe;
 
     private boolean recoitDegats;
@@ -26,7 +26,7 @@ public class Personnage {
         animation = new Animation(3, 50, true);
 
         animationBouclier = new Animation(10, 50, true);
-
+        animationPasseMurail = new Animation(10, 10, true);
         if (idPerso == 1)
         {
             toucheHaut = Input.KEY_Z;
@@ -81,6 +81,8 @@ public class Personnage {
 
     public Animation getAnimationBouclier() {return animationBouclier;}
 
+    public Animation getAnimationPasseMurail() {return animationPasseMurail;}
+
 
     public void deplacer (GameContainer gc)
     {
@@ -113,7 +115,7 @@ public class Personnage {
 
 
         //System.out.println(offsetY);
-        if (direction == 1 && (terrain.peutTraverser(positX, positY-1) || offsetY>0))
+        if (direction == 1 && (terrain.peutTraverser(this, positX, positY-1) || offsetY>0))
         {
             if (Math.abs(offsetX) < vitesse)
             {
@@ -129,7 +131,7 @@ public class Personnage {
             }
 
         }
-        else if (direction == 2 && (terrain.peutTraverser(positX+1, positY) || offsetX<0))
+        else if (direction == 2 && (terrain.peutTraverser(this, positX+1, positY) || offsetX<0))
         {
             if (Math.abs(offsetY) < vitesse)
             {
@@ -144,7 +146,7 @@ public class Personnage {
                     offsetY+=vitesse;
             }
         }
-        else if (direction == 3 && (terrain.peutTraverser(positX, positY+1)|| offsetY<0))
+        else if (direction == 3 && (terrain.peutTraverser(this, positX, positY+1)|| offsetY<0))
         {
             if (Math.abs(offsetX) < vitesse)
             {
@@ -159,7 +161,7 @@ public class Personnage {
                     offsetX+=vitesse;
             }
         }
-        else if (direction == 4 && (terrain.peutTraverser(positX-1, positY)|| offsetX>0))
+        else if (direction == 4 && (terrain.peutTraverser(this, positX-1, positY)|| offsetX>0))
         {
             if (Math.abs(offsetY) < vitesse)
             {
@@ -208,6 +210,15 @@ public class Personnage {
 
     }
 
+    public boolean possedeKick()
+    {
+        return possedeKick;
+    }
+    public void donnerKick()
+    {
+        possedeKick = true;
+    }
+
     public int veutPoserBombe(GameContainer gc)
     {
         if (gc.getInput().isKeyPressed(toucheBombe))
@@ -233,6 +244,10 @@ public class Personnage {
 
     }
 
+    public void setPasseMurail(boolean passeMurail)
+    {
+        this.passeMurail = passeMurail;
+    }
 
     public void donnerBouclier()
     {
@@ -355,7 +370,10 @@ public class Personnage {
         }
     }
 
-
+    public boolean possedePasseMurail()
+    {
+        return passeMurail;
+    }
 
     public boolean estInvincible ()
     {
@@ -416,5 +434,7 @@ public class Personnage {
         bombe_traverseBloc = 0;
         possedeBouclier = false;
         doitPerdreBlouclier = false;
+        passeMurail = false;
+        possedeKick = true;
     }
 }

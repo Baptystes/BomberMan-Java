@@ -81,7 +81,7 @@ public class Terrain {
     public void poserBombe (Personnage perso, Personnage deuxiemePerso)
     {
 
-        if (perso.peutPoserBombe() == 1 && detectBombe(perso.getPositX(), perso.getPositY()) == null)
+        if (perso.peutPoserBombe() == 1 && detectBombe(perso.getPositX(), perso.getPositY()) == null && getIdBloc(perso.getPositX(), perso.getPositY()) == 0)
         {
             bombes.add(new Bombe(affichage, perso, deuxiemePerso, this));
             perso.poseUneBombe();
@@ -124,8 +124,8 @@ public class Terrain {
     public void detruireBloc (int positX, int positY)
     {
         setIdBloc(positX, positY, 0);
-        //if (r.nextInt(100+1)<=20)
-            poserBonus(positX, positY, 9);//r.nextInt(8));
+        if (r.nextInt(100+1)<=20)
+            poserBonus(positX, positY, r.nextInt(12));
     }
 
     public Bombe detectBombe (int positX, int positY)
@@ -138,10 +138,14 @@ public class Terrain {
         }
         return null;
     }
-    public boolean peutTraverser (int positX, int positY)
+    public boolean peutTraverser (Personnage joueur, int positX, int positY)
     {
         Bombe bombe = detectBombe(positX, positY);
-        if (getIdBloc(positX,positY) == 0 && (bombe == null || bombe.getEtat()==2))
+        if (joueur.possedeKick() && bombe != null)
+        {
+           bombe.kick(joueur);
+        }
+        if ((joueur.possedePasseMurail()==false && (getIdBloc(positX,positY) == 0 && (bombe == null || bombe.getEtat()==2))) || (joueur.possedePasseMurail() && (getIdBloc(positX,positY)!=1)))
             return true;
         else
             return false;

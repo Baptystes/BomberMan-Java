@@ -92,6 +92,10 @@ public class Bonus {
             joueur.modifierVitesse(-1);
             System.out.print(joueur.getVitesse());
         }
+        else if (idBonus == 11)
+        {
+            joueur.setPasseMurail(true);
+        }
 
     }
     public int getId ()

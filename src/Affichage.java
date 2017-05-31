@@ -74,7 +74,7 @@ public class Affichage {
         }
 
         //imageBombe.setCenterOfRotation(57,57);
-        imagesBonus = new Image [12];
+        imagesBonus = new Image [13];
 
         try {
             imageBonus = new Image("images/bonus.png");

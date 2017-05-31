@@ -435,6 +435,6 @@ public class Personnage {
         possedeBouclier = false;
         doitPerdreBlouclier = false;
         passeMurail = false;
-        possedeKick = true;
+        possedeKick = false;
     }
 }

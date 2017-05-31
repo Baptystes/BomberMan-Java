@@ -96,6 +96,10 @@ public class Bonus {
         {
             joueur.setPasseMurail(true);
         }
+        else if (idBonus == 12)
+        {
+            joueur.donnerKick();
+        }
 
     }
     public int getId ()

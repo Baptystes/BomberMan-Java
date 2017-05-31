@@ -125,7 +125,17 @@ public class Terrain {
     {
         setIdBloc(positX, positY, 0);
         if (r.nextInt(100+1)<=20)
-            poserBonus(positX, positY, r.nextInt(12));
+            poserBonus(positX, positY,r.nextInt(13));
+    }
+
+    public boolean detectFlammes(Bombe bombeRecu)
+    {
+        for (int a=0 ; a<bombes.size() ; a++)
+        {
+            if (bombes.get(a) != bombeRecu && bombes.get(a).detectContactFlamme(bombeRecu.getPositX(), bombeRecu.getPositY()))
+                return true;
+        }
+        return false;
     }
 
     public Bombe detectBombe (int positX, int positY)

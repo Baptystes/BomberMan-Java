@@ -96,7 +96,8 @@ public class Bombe {
         //System.out.println(chronometre.getTempsRestant());
 
         animation.update();
-        if (etat == 2) {
+        if (etat == 2)
+        {
             if (detectJoueur(auteur))
             {
                 if (auteur.possedeBouclier())
@@ -117,8 +118,16 @@ public class Bombe {
                 else
                     deuxiemePerso.perdUneVie(auteur);
             }
-        }
 
+
+
+
+        }
+        else if (etat == 1)
+        {
+            if (terrain.detectFlammes(this) == true)
+                exploser();
+        }
         if (chronometre.checkFinished() == 1 && etat == 1) {
             exploser();
             return 0;
@@ -130,7 +139,7 @@ public class Bombe {
         }
         else
         {
-            if (kick)
+            if (kick && etat ==1)
             {
                 if (direction == 1)
                     offsetY-=2;
@@ -202,15 +211,15 @@ public class Bombe {
                     }
                 }
 
-
             }
             return 0;
         }
 
     }
 
-    public void exploser() {
-
+    public void exploser()
+    {
+        kick = false;
         if (etat == 1) {
             Son.playsonbombe();
             Son.playsonfeu();
@@ -317,14 +326,23 @@ public class Bombe {
 
     }
 
-    public boolean detectJoueur(Personnage joueur) {
+    public boolean detectJoueur(Personnage joueur)
+    {
         int detectJoueur;
         if (((positX + flammeDroite) >= joueur.getPositX() && (positX - flammeGauche) <= joueur.getPositX() && positY == joueur.getPositY()) || ((positY + flammeBas) >= joueur.getPositY() && (positY - flammeHaut) <= joueur.getPositY() && positX == joueur.getPositX())) {
             return true;
         } else {
             return false;
         }
+    }
 
+    public boolean detectContactFlamme(int positXRecu, int positYRecu)
+    {
+        if (((positX + flammeDroite) >= positXRecu && (positX - flammeGauche) <= positXRecu && positY == positYRecu) || ((positY + flammeBas) >= positYRecu && (positY - flammeHaut) <= positYRecu && positX == positXRecu)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

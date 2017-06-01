@@ -17,6 +17,9 @@ public class Menu
     private Image imageWon;
     private Affichage affichage;
 
+    Animation animationPlay;
+    Image imagePlay;
+
     Texte texte;
 
     public Menu (GameContainer gc, Affichage affichage)
@@ -34,7 +37,7 @@ public class Menu
             e.printStackTrace();
         }
         try {
-            imageBg = new Image("images/menu/bomberman.png");
+            imageBg = new Image("images/menu/wallpaper.png");
 
         } catch (SlickException e) {
             e.printStackTrace();
@@ -47,6 +50,13 @@ public class Menu
         }
 
         texte = new Texte();
+        animationPlay = new Animation(46, 30, false);
+        try {
+            imagePlay = new Image("images/menu/play.png");
+
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
     }
 
     
@@ -60,7 +70,14 @@ public class Menu
     public int gestion()
     {
 
-        int posX = gc.getInput().getMouseX();
+
+        if (gc.getInput().isKeyPressed(Input.KEY_ENTER))
+            return 1;
+        else if (gc.getInput().isKeyPressed(Input.KEY_ESCAPE))
+            return 2;
+        else
+            return 0;
+        /*int posX = gc.getInput().getMouseX();
         int posY = gc.getInput().getMouseY();
 
         boolean sourisDansCadre = false;
@@ -90,10 +107,12 @@ public class Menu
             return choixEnCours+1;
         else
             return 0;
-
+*/
 
 
     }
+
+    /*
     public void exit()
     {
         int posX = Mouse.getX();
@@ -107,7 +126,8 @@ public class Menu
             }
         }
 
-    }
+    }*/
+    /*
     public void option()
     {
 
@@ -121,23 +141,25 @@ public class Menu
             }
         }
 
-    }
+    }*/
 
 
     public void afficherPrincipal()
     {
 
-        imageBg.draw(0,0);
-        for (int a=0 ; a<3 ; a++)
+        imageBg.draw(0,0, gc.getWidth(), gc.getHeight());
+        animationPlay.update();
+        imagePlay.getSubImage(518*animationPlay.getImageEnCours(), 0, 518, 541).draw(gc.getWidth()/2-518/2,gc.getHeight()/2 - 541/2-100);
+        /* (int a=0 ; a<3 ; a++)
         {
             imageBoutons.getSubImage(0, a*84, 259, 84).draw(gc.getWidth()/2-259/2, gc.getHeight()/5*a + 100);
         }
 
         for (int a=0 ; a<2 ; a++)
-            imageBoutons.getSubImage(259, 0, 69, 11).draw(gc.getWidth()/2-259/2 - 90 + 360*a, gc.getHeight()/5*choixEnCours +84/2 - 11/2 + 100);
+            imageBoutons.getSubImage(259, 0, 69, 11).draw(gc.getWidth()/2-259/2 - 90 + 360*a, gc.getHeight()/5*choixEnCours +84/2 - 11/2 + 100);*/
 
     }
-
+/*
     public void afficherOptions()
     {
         imageBg.draw(0,0);
@@ -147,7 +169,7 @@ public class Menu
             affichage.getImageBonus(a).draw(gc.getWidth()/2-150 + a*50, 100, affichage.getTileSize(), affichage.getTileSize());
         }
 
-    }
+    }*/
     public void iWon()
     {
         imageWon.draw(0,50);

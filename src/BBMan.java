@@ -76,10 +76,10 @@ public class BBMan extends BasicGame {
             gc.exit();
         }
 
-        else if (etatDuJeu == 3)
+       /* else if (etatDuJeu == 3)
         {
             menu.afficherOptions();
-        }
+        }*/
         else if (etatDuJeu==4)
         {
             perso1.finMourrir(g);

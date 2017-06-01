@@ -82,9 +82,16 @@ public class BBMan extends BasicGame {
         }*/
         else if (etatDuJeu==4)
         {
-            perso1.finMourrir(g);
-            perso2.finMourrir(g);
-            menu.iWon();
+            terrain.dessinerMap(g);
+            terrain.afficherBombes(g);
+            terrain.afficherBonus(g);
+            perso1.afficher(g);
+            perso2.afficher(g);
+
+            affichage.interfaceJeu(g, perso1, perso2);
+
+            affichage.ecranDefaite(gc, perso1, perso2);
+            //menu.iWon();
             if (gc.getInput().isKeyPressed(Input.KEY_ENTER))
             {
                 etatDuJeu = 0;

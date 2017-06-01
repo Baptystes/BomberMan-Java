@@ -1,6 +1,7 @@
 import org.newdawn.slick.*;
 //import java.awt.Font;
 
+import java.awt.*;
 import java.awt.Font;
 import java.io.InputStream;
 
@@ -10,6 +11,8 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.util.ResourceLoader;
 
@@ -226,5 +229,27 @@ public class Affichage {
     public Image getImageBonus (int a)
     {
         return imagesBonus[a];
+    }
+
+    public void ecranDefaite(GameContainer gc, Personnage perso1, Personnage perso2)
+    {
+        perso1.getAnimation().update();
+        perso2.getAnimation().update();
+        if (perso2.getNbVies() == 0 && perso1.getNbVies()!=0)
+        {
+            imageJoueurs.getSubImage(32 * perso1.getAnimation().getImageEnCours() + 32*(3-1) * perso1.getAnimation().getNombreImages(),32*(0), 32, 32).draw(gc.getWidth()/2-tileSize, gc.getHeight()/2-tileSize, 2*tileSize, 2*tileSize);
+        }
+        else if (perso2.getNbVies() != 0 && perso1.getNbVies()==0)
+        {
+            imageJoueurs.getSubImage(32 * perso1.getAnimation().getImageEnCours() + 32*(3-1) * perso1.getAnimation().getNombreImages(),32*(1), 32, 32).draw(gc.getWidth()/2-tileSize, gc.getHeight()/2-tileSize, 2*tileSize, 2*tileSize);
+        }
+        else
+        {
+            imageJoueurs.getSubImage(32 * perso1.getAnimation().getImageEnCours() + 32*(3-1) * perso1.getAnimation().getNombreImages(),32*(0), 32, 32).draw(gc.getWidth()/2-3*tileSize, gc.getHeight()/2-tileSize, 2*tileSize, 2*tileSize);
+            imageJoueurs.getSubImage(32 * perso1.getAnimation().getImageEnCours() + 32*(3-1) * perso1.getAnimation().getNombreImages(),32*(1), 32, 32).draw(gc.getWidth()/2 + tileSize, gc.getHeight()/2-tileSize, 2*tileSize, 2*tileSize);
+        }
+
+        texte.afficher(400, 20, "Entrer pour continuer");
+
     }
 }

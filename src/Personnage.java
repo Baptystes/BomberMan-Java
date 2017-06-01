@@ -41,7 +41,7 @@ public class Personnage {
             toucheBas = Input.KEY_DOWN;
             toucheGauche = Input.KEY_LEFT;
             toucheDroite = Input.KEY_RIGHT;
-            toucheBombe = Input.KEY_NUMPAD0;
+            toucheBombe = Input.KEY_RCONTROL;
         }
 
         offsetX = 0;
@@ -331,6 +331,7 @@ public class Personnage {
 
     public void perdUneVie (Personnage autreJoueur)
     {
+        setNbVies(getNbVies() -1);
         if (Math.sqrt( Math.pow(1 - autreJoueur.getPositX(), 2) + Math.sqrt(Math.pow(15 - autreJoueur.getPositY(), 2))) > Math.sqrt( Math.pow(19 - autreJoueur.getPositX(), 2) + Math.sqrt(Math.pow(1 - autreJoueur.getPositY(), 2))))
         {
             respawn(1, 15);
@@ -341,9 +342,12 @@ public class Personnage {
             respawn(19,1);
 
         }
-        donnerBouclier();
+        if (nbVies>0)
+            donnerBouclier();
+        else
+            direction = 0;
         recoitDegats();
-        setNbVies(getNbVies() -1);
+
         /*if (estInvincible() == false)
         {
 
@@ -390,8 +394,9 @@ public class Personnage {
     public void reset(int positX, int positY)
     {
         Option option = new Option();
-        respawn(positX, positY);
         nbVies = option.getNbVies();
+        respawn(positX, positY);
+
         nombreBombePosee = 0;
     }
 
@@ -412,12 +417,15 @@ public class Personnage {
 
     public void respawn(int positX, int positY)
     {
-        this.positX = positX;
-        this.positY = positY;
-        offsetX = 0;
-        offsetY = 0;
-        resetBonus();
-        retirerBouclier();
+        if (nbVies>0)
+        {
+            this.positX = positX;
+            this.positY = positY;
+            offsetX = 0;
+            offsetY = 0;
+            resetBonus();
+            retirerBouclier();
+        }
     }
 
 

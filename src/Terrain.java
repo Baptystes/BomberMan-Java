@@ -109,14 +109,23 @@ public class Terrain {
             if (bombes.get(a).mettreAJour() == 1)
             {
                 bombes.get(a).getAuteur().supprimeUneBombe();
+                System.out.println("Disparait pour " + bombes.get(a).getAuteur().getIdJoueur() );
                 bombes.removeElementAt(a);
+
             }
         }
 
         if (perso1.getRecoitDegats()==false && perso1.doitPerdreBouclier())
+        {
+            System.out.println("p1");
             perso1.retirerBouclier();
+        }
+
         if (perso2.getRecoitDegats()==false && perso2.doitPerdreBouclier())
+        {
             perso2.retirerBouclier();
+            System.out.println("p2");
+        }
 
 
     }

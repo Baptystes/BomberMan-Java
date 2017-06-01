@@ -104,9 +104,13 @@ public class Bombe {
                 {
                     auteur.recoitDegats();
                     auteur.fairePerdreBouclier();
+
                 }
                 else
+                {
                     auteur.perdUneVie(deuxiemePerso);
+                    System.out.println(auteur.getIdJoueur() + " :1");
+                }
             }
             if (detectJoueur(deuxiemePerso))
             {
@@ -116,7 +120,11 @@ public class Bombe {
                     deuxiemePerso.recoitDegats();
                 }
                 else
+                {
                     deuxiemePerso.perdUneVie(auteur);
+                    System.out.println(auteur.getIdJoueur()+ " :2");
+                }
+
             }
 
 

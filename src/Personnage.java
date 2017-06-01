@@ -346,7 +346,7 @@ public class Personnage {
             donnerBouclier();
         else
             direction = 0;
-        recoitDegats();
+        //recoitDegats();
 
         /*if (estInvincible() == false)
         {
@@ -354,7 +354,7 @@ public class Personnage {
             System.out.println (" Le joueur " + idPerso+ " a perdu une vie. Son nombre de vie est " +getNbVies());
         }*/
 
-        tempsInvincible.reDemarrer(3000);
+        //tempsInvincible.reDemarrer(3000);
     }
 
     public void modifierVitesse(double offset)

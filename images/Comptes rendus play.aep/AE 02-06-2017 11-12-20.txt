@@ -1,0 +1,12 @@
+Adobe After Effects v14.1 Windows 64 - Compte rendu du projet play.aep
+
+Début du rendu le 02/06/2017 à 11:12:20
+
+  02/06/2017 11:12:20 : début de la composition play.
+
+  Destin. : D:\Programmes\Programmation\JAVA\BBMan\images\menu\play_[#####].png    02/06/2017 11:12:21 : fin de la composition play.
+
+
+  Temps total écoulé : 1 Secondes
+Compte-rendu terminé le 02/06/2017 à 11:12:21
+

@@ -52,7 +52,7 @@ public class Menu
         texte = new Texte();
         animationPlay = new Animation(46, 30, false);
         try {
-            imagePlay = new Image("images/menu/play.png");
+            imagePlay = new Image("images/menu/playColonne.png");
 
         } catch (SlickException e) {
             e.printStackTrace();
@@ -147,9 +147,10 @@ public class Menu
     public void afficherPrincipal()
     {
 
+        //System.out.println(518*(animationPlay.getImageEnCours()%10) + "  " + 541*(int)(animationPlay.getImageEnCours()/10));
         imageBg.draw(0,0, gc.getWidth(), gc.getHeight());
         animationPlay.update();
-        imagePlay.getSubImage(518*animationPlay.getImageEnCours(), 0, 518, 541).draw(gc.getWidth()/2-518/2,gc.getHeight()/2 - 541/2-100);
+        imagePlay.getSubImage(518*(animationPlay.getImageEnCours()%10), 541*(int)(animationPlay.getImageEnCours()/10), 518, 541).draw(gc.getWidth()/2-518/2,gc.getHeight()/2 - 541/2-100);
         /* (int a=0 ; a<3 ; a++)
         {
             imageBoutons.getSubImage(0, a*84, 259, 84).draw(gc.getWidth()/2-259/2, gc.getHeight()/5*a + 100);

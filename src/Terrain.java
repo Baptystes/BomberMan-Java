@@ -104,8 +104,6 @@ public class Terrain {
         perso1.resetRecoitDegat();
         perso2.resetRecoitDegat();
 
-
-
         for (int a=0 ; a< bombes.size() ; a++)
         {
             if (bombes.get(a).mettreAJour() == 1)
@@ -148,17 +146,6 @@ public class Terrain {
         }
         return false;
     }
-
-    public boolean detectFlammes(Personnage perso)
-    {
-        for (int a=0 ; a<bombes.size() ; a++)
-        {
-            if (bombes.get(a).detectContactFlamme(perso.getPositX(), perso.getPositY()))
-                return true;
-        }
-        return false;
-    }
-
 
 
 

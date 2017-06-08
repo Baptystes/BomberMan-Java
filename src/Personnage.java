@@ -1,14 +1,16 @@
 import net.java.games.input.Component;
 import org.newdawn.slick.*;
 
+import javax.swing.plaf.synth.SynthEditorPaneUI;
+
 public class Personnage {
 
 
-    private int positX, positY, offsetX, offsetY, idPerso, direction, vitesse, nombreBombeMax, nombreBombePosee, bombe_portee, bombe_tempsAvantExplosion, bombe_traverseBloc, nbVies, directionEnCours;
+    private int positX, positY, offsetX, offsetY, idPerso, direction, directionEnCours, vitesse, nombreBombeMax, nombreBombePosee, bombe_portee, bombe_tempsAvantExplosion, bombe_traverseBloc, nbVies;
     private boolean possedeBouclier, passeMurail, possedeKick;
     private Terrain terrain;
     private Affichage affichage;
-    Chronometre tempsInvincible;
+    //Chronometre tempsInvincible;
     Animation animation;
     Animation animationBouclier, animationPasseMurail;
     private int toucheHaut, toucheBas, toucheGauche, toucheDroite, toucheBombe;
@@ -49,7 +51,7 @@ public class Personnage {
 
         directionEnCours = 3;
 
-        tempsInvincible = new Chronometre();
+       // tempsInvincible = new Chronometre();
     }
 
     public int getPositX () { return positX; }
@@ -200,6 +202,8 @@ public class Personnage {
             offsetX = (affichage.getTileSize() + affichage.getTileBorder())/2;
             positX--;
         }
+
+
         Bonus bonus;
         if ((bonus = terrain.detectBonus(positX, positY)) != null)
         {
@@ -253,15 +257,19 @@ public class Personnage {
     {
         possedeBouclier = true;
         doitPerdreBlouclier = false;
+        System.out.println(idPerso + " prend bouclier");
     }
     public void retirerBouclier()
     {
         possedeBouclier = false;
         doitPerdreBlouclier = false;
+        System.out.println(idPerso + " perd bouclier");
     }
     public boolean doitPerdreBouclier()
     {
+        //System.out.println(idPerso + " doit perdre bouclier");
         return doitPerdreBlouclier;
+
     }
     public boolean possedeBouclier ()
     {
@@ -292,8 +300,11 @@ public class Personnage {
 
     public void ajouterTailleFlamme(int offset)
     {
-        if (offset>0 && bombe_portee<10 || offset<0 && bombe_portee>0)
-            bombe_portee += offset;
+        bombe_portee += offset;
+        if (bombe_portee<1)
+            bombe_portee = 1;
+        else if (bombe_portee>10)
+            bombe_portee = 10;
     }
 
     public void setTailleFlamme (int taille)
@@ -335,7 +346,6 @@ public class Personnage {
         if (Math.sqrt( Math.pow(1 - autreJoueur.getPositX(), 2) + Math.sqrt(Math.pow(15 - autreJoueur.getPositY(), 2))) > Math.sqrt( Math.pow(19 - autreJoueur.getPositX(), 2) + Math.sqrt(Math.pow(1 - autreJoueur.getPositY(), 2))))
         {
             respawn(1, 15);
-
         }
         else
         {
@@ -366,30 +376,23 @@ public class Personnage {
             vitesse = 1;
     }
 
-    public void finMourrir(Graphics g)
-    {
-        if (getNbVies() ==0)
-        {
-            g.drawString("La partie est terminée. Le joueur" + idPerso + " a perdu", 200,0);
-        }
-    }
 
     public boolean possedePasseMurail()
     {
         return passeMurail;
     }
 
-    public boolean estInvincible ()
+    /*public boolean estInvincible ()
     {
         return possedeBouclierResurection();
-    }
+    }*/
 
     public boolean estMort () { return (nbVies<=0);}
-
+/*
     public boolean possedeBouclierResurection()
     {
         return tempsInvincible.checkFinished() == 0;
-    }
+    }*/
 
     public void reset(int positX, int positY)
     {

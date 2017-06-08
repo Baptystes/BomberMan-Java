@@ -12,12 +12,13 @@ public class BBMan extends BasicGame {
 
     private Affichage affichage;
 
+    private Menu menu;
+    private Option option;
+
     private int tileSize, tileBorder, colonneLatterale, etatDuJeu;
 
 
-    private Menu menu;
-    private Option option;
-    private Chronometre chronometre;
+
 
 
 
@@ -29,9 +30,9 @@ public class BBMan extends BasicGame {
     }
 
     @Override
-
     public void init( GameContainer gc) throws SlickException{
         this.gc = gc;
+
         affichage = new Affichage(tileSize, tileBorder, colonneLatterale);
         terrain = new Terrain(affichage);
 
@@ -42,6 +43,7 @@ public class BBMan extends BasicGame {
 
         menu = new Menu(gc, affichage);
         option =new Option();
+        etatDuJeu = 0;
 
     }
 
@@ -64,22 +66,13 @@ public class BBMan extends BasicGame {
 
             affichage.interfaceJeu(g, perso1, perso2);
 
-            if (gc.getInput().isKeyPressed(Input.KEY_ESCAPE))
-            {
-                menu.setChoix(0);
-                etatDuJeu = 0;
-            }
+
 
         }
         else if (etatDuJeu == 2)
         {
             gc.exit();
         }
-
-       /* else if (etatDuJeu == 3)
-        {
-            menu.afficherOptions();
-        }*/
         else if (etatDuJeu==4)
         {
             terrain.dessinerMap(g);
@@ -95,7 +88,7 @@ public class BBMan extends BasicGame {
             if (gc.getInput().isKeyPressed(Input.KEY_ENTER))
             {
                 etatDuJeu = 0;
-                menu.setChoix(0);
+               // menu.setChoix(0);
             }
         }
 
@@ -123,6 +116,12 @@ public class BBMan extends BasicGame {
         }
         else if (etatDuJeu == 1)
         {
+            if (gc.getInput().isKeyPressed(Input.KEY_ESCAPE))
+            {
+                //menu.setChoix(0);
+                etatDuJeu = 0;
+            }
+
             perso1.deplacer(gc);
             perso2.deplacer(gc);
 

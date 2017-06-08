@@ -231,100 +231,101 @@ public class Bombe {
 
     public void exploser()
     {
-        kick = false;
-        if (etat == 1) {
-            Son.playsonbombe();
-            Son.playsonfeu();
-            chronometre.reDemarrer(1000);
-            etat = 2;
-            kick =false;
-        }
-        animation.reset();
-        int stopAvance = 0;
-        int idBloc;
-        Bombe bombe;
-        while (stopAvance == 0) // Haut
-        {
-            if (flammeBas < flammePortee) {
-                if ((idBloc = terrain.getIdBloc(positX, positY + flammeBas + 1)) == 0) {
+        if (etat != 2) {
+            kick = false;
+            if (etat == 1) {
+                Son.playsonbombe();
+                Son.playsonfeu();
+                chronometre.reDemarrer(1000);
+                etat = 2;
+                kick = false;
+            }
+            animation.reset();
+            int stopAvance = 0;
+            int idBloc;
+            Bombe bombe;
+            while (stopAvance == 0) // Haut
+            {
+                if (flammeBas < flammePortee) {
+                    if ((idBloc = terrain.getIdBloc(positX, positY + flammeBas + 1)) == 0) {
 
-                    flammeBas++;
-                    if ((bombe = terrain.detectBombe(positX, positY + flammeBas)) != null)
-                        bombe.exploser();
-                } else if (idBloc == 2) {
-                    flammeBas++;
-                    if (!traverseBloc)
+                        flammeBas++;
+                        if ((bombe = terrain.detectBombe(positX, positY + flammeBas)) != null)
+                            bombe.exploser();
+                    } else if (idBloc == 2) {
+                        flammeBas++;
+                        if (!traverseBloc)
+                            stopAvance++;
+                        terrain.detruireBloc(positX, positY + flammeBas);
+                    } else if (idBloc == 1) {
                         stopAvance++;
-                    terrain.detruireBloc(positX, positY + flammeBas);
-                } else if (idBloc == 1) {
-                    stopAvance++;
-                }
-            } else
-                stopAvance++;
-        }
-
-        stopAvance = 0;
-        while (stopAvance == 0) // Bas
-        {
-            if (flammeHaut < flammePortee) {
-                if ((idBloc = terrain.getIdBloc(positX, positY - flammeHaut - 1)) == 0) {
-
-                    flammeHaut++;
-                    if ((bombe = terrain.detectBombe(positX, positY - flammeHaut)) != null)
-                        bombe.exploser();
-                } else if (idBloc == 2) {
-                    flammeHaut++;
-                    if (!traverseBloc)
-                        stopAvance++;
-                    terrain.detruireBloc(positX, positY - flammeHaut);
-                } else if (idBloc == 1)
-                    stopAvance++;
-            } else
-                stopAvance++;
-        }
-
-        stopAvance = 0;
-        while (stopAvance == 0) // Gauche
-        {
-            if (flammeGauche < flammePortee) {
-                if ((idBloc = terrain.getIdBloc(positX - flammeGauche - 1, positY)) == 0) {
-                    flammeGauche++;
-                    if ((bombe = terrain.detectBombe(positX - flammeGauche, positY)) != null)
-                        bombe.exploser();
-                } else if (idBloc == 2) {
-                    flammeGauche++;
-                    if (!traverseBloc)
-                        stopAvance++;
-                    terrain.detruireBloc(positX - flammeGauche, positY);
-                } else if (idBloc == 1)
-                    stopAvance++;
-            } else
-                stopAvance++;
-        }
-
-        stopAvance = 0;
-        while (stopAvance == 0) // Droite
-        {
-            if (flammeDroite < flammePortee) {
-                if ((idBloc = terrain.getIdBloc(positX + flammeDroite + 1, positY)) == 0) {
-                    flammeDroite++;
-                    if ((bombe = terrain.detectBombe(positX + flammeDroite, positY)) != null) {
-                        bombe.exploser();
-                        System.out.print("KSLKJFKSDFLKSJDLF");
                     }
-
-                } else if (idBloc == 2) {
-                    flammeDroite++;
-                    if (!traverseBloc)
-                        stopAvance++;
-                    terrain.detruireBloc(positX + flammeDroite, positY);
-                } else if (idBloc == 1)
+                } else
                     stopAvance++;
-            } else
-                stopAvance++;
+            }
+
+            stopAvance = 0;
+            while (stopAvance == 0) // Bas
+            {
+                if (flammeHaut < flammePortee) {
+                    if ((idBloc = terrain.getIdBloc(positX, positY - flammeHaut - 1)) == 0) {
+
+                        flammeHaut++;
+                        if ((bombe = terrain.detectBombe(positX, positY - flammeHaut)) != null)
+                            bombe.exploser();
+                    } else if (idBloc == 2) {
+                        flammeHaut++;
+                        if (!traverseBloc)
+                            stopAvance++;
+                        terrain.detruireBloc(positX, positY - flammeHaut);
+                    } else if (idBloc == 1)
+                        stopAvance++;
+                } else
+                    stopAvance++;
+            }
+
+            stopAvance = 0;
+            while (stopAvance == 0) // Gauche
+            {
+                if (flammeGauche < flammePortee) {
+                    if ((idBloc = terrain.getIdBloc(positX - flammeGauche - 1, positY)) == 0) {
+                        flammeGauche++;
+                        if ((bombe = terrain.detectBombe(positX - flammeGauche, positY)) != null)
+                            bombe.exploser();
+                    } else if (idBloc == 2) {
+                        flammeGauche++;
+                        if (!traverseBloc)
+                            stopAvance++;
+                        terrain.detruireBloc(positX - flammeGauche, positY);
+                    } else if (idBloc == 1)
+                        stopAvance++;
+                } else
+                    stopAvance++;
+            }
+
+            stopAvance = 0;
+            while (stopAvance == 0) // Droite
+            {
+                if (flammeDroite < flammePortee) {
+                    if ((idBloc = terrain.getIdBloc(positX + flammeDroite + 1, positY)) == 0) {
+                        flammeDroite++;
+                        if ((bombe = terrain.detectBombe(positX + flammeDroite, positY)) != null) {
+                            bombe.exploser();
+                            System.out.print("KSLKJFKSDFLKSJDLF");
+                        }
+
+                    } else if (idBloc == 2) {
+                        flammeDroite++;
+                        if (!traverseBloc)
+                            stopAvance++;
+                        terrain.detruireBloc(positX + flammeDroite, positY);
+                    } else if (idBloc == 1)
+                        stopAvance++;
+                } else
+                    stopAvance++;
+            }
+
         }
-
-
     }
 
     public Personnage getAuteur() {

@@ -218,6 +218,12 @@ public class Affichage {
 
             imagesBonus[9].draw(colonneLatterale + indexToPixel(-3 + a*25), indexToPixel(8) , 1*tileSize, 1*tileSize); // nbBomebes
             texte.afficher(colonneLatterale + indexToPixel(-2 + a*25)+15, indexToPixel(8),Integer.toString(persos[a].getVitesse()) + "/5");
+
+            if (persos[a].possedeKick())
+            {
+                imagesBonus[12].draw(colonneLatterale + indexToPixel(-3 + a*25), indexToPixel(9) , 1*tileSize, 1*tileSize); // nbBomebes
+            }
+            //texte.afficher(colonneLatterale + indexToPixel(-2 + a*25)+15, indexToPixel(8),Integer.toString(persos[a].getVitesse()) + "/5");
         }
         //font.drawString(0,0,"Test MAGGLE!");
 

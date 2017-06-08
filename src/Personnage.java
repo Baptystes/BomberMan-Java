@@ -245,7 +245,6 @@ public class Personnage {
             return 1;
         else
             return 0;
-
     }
 
     public void setPasseMurail(boolean passeMurail)
@@ -257,19 +256,18 @@ public class Personnage {
     {
         possedeBouclier = true;
         doitPerdreBlouclier = false;
-        System.out.println(idPerso + " prend bouclier");
+        System.out.println("perso: "+idPerso + " donne bouclier");
     }
     public void retirerBouclier()
     {
         possedeBouclier = false;
         doitPerdreBlouclier = false;
-        System.out.println(idPerso + " perd bouclier");
+        System.out.println("perso: "+idPerso + " virer bouclier");
     }
     public boolean doitPerdreBouclier()
     {
         //System.out.println(idPerso + " doit perdre bouclier");
         return doitPerdreBlouclier;
-
     }
     public boolean possedeBouclier ()
     {
@@ -278,6 +276,7 @@ public class Personnage {
 
     public void fairePerdreBouclier ()
     {
+        System.out.println("perso: "+idPerso + " faire perdre bouclier");
         doitPerdreBlouclier = true;
     }
 

@@ -104,27 +104,29 @@ public class Terrain {
         perso1.resetRecoitDegat();
         perso2.resetRecoitDegat();
 
+
+
         for (int a=0 ; a< bombes.size() ; a++)
         {
             if (bombes.get(a).mettreAJour() == 1)
             {
                 bombes.get(a).getAuteur().supprimeUneBombe();
-                System.out.println("Disparait pour " + bombes.get(a).getAuteur().getIdJoueur() );
+                System.out.println("terrain: bombe disparait de " + bombes.get(a).getAuteur().getIdJoueur() );
                 bombes.removeElementAt(a);
-
+                a--;
             }
         }
 
         if (perso1.getRecoitDegats()==false && perso1.doitPerdreBouclier())
         {
-            System.out.println("p1");
+            System.out.println("terrain: p1 VirerBouclier");
             perso1.retirerBouclier();
         }
 
         if (perso2.getRecoitDegats()==false && perso2.doitPerdreBouclier())
         {
             perso2.retirerBouclier();
-            System.out.println("p2");
+            System.out.println("terrain: p2 VirerBouclier");
         }
 
 
@@ -146,6 +148,19 @@ public class Terrain {
         }
         return false;
     }
+
+    public boolean detectFlammes(Personnage perso)
+    {
+        for (int a=0 ; a<bombes.size() ; a++)
+        {
+            if (bombes.get(a).detectContactFlamme(perso.getPositX(), perso.getPositY()))
+                return true;
+        }
+        return false;
+    }
+
+
+
 
     public Bombe detectBombe (int positX, int positY)
     {
@@ -183,7 +198,7 @@ public class Terrain {
     public void poserBonus (int positX, int positY, int idBonus)
     {
         bonus.add(new Bonus(affichage, this, idBonus, positX, positY));
-        System.out.println("\nSpawnBonus:"+idBonus);
+        //System.out.println("\nSpawnBonus:"+idBonus);
     }
 
     public Bonus detectBonus (int positX, int positY)

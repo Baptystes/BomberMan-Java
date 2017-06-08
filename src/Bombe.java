@@ -100,16 +100,18 @@ public class Bombe {
         {
             if (detectJoueur(auteur))
             {
-                if (auteur.possedeBouclier())
+                if (auteur.possedeBouclier() )
                 {
                     auteur.recoitDegats();
-                    auteur.fairePerdreBouclier();
+                    if (auteur.doitPerdreBouclier() == false)
+                        auteur.fairePerdreBouclier();
 
                 }
                 else
                 {
+                    System.out.println("bombe: de " + auteur.getIdJoueur() + "detect auteur");
                     auteur.perdUneVie(deuxiemePerso);
-                    System.out.println(auteur.getIdJoueur() + " :1");
+
                 }
             }
             if (detectJoueur(deuxiemePerso))
@@ -117,12 +119,14 @@ public class Bombe {
                 if (deuxiemePerso.possedeBouclier())
                 {
                     deuxiemePerso.fairePerdreBouclier();
-                    deuxiemePerso.recoitDegats();
+                    if (deuxiemePerso.doitPerdreBouclier() == false)
+                        deuxiemePerso.recoitDegats();
                 }
                 else
                 {
+                    System.out.println("bombe: de " + auteur.getIdJoueur() + "detect autre");
                     deuxiemePerso.perdUneVie(auteur);
-                    System.out.println(auteur.getIdJoueur()+ " :2");
+
                 }
 
             }

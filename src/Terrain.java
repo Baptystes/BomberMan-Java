@@ -133,8 +133,8 @@ public class Terrain {
     public void detruireBloc (int positX, int positY)
     {
         setIdBloc(positX, positY, 0);
-        //if (r.nextInt(100+1)<=20)
-          //  poserBonus(positX, positY, r.nextInt(13));
+        if (r.nextInt(100+1)<=20)
+            poserBonus(positX, positY, r.nextInt(13));
     }
 
     public boolean detectFlammes(Bombe bombeRecu)

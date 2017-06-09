@@ -1,8 +1,6 @@
 import javax.swing.*;
 
-/**
- * Created by Angerame on 27/05/2017.
- */
+
 public class Option
 {
     private int  vitesse, nombreBombeMax, nombreBombePosee, bombe_portee, bombe_tempsAvantExplosion, nbVies;;

@@ -241,11 +241,11 @@ public class Affichage {
     {
         perso1.getAnimation().update();
         perso2.getAnimation().update();
-        if (perso2.getNbVies() == 0 && perso1.getNbVies()!=0)
+        if (perso2.getNbVies() <= 0 && perso1.getNbVies()>0)
         {
             imageJoueurs.getSubImage(32 * perso1.getAnimation().getImageEnCours() + 32*(3-1) * perso1.getAnimation().getNombreImages(),32*(0), 32, 32).draw(gc.getWidth()/2-tileSize, gc.getHeight()/2-tileSize, 2*tileSize, 2*tileSize);
         }
-        else if (perso2.getNbVies() != 0 && perso1.getNbVies()==0)
+        else if (perso2.getNbVies() > 0 && perso1.getNbVies()<=0)
         {
             imageJoueurs.getSubImage(32 * perso1.getAnimation().getImageEnCours() + 32*(3-1) * perso1.getAnimation().getNombreImages(),32*(1), 32, 32).draw(gc.getWidth()/2-tileSize, gc.getHeight()/2-tileSize, 2*tileSize, 2*tileSize);
         }

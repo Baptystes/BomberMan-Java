@@ -126,8 +126,8 @@ public class Personnage {
             }
             else
             {
-               if (offsetX>0)
-                   offsetX-=vitesse;
+              if (offsetX>0)
+                       offsetX-=vitesse;
                else if (offsetX<0)
                    offsetX+=vitesse;
             }
@@ -386,7 +386,7 @@ public class Personnage {
         return possedeBouclierResurection();
     }*/
 
-    public boolean estMort () { return (nbVies<=0);}
+    public boolean estMort () { if (nbVies<0) nbVies = 0; return (nbVies<=0);}
 /*
     public boolean possedeBouclierResurection()
     {
